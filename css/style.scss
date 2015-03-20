@@ -1,3 +1,31 @@
+@mixin landing-title {
+  color: #F9F7EB;
+}
+
 body {
-  margin: 0;
+  margin-top: 0; }
+
+h1#main-title {
+  @include landing-title;
+  position: relative;
+  top: 300px;
+  padding: 20px;
+  border: 1px solid #F9F7EB;
+  display: inline-block;
+  font-size: 6em;
+  letter-spacing: 15px;
+  font-weight: 400;
+  margin-top: 0; }
+
+h2#main-subtitle {
+  @include landing-title;
+  font-weight: 300;
+  opacity: 0;
+}
+
+.test {
+  color: red; }
+  
+.parallax-window {
+  min-height: 3000px;
 }

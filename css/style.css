@@ -1,4 +1,25 @@
 body {
-  margin: 0; }
+  margin-top: 0; }
 
-/*# sourceMappingURL=style.css.map */
+h1#main-title {
+  color: #F9F7EB;
+  position: relative;
+  top: 300px;
+  padding: 20px;
+  border: 1px solid #F9F7EB;
+  display: inline-block;
+  font-size: 6em;
+  letter-spacing: 15px;
+  font-weight: 400;
+  margin-top: 0; }
+
+h2#main-subtitle {
+  color: #F9F7EB;
+  font-weight: 300;
+  opacity: 0; }
+
+.test {
+  color: red; }
+
+.parallax-window {
+  min-height: 3000px; }
