@@ -15,8 +15,11 @@ h1#main-title {
 
 h2#main-subtitle {
   color: #F9F7EB;
+  position: relative;
   font-weight: 300;
-  opacity: 0; }
+  opacity: 0;
+  top: 320px;
+  letter-spacing: 5px; }
 
 .test {
   color: red; }

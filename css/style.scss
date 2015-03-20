@@ -1,5 +1,6 @@
 @mixin landing-title {
   color: #F9F7EB;
+  position: relative;
 }
 
 body {
@@ -7,7 +8,6 @@ body {
 
 h1#main-title {
   @include landing-title;
-  position: relative;
   top: 300px;
   padding: 20px;
   border: 1px solid #F9F7EB;
@@ -21,6 +21,8 @@ h2#main-subtitle {
   @include landing-title;
   font-weight: 300;
   opacity: 0;
+  top: 320px;
+  letter-spacing: 5px;
 }
 
 .test {
