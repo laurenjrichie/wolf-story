@@ -27,7 +27,20 @@ h2#main-subtitle {
 
 .test {
   color: red; }
-  
+
 .parallax-window {
   min-height: 3000px;
+}
+
+// d3 MAP
+
+.land {
+  fill: #ddd;
+}
+
+.border {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
