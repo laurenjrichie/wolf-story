@@ -1,0 +1,23 @@
+{
+  "name": "wolves",
+  "version": "1.0.0",
+  "description": "Story of wolf recovery in the US",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laurenjrichie/wolf-story.git"
+  },
+  "keywords": [],
+  "author": "Rosa & Lauren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurenjrichie/wolf-story/issues"
+  },
+  "homepage": "https://github.com/laurenjrichie/wolf-story",
+  "dependencies": {
+    "topojson": "1"
+  }
+}
