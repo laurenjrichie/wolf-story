@@ -45,7 +45,7 @@ var svg = d3.select(".map").append("svg")
 
 queue()
     .defer(d3.json, "data/us.json")
-    .defer(d3.csv, "data/wolf-data.csv")
+    .defer(d3.csv, "data/test.csv")
     .await(ready);
 
 function ready(error, us, populations) {
@@ -63,7 +63,7 @@ function ready(error, us, populations) {
 }
 
 function appendData(svg) {
-  var data = d3.csv("data/wolf-data.csv", function(d) {
+  var data = d3.csv("data/test.csv", function(d) {
     return {
       name: d.name,
       xcoord: d.xcoord,
@@ -72,12 +72,18 @@ function appendData(svg) {
   }, function(error, rows) {    
     console.log(rows);
     var projection2 = d3.geo.albersUsa();
+    
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
-      .attr("r",10)
+      .attr("r",getPackSize)
+      .attr('class', "nRockies")
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
-      });    
+      })
   });
+};
+
+function getPackSize() {
+  return Math.random() * (20 - 1) + 1;
 };
