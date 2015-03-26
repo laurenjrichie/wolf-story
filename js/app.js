@@ -68,22 +68,37 @@ function appendData(svg) {
       name: d.name,
       xcoord: d.xcoord,
       ycoord: d.ycoord,
+      y2: d.y2,
+      b: d.b,
+      c: d.c,
+      d: d.d,
+      e: d.e,
+      f: d.f
     };
   }, function(error, rows) {    
     console.log(rows);
     var projection2 = d3.geo.albersUsa();
-    
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
-      .attr("r",getPackSize)
+      .attr("r", function(rows) {
+        return rows.y2;
+      })
       .attr('class', "nRockies")
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
+      
+      $('body').on('click', function() {
+        svg.selectAll("circle")
+          .attr("r", function(rows) {
+            return rows.c;
+          })
+      });      
   });
-};
+  };
 
-function getPackSize() {
-  return Math.random() * (20 - 1) + 1;
-};
+// function getPackSize() {
+//   return Math.random() * (20 - 1) + 1;
+// };
+
