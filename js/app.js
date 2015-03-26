@@ -28,27 +28,56 @@ function changeOpacity(direction, element) {
   element.css('opacity', newOpacity)
 }
 
+// THE MAP
 
 var width = 960,
-    height = 600;
+    height = 500;
+
+var projection = d3.geo.albers();
 
 var path = d3.geo.path()
-    .projection(null);
+    .projection(projection)
+    .pointRadius(1.5);
 
 var svg = d3.select(".map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("us.json", function(error, us) {
-  if (error) return console.error(error);
+queue()
+    .defer(d3.json, "data/us.json")
+    .defer(d3.csv, "data/wolf-data.csv")
+    .await(ready);
+
+function ready(error, us, populations) {
+  svg.append("path")
+      .datum(topojson.feature(us, us.objects.land))
+      .attr("class", "land")
+      .attr("d", path);
 
   svg.append("path")
-    .datum(topojson.feature(us, us.objects.nation))
-    .attr("class", "land")
-    .attr("d", path);
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "states")
+      .attr("d", path);
+      
+  appendData(svg);
+}
 
-  svg.append("path")
-    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-    .attr("class", "border border--state")
-    .attr("d", path);
-});
+function appendData(svg) {
+  var data = d3.csv("data/wolf-data.csv", function(d) {
+    return {
+      name: d.name,
+      xcoord: d.xcoord,
+      ycoord: d.ycoord,
+    };
+  }, function(error, rows) {    
+    console.log(rows);
+    var projection2 = d3.geo.albersUsa();
+    svg.selectAll("circle")
+      .data(rows)
+      .enter().append("circle")
+      .attr("r",10)
+      .attr("transform", function(rows) {
+        return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
+      });    
+  });
+};

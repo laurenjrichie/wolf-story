@@ -34,13 +34,15 @@ h2#main-subtitle {
 
 // d3 MAP
 
+path {
+  stroke-linejoin: round;
+}
+
 .land {
   fill: #ddd;
 }
 
-.border {
+.states {
   fill: none;
   stroke: #fff;
-  stroke-linejoin: round;
-  stroke-linecap: round;
 }

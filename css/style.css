@@ -27,13 +27,12 @@ h2#main-subtitle {
 .parallax-window {
   min-height: 3000px; }
 
+path {
+  stroke-linejoin: round; }
+
 .land {
   fill: #ddd; }
 
-.border {
+.states {
   fill: none;
-  stroke: #fff;
-  stroke-linejoin: round;
-  stroke-linecap: round; }
-
-/*# sourceMappingURL=style.css.map */
+  stroke: #fff; }
