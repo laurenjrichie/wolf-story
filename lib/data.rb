@@ -1,21 +1,15 @@
-class Region
-  def initialize
-    @name
-    @raw_region_data
-    @raw_headers = get_data('name')
-  end
-  
-  def circle_count(population, year)
-    circle_count = population/20
-  end
-  
-end
-
 class DataParser
+
+  attr_accessor :target_data
+
+  def initialize(target_data)
+    @target_data = get_data(target_data)
+  end
+
   def get_data(region_name)
-    files = Dir.glob("data/wolf-data.csv")
+    files = Dir.glob("data/population_data.csv")
     raw_lines = ''
-    
+
     files.each do |file|
       raw_lines = IO.readlines(file)
     end
@@ -29,44 +23,58 @@ class DataParser
     array_of_rows.each do |row|
       array_of_split_rows << row[0].split(',')
     end
-    
+
     array_of_split_rows.each do |row|
       if row.include?(region_name)
-        return row
+        return row[1..-1]
       end
     end
-    
+
   end
-  
+
 end
 
+test = DataParser.new("GLakes")
 
-files = Dir.glob("data/wolf-data.csv")
 
-raw_lines = ''
+class Region
+  attr_accessor :population_data, :circle_count, :coordinate_count
 
-files.each do |file|
-  raw_lines = IO.readlines(file)
+  def initialize(region)
+    @name
+    @population_data = DataParser.new(region)
+    @circle_counts = []
+  end
+
+  def circle_count
+    @population_data.target_data.each do |year|
+      _year = year.to_i
+      if _year > 0 && _year < 10
+        @circle_counts << 1
+      elsif _year >= 10 && _year < 20
+        @circle_counts << 2
+      else
+        @circle_counts << _year / 20
+      end
+    end
+    @circle_counts
+  end
+
+  def coordinate_count
+    circle_count.max
+  end
+
+  def generate_radius_arrays
+    radius_arrays = []
+    coordinate_count.times do
+      radius_arrays << []
+    end
+  end
+
 end
 
-raw_lines.each do |line|
-  line.delete!("\n")
-end
-
-array_of_rows = raw_lines.each_slice(1).to_a
-
-array_of_split_rows = []
-array_of_rows.each do |row|
-  array_of_split_rows << row[0].split(',')
-end
-
-headers = array_of_split_rows[0]
-northern_rockies = array_of_split_rows[1]
-great_lakes = array_of_split_rows[2]
-pac_nw = array_of_split_rows[3]
-southwest = array_of_split_rows[4]
-
-# array_of_rows.each do |row|
-#   p column = row.transpose
-# end
-
+# test_1 = Region.new("GLakes")
+test_1 = Region.new("NRockies")
+# test_1 = Region.new("PacNW")
+p test_1.circle_count
+p test_1.coordinate_count
