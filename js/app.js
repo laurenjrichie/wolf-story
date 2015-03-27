@@ -58,7 +58,7 @@ function ready(error, us, populations) {
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path);
-      
+
   appendData(svg);
 }
 
@@ -69,36 +69,38 @@ function appendData(svg) {
       xcoord: d.xcoord,
       ycoord: d.ycoord,
       y2: d.y2,
-      b: d.b,
-      c: d.c,
-      d: d.d,
-      e: d.e,
-      f: d.f
+      y3: d.y3,
+      y4: d.y4,
+      y5: d.y5,
+      y6: d.y6,
+      y7: d.y7,
     };
-  }, function(error, rows) {    
-    console.log(rows);
+  }, function(error, rows) {
+    var year = "y2";
+    var j = 2;
+
     var projection2 = d3.geo.albersUsa();
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
       .attr("r", function(rows) {
-        return rows.y2;
+        return rows[year];
       })
       .attr('class', "nRockies")
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
-      
+
       $('body').on('click', function() {
+        year = "y" + j++;
         svg.selectAll("circle")
           .attr("r", function(rows) {
-            return rows.c;
+            return rows[year];
           })
-      });      
+      });
   });
-  };
+};
 
 // function getPackSize() {
 //   return Math.random() * (20 - 1) + 1;
 // };
-
