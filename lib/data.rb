@@ -52,16 +52,11 @@ class DataParser
 
 end
 
-test = DataParser.new("GLakes")
-test = DataParser.new("NRockies").get_data_coord('nr_coordinates.csv')
-
-
-
 class Region
-  attr_accessor :population_data, :circle_count, :coordinate_count, :headers, :generate_years_arrays, :generate_radius_arrays, :randomize_radius, :add_coordinates
+  attr_accessor :population_data, :circle_count, :coordinate_count, :headers, :generate_years_arrays, :generate_radius_arrays, :add_coordinates
 
   def initialize(region)
-    @name
+    @name = region
     @population_data = DataParser.new(region)
     @headers = DataParser.new("name").target_data
     @circle_counts = []
@@ -93,25 +88,33 @@ class Region
     years_array
   end
 
-  def randomize_radius
-    rand(2..20)
-  end
-
   def generate_radius_arrays
-    radius_arrays = generate_years_arrays
-    shuffled_radius_arrays = []
-    radius_arrays.each_with_index do |array, index|
-      circle_count[index].times do # for each year, fill in the number of circles that will have a radius > 0
-        array << randomize_radius
+    if @name == "nRockies"
+      radius_arrays = generate_years_arrays
+      # radius_arrays
+    else
+      radius_arrays = []
+      empty_arrays = coordinate_count.times do
+        radius_arrays << []
+      end
+      # p radius_arrays
+    end
+
+    return radius_arrays.each_with_index do |array, index|
+      if circle_count[index] < 4
+        circle_count[index].times do
+          array << rand(4..8)
+        end
+      else
+        circle_count[index].times do
+          array << rand(2..14)
+        end
       end
       ((coordinate_count + 1) - array.length).times do
-        array << 0 # then, for each year, fill in the rest (up through coordinate_count number of coordinates) with zeros
+        array << 0
       end
-      shuffled_array = array[1..-1].shuffle!
-      shuffled_array.unshift(array[0])
-      shuffled_radius_arrays << shuffled_array
     end
-    shuffled_radius_arrays
+
   end
 
   def transpose_radius_arrays
@@ -119,20 +122,24 @@ class Region
   end
 
   def add_coordinates
-    coord_data = DataParser.new('NRockies').get_data_coord('nr_coordinates.csv')
+    coord_data = DataParser.new(@name).get_data_coord("#{@name}.csv")
     return transpose_radius_arrays.each_with_index do |array, index|
       coordinates = coord_data[index]
       array.insert(0, coordinates.split(',')[1].to_f)
       array.insert(0, coordinates.to_f)
+      array.insert(0, @name)
     end
   end
 
   def generate_csv
     data_to_export = add_coordinates
-    data_to_export[0][0] = "xcoord"
-    data_to_export[0][1] = "ycoord"
+    if @name == "nRockies"
+      data_to_export[0][0] = "name"
+      data_to_export[0][1] = "xcoord"
+      data_to_export[0][2] = "ycoord"
+    end
 
-    CSV.open("data/output.csv", "w") do |csv|
+    CSV.open("data/output.csv", "ab") do |csv|
       data_to_export.each do |array|
         csv << array
       end
@@ -141,5 +148,7 @@ class Region
 
 end
 
-test_1 = Region.new("NRockies")
-test_1.generate_csv
+Region.new("nRockies").generate_csv
+Region.new("gLakes").generate_csv
+Region.new("southwest").generate_csv
+Region.new("pacNW").generate_csv
