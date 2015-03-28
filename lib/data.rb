@@ -2,7 +2,7 @@ require 'csv'
 
 class DataParser
 
-  attr_accessor :target_data
+  attr_accessor :target_data, :get_data_coord
 
   def initialize(target_data)
     @target_data = get_data(target_data)
@@ -34,13 +34,31 @@ class DataParser
 
   end
 
+  def get_data_coord(region_coordinates)
+    files = Dir.glob("data/#{region_coordinates}")
+    raw_lines = ''
+
+    files.each do |file|
+      raw_lines = IO.readlines(file)
+    end
+
+    raw_lines.each do |line|
+      line.delete!("\n")
+    end
+
+    raw_lines
+
+  end
+
 end
 
 test = DataParser.new("GLakes")
+test = DataParser.new("NRockies").get_data_coord('nr_coordinates.csv')
+
 
 
 class Region
-  attr_accessor :population_data, :circle_count, :coordinate_count, :headers, :generate_years_arrays, :generate_radius_arrays, :randomize_radius
+  attr_accessor :population_data, :circle_count, :coordinate_count, :headers, :generate_years_arrays, :generate_radius_arrays, :randomize_radius, :add_coordinates
 
   def initialize(region)
     @name
@@ -66,7 +84,7 @@ class Region
   def coordinate_count
     circle_count.max
   end
-  
+
   def generate_years_arrays
     years_array = []
     @headers.each do |year|
@@ -74,7 +92,7 @@ class Region
     end
     years_array
   end
-  
+
   def randomize_radius
     rand(2..20)
   end
@@ -95,14 +113,27 @@ class Region
     end
     shuffled_radius_arrays
   end
-  
+
   def transpose_radius_arrays
     generate_radius_arrays.transpose
   end
-  
+
+  def add_coordinates
+    coord_data = DataParser.new('NRockies').get_data_coord('nr_coordinates.csv')
+    return transpose_radius_arrays.each_with_index do |array, index|
+      coordinates = coord_data[index]
+      array.insert(0, coordinates.split(',')[1].to_f)
+      array.insert(0, coordinates.to_f)
+    end
+  end
+
   def generate_csv
+    data_to_export = add_coordinates
+    data_to_export[0][0] = "xcoord"
+    data_to_export[0][1] = "ycoord"
+
     CSV.open("data/output.csv", "w") do |csv|
-      transpose_radius_arrays.each do |array|
+      data_to_export.each do |array|
         csv << array
       end
     end
@@ -110,11 +141,5 @@ class Region
 
 end
 
-# test_1 = Region.new("GLakes")
 test_1 = Region.new("NRockies")
-# test_1 = Region.new("PacNW")
-# test_1.generate_radius_arrays
-# p test_1.circle_count
-# p test_1.transpose_radius_arrays
-# p test_1.coordinate_count
 test_1.generate_csv
