@@ -89,16 +89,7 @@ class Region
   end
 
   def generate_radius_arrays
-    if @name == "nRockies"
-      radius_arrays = generate_years_arrays
-      # radius_arrays
-    else
-      radius_arrays = []
-      empty_arrays = coordinate_count.times do
-        radius_arrays << []
-      end
-      # p radius_arrays
-    end
+    radius_arrays = generate_years_arrays
 
     return radius_arrays.each_with_index do |array, index|
       if circle_count[index] < 4
@@ -131,13 +122,11 @@ class Region
     end
   end
 
-  def generate_csv
+  def generate_csv # this code as is requires deleting three extra lines (headers) from output.
     data_to_export = add_coordinates
-    if @name == "nRockies"
-      data_to_export[0][0] = "name"
-      data_to_export[0][1] = "xcoord"
-      data_to_export[0][2] = "ycoord"
-    end
+    data_to_export[0][0] = "name"
+    data_to_export[0][1] = "xcoord"
+    data_to_export[0][2] = "ycoord"
 
     CSV.open("data/output.csv", "ab") do |csv|
       data_to_export.each do |array|

@@ -118,7 +118,7 @@ function appendData(svg) {
       .attr("r", function(rows) {
         return rows[year];
       })
-      .attr('class', "nRockies")
+      .attr('class', "nRockies") // change class
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
