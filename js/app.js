@@ -30,10 +30,12 @@ function changeOpacity(direction, element) {
 
 // THE MAP
 
-var width = 960,
-    height = 500;
+var width = 1400,
+    height = 800;
 
-var projection = d3.geo.albers();
+var projection = d3.geo.albers()
+    .scale(1500)
+    .translate([720, 375]);
 
 var path = d3.geo.path()
     .projection(projection)
@@ -111,7 +113,10 @@ function appendData(svg) {
     var year = "y1977";
     var j = 1977;
 
-    var projection2 = d3.geo.albersUsa();
+    var projection2 = d3.geo.albersUsa()
+      .scale(1500)
+      .translate([720, 375]);
+      
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
@@ -123,16 +128,25 @@ function appendData(svg) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
 
-      $('body').on('click', function() {
-        year = "y" + j++;
-        svg.selectAll("circle")
-          .attr("r", function(rows) {
-            return rows[year];
-          })
+      // $('body').on('click', function() {
+      //   year = "y" + j++;
+      //   svg.selectAll("circle")
+      //     .attr("r", function(rows) {
+      //       return rows[year];
+      //     })
+      // });
+      
+      $('#play-map-button').on('click', function() {
+        var playMap = setInterval(function() {
+          if (j == 2015) {
+            j = 1977;
+            clearInterval(playMap);
+            return;
+          }
+          year = "y" + j++;
+          svg.selectAll("circle")
+            .attr("r", function(rows) { return rows[year]; })
+        }, 200);
       });
   });
 };
-
-// function getPackSize() {
-//   return Math.random() * (20 - 1) + 1;
-// };
