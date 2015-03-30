@@ -130,15 +130,41 @@ function appendData(svg) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       });
 
-      var playMap = null;
+      var playInterval = null;
 
-      $('#play-postcol-button').on('click', function(rows) {
-        if(playMap !== null) {
-          clearInterval(playMap);
-          playMap = null;
+      setupSlider();
+
+      $('#play-postcol-button').on('click', function() {
+        if(playInterval != null) {
+          stopPlaying();
+        } else {
+          startPlaying();
         }
+        $('#slider-container').show();
+      });
 
-        $('#slider-div').empty();
+      function startPlaying() {
+        playInterval = setInterval(function() {
+          if (j == 2015) {
+            j = 1977;
+            stopPlaying();
+          }
+
+          year = "y" + j++;
+          svg.selectAll("circle")
+            .attr("r", function(rows) { return rows[year]; })
+            .attr('class', function(rows) {
+              return rows.region;
+            });
+        }, 200);
+      }
+
+      function stopPlaying() {
+        clearInterval(playInterval);
+        playInterval = null;
+      }
+
+      function setupSlider() {
         var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
 
        .on("slide",function(event,value){
@@ -151,22 +177,8 @@ function appendData(svg) {
        });
 
        d3.select('#slider-div').call(slider);
+       $('#slider-container').hide();
+    }
 
-        playMap = setInterval(function() {
-          if (j == 2015) {
-            j = 1977;
-            clearInterval(playMap);
-            playMap = null;
-            return;
-          }
-
-          year = "y" + j++;
-          svg.selectAll("circle")
-            .attr("r", function(rows) { return rows[year]; })
-            .attr('class', function(rows) {
-              return rows.region;
-            });
-        }, 200);
-      });
   });
 };
