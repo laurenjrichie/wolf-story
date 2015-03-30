@@ -47,7 +47,7 @@ var svg = d3.select(".map").append("svg")
 
 queue()
     .defer(d3.json, "data/us.json")
-    .defer(d3.csv, "data/output.csv")
+    .defer(d3.csv, "data/output.csv") //???
     .await(ready);
 
 function ready(error, us, populations) {
@@ -61,7 +61,105 @@ function ready(error, us, populations) {
       .attr("class", "states")
       .attr("d", path);
 
-  appendData(svg);
+  // appendData(svg);
+  appendPreColData(svg);
+}
+
+function appendPreColData(svg) {
+  var data = d3.csv("data/uscities.csv", function(d) {
+    return {
+      xcoord: d.xcoord,
+      ycoord: d.ycoord,
+    }
+  }, function(error, rows) {
+    var projection3 = d3.geo.albersUsa()
+      .scale(1500)
+      .translate([720, 375]);
+      
+    svg.selectAll("circle")
+      .data(rows)
+      .enter().append("circle")
+      .attr("r", function() {
+        return Math.random() * (16 - 4) + 4;
+      })
+      .attr('class', "preCol")
+      .attr("transform", function(rows) {
+        return "translate(" + projection3([rows.ycoord,rows.xcoord]) + ")";
+      });
+
+      var splicedData = [];
+    $("#play-preCol-button").on('click', function() {
+      var count = 0;
+      // var playPreColMap = setInterval(function() {
+        // if (rows.length == 0) {
+        //   rows = splicedData;
+        //   clearInterval(playPreColMap);
+        //   svg.selectAll("circle")
+        //     .data(rows)
+        //     .enter().append("circle")
+        //     .attr("r", function() {
+        //       return Math.random() * (16 - 4) + 4;
+        //     })
+        //     .attr('class', "preCol")
+        //     .attr("transform", function(rows) {
+        //       return "translate(" + projection3([rows.ycoord,rows.xcoord]) + ")";
+        //     });
+        //   return;
+        // }
+        var randomNum = Math.floor(Math.random() * rows.length)
+        var randomNum2 = Math.floor(Math.random() * rows.length)
+
+        console.log(randomNum)
+        console.log(randomNum2)
+        // console.log(rows)
+        
+        var slicedData = rows.slice(randomNum, randomNum + 50);
+        var slicedData2 = rows.slice(randomNum2, randomNum2 + 50);
+        console.log(slicedData);
+        console.log(slicedData2);
+        // console.log(slicedData);
+        // splicedData = splicedData.concat.apply(splicedData, rows.splice(randomNum, randomNum + 50));
+        // console.log(splicedData)
+        // console.log(count);
+        count++;
+        var circles = svg.selectAll("circle");
+        // console.log(circles);
+        // console.log(circles.data(slicedData));
+        circles.data(slicedData)
+          .attr('r', 30)
+          // .remove()
+          // .style('fill', 'blue')
+          // .exit()
+        
+        var circles = svg.selectAll("circle");
+        circles.data(slicedData2)
+          // .style("fill", "red")
+          .attr('r', 0)
+          // .data(rows)
+          // .exit().remove();      
+      // }, 500);
+    });
+    
+    
+    // $('#play-postCol-button').on('click', function(rows) {
+    //   var playMap = setInterval(function() {
+    //     if (j == 2015) {
+    //       j = 1977;
+    //       clearInterval(playMap);
+    //       return;
+    //     }
+    //     year = "y" + j++;
+    //     svg.selectAll("circle")
+    //       .attr("r", function(rows) { return rows[year]; })
+    //       .attr('class', function(rows) {
+    //         return rows.region;
+    //       });
+    //   }, 200);
+    // });
+    
+    
+  });
+  
 }
 
 function appendData(svg) {
@@ -128,17 +226,9 @@ function appendData(svg) {
       })
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
-      })
-
-      // $('body').on('click', function() {
-      //   year = "y" + j++;
-      //   svg.selectAll("circle")
-      //     .attr("r", function(rows) {
-      //       return rows[year];
-      //     })
-      // });
-      
-      $('#play-map-button').on('click', function(rows) {
+      });
+    
+      $('#play-postCol-button').on('click', function(rows) {
         var playMap = setInterval(function() {
           if (j == 2015) {
             j = 1977;
