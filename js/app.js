@@ -67,7 +67,7 @@ function ready(error, us, populations) {
 function appendData(svg) {
   var data = d3.csv("data/output.csv", function(d) {
     return {
-      // name: d.name,
+      region: d.region,
       xcoord: d.xcoord,
       ycoord: d.ycoord,
       y1977: d.y1977,
@@ -123,7 +123,9 @@ function appendData(svg) {
       .attr("r", function(rows) {
         return rows[year];
       })
-      .attr('class', "nRockies") // change class
+      .attr('class', function(rows) {
+        return rows.region;
+      })
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
@@ -136,7 +138,7 @@ function appendData(svg) {
       //     })
       // });
       
-      $('#play-map-button').on('click', function() {
+      $('#play-map-button').on('click', function(rows) {
         var playMap = setInterval(function() {
           if (j == 2015) {
             j = 1977;
@@ -146,6 +148,9 @@ function appendData(svg) {
           year = "y" + j++;
           svg.selectAll("circle")
             .attr("r", function(rows) { return rows[year]; })
+            .attr('class', function(rows) {
+              return rows.region;
+            });
         }, 200);
       });
   });

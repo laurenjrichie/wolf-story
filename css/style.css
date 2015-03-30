@@ -40,3 +40,15 @@ path {
 .nRockies {
   opacity: 0.6;
   fill: #b2273a; }
+
+.gLakes {
+  opacity: 0.6;
+  fill: aqua; }
+
+.southwest {
+  opacity: 0.6;
+  fill: gray; }
+
+.pacNW {
+  opacity: 0.6;
+  fill: gold; }

@@ -58,7 +58,7 @@ class Region
   def initialize(region)
     @name = region
     @population_data = DataParser.new(region)
-    @headers = DataParser.new("name").target_data
+    @headers = DataParser.new("region").target_data
     @circle_counts = []
   end
 
@@ -124,7 +124,7 @@ class Region
 
   def generate_csv # this code as is requires deleting three extra lines (headers) from output.
     data_to_export = add_coordinates
-    data_to_export[0][0] = "name"
+    data_to_export[0][0] = "region"
     data_to_export[0][1] = "xcoord"
     data_to_export[0][2] = "ycoord"
 
