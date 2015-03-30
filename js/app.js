@@ -116,7 +116,7 @@ function appendData(svg) {
     var projection2 = d3.geo.albersUsa()
       .scale(1500)
       .translate([720, 375]);
-      
+
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
@@ -128,23 +128,38 @@ function appendData(svg) {
       })
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
-      })
+      });
 
-      // $('body').on('click', function() {
-      //   year = "y" + j++;
-      //   svg.selectAll("circle")
-      //     .attr("r", function(rows) {
-      //       return rows[year];
-      //     })
-      // });
-      
-      $('#play-map-button').on('click', function(rows) {
-        var playMap = setInterval(function() {
+      var playMap = null;
+
+      $('#play-postcol-button').on('click', function(rows) {
+        if(playMap !== null) {
+          clearInterval(playMap);
+          playMap = null;
+        }
+
+        $('#slider-div').empty();
+        var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
+
+       .on("slide",function(event,value){
+         year = "y" + value;
+         svg.selectAll("circle")
+           .attr("r", function(rows) { return rows[year];})
+           .attr('class', function(rows) {
+             return rows.region;
+           });
+       });
+
+       d3.select('#slider-div').call(slider);
+
+        playMap = setInterval(function() {
           if (j == 2015) {
             j = 1977;
             clearInterval(playMap);
+            playMap = null;
             return;
           }
+
           year = "y" + j++;
           svg.selectAll("circle")
             .attr("r", function(rows) { return rows[year]; })
