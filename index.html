@@ -18,47 +18,59 @@
       <h1 id="main-title" class="text-center">COMEBACK</h1>
       <h2 id="main-subtitle" class="text-center">How a once-persecuted predator is returning to the US</h2>
     </div>
-    
 
-    <div class="map">
-      <div class="1976-content hide map-event">
-        <button class="close-event-content">X</button>
-        <p>
-          With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
-          Wolves were protected under the Endangered Species Act in 1976.
-        </p>
-        <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
-      </div>
-      <div class="1995-content hide map-event">
-        <button class="close-event-content">X</button>
-        <p>
-          In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
-          In 1998, wolves were released into eastern Arizona.
-        </p>
-        <div>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
+    <div class="container">
+      <div class="map">
+        <div class="1976-content hide map-event">
+          <button class="close-event-content">X</button>
+          <p>
+            With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
+            Wolves were protected under the Endangered Species Act in 1976.
+          </p>
+          <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
         </div>
-      </div>
-      <div class="today-content hide map-event">
-        <button class="close-event-content">X</button>
-        <p>
-          Their population has rebounded in the Northern Rockies and Great Lakes,
-          and is slowly growing in the Pacific Northwest and Southwest.
-        </p>
-        <img src="img/gibbon-pack.jpg" alt="wolves" />
-      </div>
-      <h1 id="precol-map-header">Wolves before European colonization</h1>
-      <h1 id="postcol-map-header">Wolves 1977-present</h1>
-      <button id="play-precol-button">1800-1950</button>
-      <button id="play-postcol-button">1977-2014</button>
-      <button id="1976-event">Protected</button>
-      <button id="1995-event">Reintroduced</button>
-      <button id="today-event">Today</button>
-    </div>
+        <div class="1995-content hide map-event">
+          <button class="close-event-content">X</button>
+          <p>
+            In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
+            In 1998, wolves were released into eastern Arizona.
+          </p>
+          <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="today-content hide map-event">
+          <button class="close-event-content">X</button>
+          <p>
+            Their population has rebounded in the Northern Rockies and Great Lakes,
+            and is slowly growing in the Pacific Northwest and Southwest.
+          </p>
+          <img src="img/gibbon-pack.jpg" alt="wolves" />
+        </div>
 
-    <div id="slider-container">
-      <div id="slider-div"></div>
-    </div>
+        <h1 id="precol-map-header">Wolves before European colonization</h1>
+        <h1 id="postcol-map-header" class="text-center">WOLVES 1977 - Present</h1>
+        <div class="row col-sm-8 col-sm-offset-2 text-center ">
+          <ul class="list-inline">
+            <li class="col-sm-4 col-sm-offset-2">
+              <button id="play-precol-button" class="timeline btn btn-block col-sm-2 ">1800-1950</button>
+            </li>
+            <li class="col-sm-4">
+              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2 ">1977-2014</button>
+            </li>
+          </ul>
+        </div>
+
+
+        <button id="1976-event" class="hide">Protected</button>
+        <button id="1995-event" class="hide">Reintroduced</button>
+        <button id="today-event" class="hide">Today</button>
+      </div>
+
+      <div id="slider-container">
+        <div id="slider-div"></div>
+      </div>
+  </div>
 
     <script charset="utf-8" src="js/d3.js"></script>
     <script src="js/d3.slider.js"></script>

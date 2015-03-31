@@ -1,10 +1,53 @@
+//Typhography
+@import
+url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+
+//Color Theme
+$black: #000000;
+$white: #FFFFFF;
+$nRockies: #B2273A;
+$gLakes: #796E24;
+$southwest: #337ab7;
+$pacNW: #432F21;
+
+//Button Style
+@mixin mapButtons {
+  font-size: 16px;
+  border: 1px solid $black;
+  border-radius: 0;
+  line-height: 1.5;
+  color: $white;
+	background-color: $black;
+  text-shadow: none;
+  box-shadow: none;
+
+  .active,
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    background-color: transparent;
+    border: 2px solid $black;
+    color: $black;
+  }
+}
+
+
 @mixin landing-title {
+  font-weight: 300;
   color: #F9F7EB;
   position: relative;
 }
 
 body {
-  margin-top: 0; }
+  margin-top: 0;
+  font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.row {
+  margin-top: 1.5em;
+}
 
 h1#main-title {
   @include landing-title;
@@ -14,8 +57,8 @@ h1#main-title {
   display: inline-block;
   font-size: 6em;
   letter-spacing: 15px;
-  font-weight: 400;
-  margin-top: 0; }
+  margin-top: 0;
+}
 
 h2#main-subtitle {
   @include landing-title;
@@ -25,11 +68,9 @@ h2#main-subtitle {
   letter-spacing: 5px;
 }
 
-.test {
-  color: red; }
 
 .parallax-window {
-  min-height: 3000px;
+  min-height: 2000px;
 }
 
 // d3 MAP
@@ -47,24 +88,28 @@ path {
   stroke: #fff;
 }
 
+.timeline {
+  @include mapButtons;
+}
+
 .nRockies {
   opacity: 0.6;
-  fill: #b2273a;
+  fill: $nRockies;
 }
 
 .gLakes {
   opacity: 0.6;
-  fill: aqua;
+  fill: $gLakes;
 }
 
 .southwest {
   opacity: 0.6;
-  fill: gray;
+  fill: $southwest;
 }
 
 .pacNW {
   opacity: 0.6;
-  fill: gold;
+  fill: $pacNW;
 }
 
 #tooltip{

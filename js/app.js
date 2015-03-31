@@ -32,12 +32,16 @@ function changeOpacity(direction, element) {
 
 // THE MAP
 
-var width = 1400,
-    height = 800;
+var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
+console.log(windowWidth);
+
+var width = windowWidth,
+    height = 700;
 
 var projection = d3.geo.albers()
-    .scale(1500)
-    .translate([720, 375]);
+    .scale(windowWidth)
+    // .translate([720, 375]);
+    .translate([600, 350]);
 
 var path = d3.geo.path()
     .projection(projection)
@@ -73,12 +77,14 @@ function appendData(svg) {
     var year = "y1977";
 
     var projection2 = d3.geo.albersUsa()
-      .scale(1500)
-      .translate([720, 375]);
+      .scale(width)
+      // .translate([720, 375]);
+      .translate([600, 350]);
 
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
+      .attr("stroke", "white")
       .attr("r", function(rows) {
         return rows[year];
       })
@@ -130,7 +136,7 @@ function startPlaying() {
       .attr('class', function(rows) {
         return rows.region;
       });
-  }, 800);
+  }, 300);
 }
 
 function stopPlaying() {
