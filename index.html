@@ -18,81 +18,107 @@
       <h1 id="main-title" class="text-center">COMEBACK</h1>
       <h2 id="main-subtitle" class="text-center">How a once-persecuted predator is returning to the US</h2>
     </div>
-    
 
-    <div class="map">
-      <div class="historical-content hide map-event" data="historical">
-        <button class="close-event-content">X</button>
-        <p>
-          Few animals in human history have been as hated as the wolf.
-          Wolves in the contiguous US once numbered in the hundreds of thousands, 
-          but as Europeans colonized the country, the land's two top predators - 
-          wolves and humans - clashed. (not sure about this image???)
-        </p>
-        <img src="img/wolf-pack.jpg" alt="wolf-pack" />
-      </div>
-      <div class="eradication-content hide map-event" data="eradication">
-        <button class="close-event-content">X</button>
-        <p>
-          Humans brought vulnerable livestock into the wilderness's backyard, 
-          where they became easy prey for wolves. Considered vermin, wolves and other 
-          predators were eliminated en masse by government-sponsored eradication campaigns.
-        </p>
-        <img src="img/wolf-skins.jpg" alt="wolf-skins" />
-      </div>
-      <div class="1950s-content hide map-event" data="1950s">
-        <button class="close-event-content">X</button>
-        <p>
-          In 1926, the last wolves in Yellowstone were killed.
-          By the 1950s, wolves in the contiguous US were nearly wiped out.
-          Only a few wolves remained in northeastern Minnesota and Michigan.
-        </p>
-        <img src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
-      </div>
-      <div class="1973-content hide map-event" data="1973">
-        <button class="close-event-content">X</button>
-        <p>
-          With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
-          Wolves were protected under the Endangered Species Act in 1973.
-        </p>
-        <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
-      </div>
-      <div class="1995-content hide map-event" data="1995">
-        <button class="close-event-content">X</button>
-        <p>
-          In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
-          In 1998, wolves were released into eastern Arizona.
-        </p>
-        <div>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
+    <div class="container">
+      <div class="map">
+        <div class="historical-content hide map-event" data="historical">
+          <button class="close-event-content">X</button>
+          <p>
+            Few animals in human history have been as hated as the wolf.
+            Wolves in the contiguous US once numbered in the hundreds of thousands,
+            but as Europeans colonized the country, the land's two top predators -
+            wolves and humans - clashed. (not sure about this image???)
+          </p>
+          <img src="img/wolf-pack.jpg" alt="wolf-pack" />
+        </div>
+        <div class="eradication-content hide map-event" data="eradication">
+          <button class="close-event-content">X</button>
+          <p>
+            Humans brought vulnerable livestock into the wilderness's backyard,
+            where they became easy prey for wolves. Considered vermin, wolves and other
+            predators were eliminated en masse by government-sponsored eradication campaigns.
+          </p>
+          <img src="img/wolf-skins.jpg" alt="wolf-skins" />
+        </div>
+        <div class="1950s-content hide map-event" data="1950s">
+          <button class="close-event-content">X</button>
+          <p>
+            In 1926, the last wolves in Yellowstone were killed.
+            By the 1950s, wolves in the contiguous US were nearly wiped out.
+            Only a few wolves remained in northeastern Minnesota and Michigan.
+          </p>
+          <img src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
+        </div>
+        <div class="1973-content hide map-event" data="1973">
+          <button class="close-event-content">X</button>
+          <p>
+            With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
+            Wolves were protected under the Endangered Species Act in 1973.
+          </p>
+          <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
+        </div>
+        <div class="1995-content hide map-event" data="1995">
+          <button class="close-event-content">X</button>
+          <p>
+            In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
+            In 1998, wolves were released into eastern Arizona.
+          </p>
+          <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="today-content hide map-event" data="today">
+          <button class="close-event-content">X</button>
+          <p>
+            Their population has rebounded in the Northern Rockies and Great Lakes,
+            and is slowly growing in the Pacific Northwest and Southwest.
+          </p>
+          <img src="img/gibbon-pack.jpg" alt="wolves" />
+        </div>
+
+        <div id="slider-container" class="row">
+          <div id="slider-div"></div>
+        </div>
+        <div class="row col-sm-8 col-sm-offset-2 text-center">
+          <h1 id="precol-map-header" class="text-center">Wolves before European colonization</h1>
+          <h1 id="postcol-map-header" class="text-center hide">WOLVES 1977 - Present</h1>
+          <ul class="list-inline">
+            <li class="col-sm-4 col-sm-offset-2">
+              <button id="play-precol-button" class="timeline btn btn-block col-sm-2">1800-1950
+                <span class="glyphicon glyphicon-play-circle"></span>
+              </button>
+            </li>
+            <li class="col-sm-4">
+              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2">1977-2014
+                <span class="glyphicon glyphicon-play-circle"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+          <!-- <div id="slider-container" class="row">
+            <div id="slider-div"></div>
+          </div> -->
+
+        <div class="precol-event-buttons">
+          <button id="historical-event" class="event-button" data="historical">Historical numbers</button>
+          <button id="eradication-event" class="event-button" data="eradication">Eradication</button>
+          <button id="1950s-event" class="event-button" data="1950s">Wiped out</button>
+        </div>
+
+        <div class="key-events row col-sm-10 col-sm-offset-1">
+          <ul class="list-inline postcol-event-buttons hide">
+            <li class="col-sm-2 col-sm-offset-3">
+              <button id="1973-event" class="event-button btn-block" data="1973">Protected</button>
+            </li>
+            <li class="col-sm-2">
+              <button id="1995-event" class="event-button btn-block" data="1995">Reintroduced</button>
+            </li>
+            <li class="col-sm-2">
+              <button id="today-event" class="event-button btn-block" data="today">Today</button>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="today-content hide map-event" data="today">
-        <button class="close-event-content">X</button>
-        <p>
-          Their population has rebounded in the Northern Rockies and Great Lakes,
-          and is slowly growing in the Pacific Northwest and Southwest.
-        </p>
-        <img src="img/gibbon-pack.jpg" alt="wolves" />
-      </div>
-      <h1 id="precol-map-header">Wolves before European colonization</h1>
-      <h1 id="postcol-map-header" class="hide">Wolves 1977-present</h1>
-      <button id="play-precol-button">1800-1950</button>
-      <button id="play-postcol-button">1977-2014</button>
-      <div class="precol-event-buttons">
-        <button id="historical-event" class="event-button" data="historical">Historical numbers</button>
-        <button id="eradication-event" class="event-button" data="eradication">Eradication</button>
-        <button id="1950s-event" class="event-button" data="1950s">Wiped out</button>
-      </div>
-      <div class="postcol-event-buttons hide">
-        <button id="1973-event" class="event-button" data="1973">Protected</button>
-        <button id="1995-event" class="event-button" data="1995">Reintroduced</button>
-        <button id="today-event" class="event-button" data="today">Today</button>
-      </div>
-    </div>
-
-    <div id="slider-container">
-      <div id="slider-div"></div>
     </div>
 
     <script charset="utf-8" src="js/d3.js"></script>

@@ -19,12 +19,14 @@ function titleScroll() {
 
 // THE MAP
 
-var width = 1400,
-    height = 800;
+var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
+
+var width = windowWidth,
+    height = 700;
 
 var projection = d3.geo.albers()
-    .scale(1500)
-    .translate([720, 375]);
+    .scale(windowWidth)
+    .translate([600, 350]);
 
 var path = d3.geo.path()
     .projection(projection)
@@ -60,8 +62,8 @@ function appendData(svg) {
     var year = "y1977";
 
     var projection2 = d3.geo.albersUsa()
-      .scale(1500)
-      .translate([720, 375]);
+      .scale(width)
+      .translate([600, 350]);
 
     svg.selectAll("circle")
       .data(rows)
@@ -69,6 +71,7 @@ function appendData(svg) {
       .property('year', function(d, index) {
         // return index; // not right - this is index of row in relation to other rows; need column index
       })
+      .attr("stroke", "white")
       .attr("r", function(rows) {
         return rows[year];
       })
@@ -123,7 +126,7 @@ function startPlaying() {
       .attr('class', function(rows) {
         return rows.region;
       });
-  }, 800);
+  }, 300);
 }
 
 function stopPlaying() {
@@ -169,7 +172,7 @@ function getPopulationData(region, year) {
   }, function(error, rows) {
     // console.log(rows);
     // 0 = nRockies, 1 = gLakes, 2 = pacNW, 3 = southwest
-    
+
   });
 }
 

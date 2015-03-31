@@ -1,7 +1,14 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 body {
-  margin-top: 0; }
+  margin-top: 0;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+.row {
+  margin-top: 2em; }
 
 h1#main-title {
+  font-weight: 300;
   color: #F9F7EB;
   position: relative;
   top: 300px;
@@ -10,22 +17,19 @@ h1#main-title {
   display: inline-block;
   font-size: 6em;
   letter-spacing: 15px;
-  font-weight: 400;
   margin-top: 0; }
 
 h2#main-subtitle {
+  font-weight: 300;
   color: #F9F7EB;
   position: relative;
-  font-weight: 300;
+  font-weight: 400;
   opacity: 0;
   top: 320px;
   letter-spacing: 5px; }
 
-.test {
-  color: red; }
-
 .parallax-window {
-  min-height: 3000px; }
+  min-height: 2000px; }
 
 path {
   stroke-linejoin: round; }
@@ -37,21 +41,35 @@ path {
   fill: none;
   stroke: #fff; }
 
+.timeline {
+  font-size: 16px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  line-height: 1.5;
+  color: #FFFFFF;
+  background-color: #000000;
+  text-shadow: none;
+  box-shadow: none; }
+  .timeline .active, .timeline:hover, .timeline:active, .timeline:visited, .timeline:focus {
+    background-color: transparent;
+    border: 2px solid #000000;
+    color: #000000; }
+
 .nRockies {
   opacity: 0.6;
-  fill: #b2273a; }
+  fill: #B2273A; }
 
 .gLakes {
   opacity: 0.6;
-  fill: aqua; }
+  fill: #796E24; }
 
 .southwest {
   opacity: 0.6;
-  fill: gray; }
+  fill: #337ab7; }
 
 .pacNW {
   opacity: 0.6;
-  fill: gold; }
+  fill: #432F21; }
 
 #tooltip {
   position: absolute;
@@ -72,3 +90,15 @@ path {
   position: absolute;
   z-index: 1;
   margin: 200px 80px 50px 40px; }
+
+.event-button {
+  font-weight: 700;
+  z-index: 10;
+  padding: 10px;
+  background-color: rgba(67, 47, 33, 0.2);
+  border: 0;
+  border-top: 2px solid #000000; }
+  .event-button:hover {
+    background-color: rgba(67, 47, 33, 0.3); }
+
+/*# sourceMappingURL=style.css.map */
