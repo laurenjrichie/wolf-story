@@ -9,7 +9,7 @@
 }
 
 .d3-slider-horizontal {
-    height: .8em;
+    height: .2em;
 }
 
 .d3-slider-range {
@@ -37,10 +37,10 @@
     position: absolute;
     width: .1em;
     height: .8em;
-    border: .5em solid #999;
+    border: .5em solid #000000;
     border-radius: 4px;
-    background: #eee;
-    background: linear-gradient(to bottom, #eee 0%, #ddd 100%);
+    background: #000000;
+    /*background: linear-gradient(to bottom, #eee 0%, #ddd 100%);*/
     z-index: 3;
     cursor: pointer;
 }
@@ -60,7 +60,7 @@
 }
 
 .d3-slider-axis-bottom {
-    top: .8em;
+    top: .4em;
 }
 
 .d3-slider-axis-right {

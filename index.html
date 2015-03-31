@@ -29,6 +29,7 @@
           </p>
           <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
         </div>
+
         <div class="1995-content hide map-event">
           <button class="close-event-content">X</button>
           <p>
@@ -39,6 +40,7 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
+
         <div class="today-content hide map-event">
           <button class="close-event-content">X</button>
           <p>
@@ -49,28 +51,42 @@
         </div>
 
         <h1 id="precol-map-header">Wolves before European colonization</h1>
-        <h1 id="postcol-map-header" class="text-center">WOLVES 1977 - Present</h1>
-        <div class="row col-sm-8 col-sm-offset-2 text-center ">
+        <div id="slider-container" class="row">
+          <div id="slider-div"></div>
+        </div>
+        <div class="row col-sm-8 col-sm-offset-2 text-center">
+          <h1 id="postcol-map-header" class="text-center">WOLVES 1977 - Present</h1>
           <ul class="list-inline">
             <li class="col-sm-4 col-sm-offset-2">
-              <button id="play-precol-button" class="timeline btn btn-block col-sm-2 ">1800-1950</button>
+              <button id="play-precol-button" class="timeline btn btn-block col-sm-2">1800-1950
+                <span class="glyphicon glyphicon-play-circle"></span>
+              </button>
             </li>
             <li class="col-sm-4">
-              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2 ">1977-2014</button>
+              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2">1977-2014
+                <span class="glyphicon glyphicon-play-circle"></span>
+              </button>
             </li>
           </ul>
         </div>
-
-
-        <button id="1976-event" class="hide">Protected</button>
-        <button id="1995-event" class="hide">Reintroduced</button>
-        <button id="today-event" class="hide">Today</button>
+        <!-- <div id="slider-container" class="row">
+          <div id="slider-div"></div>
+        </div> -->
       </div>
-
-      <div id="slider-container">
-        <div id="slider-div"></div>
+      <div class="key-events row col-sm-10 col-sm-offset-1">
+        <ul class="list-inline">
+          <li class="col-sm-2 col-sm-offset-3">
+            <button id="1976-event" class="event-button btn-block">Protected</button>
+          </li>
+          <li class="col-sm-2">
+            <button id="1995-event" class="event-button btn-block">Reintroduced</button>
+          </li>
+          <li class="col-sm-2">
+            <button id="today-event" class="event-button btn-block">Today</button>
+          </li>
+        </ul>
       </div>
-  </div>
+    </div>
 
     <script charset="utf-8" src="js/d3.js"></script>
     <script src="js/d3.slider.js"></script>

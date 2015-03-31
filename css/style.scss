@@ -31,8 +31,7 @@ $pacNW: #432F21;
     color: $black;
   }
 }
-
-
+//Heading
 @mixin landing-title {
   font-weight: 300;
   color: #F9F7EB;
@@ -46,7 +45,7 @@ body {
 }
 
 .row {
-  margin-top: 1.5em;
+  margin-top: 2em;
 }
 
 h1#main-title {
@@ -62,7 +61,7 @@ h1#main-title {
 
 h2#main-subtitle {
   @include landing-title;
-  font-weight: 300;
+  font-weight: 400;
   opacity: 0;
   top: 320px;
   letter-spacing: 5px;
@@ -137,4 +136,17 @@ path {
   position: absolute;
   z-index: 1;
   margin: 200px 80px 50px 40px;
+}
+
+.event-button {
+  font-weight: 700;
+  z-index:10;
+  padding: 10px;
+  background-color: rgba($pacNW, 0.2);
+  border: 0;
+  border-top: 2px solid $black;
+
+  &:hover {
+    background-color: rgba($pacNW, 0.3);
+  }
 }
