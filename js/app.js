@@ -4,7 +4,7 @@ $(document).ready(function() {
   playPreColMap();
   setupSlider();
   playPostcolMap();
-  hoverMapEvents();
+  clickMapEvents();
 });
 
 function titleScroll() {
@@ -190,11 +190,13 @@ function generateTooltipRegion(data) {
   return region;
 }
 
-function hoverMapEvents() {
-  $(".event-button").hover(function() {
+function clickMapEvents() {
+  $(".event-button").on('click', function() {
     var eventId = $(this).attr("data"),
-        allEvents = $(this).parent().siblings(".map-event"),
-        eventContent = $(this).parent().siblings("[data=" + eventId + "]");
+        allEvents = $(this).parents(".key-events").siblings('.map').find(".map-event");
+        eventContent = $(this).parents(".key-events").siblings('.map').find("[data=" + eventId + "]");
+    console.log($(this).parents(".key-events"));
+    console.log(eventContent);
     allEvents.addClass('hide');
     eventContent.removeClass('hide');
   })
@@ -212,7 +214,7 @@ function playPreColMap() {
     var postColStuff = $(".1973-content, .1995-content, .today-content, #postcol-map-header, .postcol-event-buttons");
     postColStuff.addClass("hide");
     $(".precol-event-buttons").removeClass("hide");
-    hoverMapEvents();
+    clickMapEvents();
   });
 }
 
