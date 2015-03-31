@@ -10,27 +10,11 @@ $(document).ready(function() {
 function titleScroll() {
   var lastScrollTop = 0;
   $(window).on('scroll', function() {
-    var scrollTop = $(this).scrollTop();
-    if (scrollTop > lastScrollTop) {
-      changeOpacity("decrease", $('#main-title'));
-      changeOpacity("increase", $('#main-subtitle'));
-    } else if (scrollTop < lastScrollTop) {
-      changeOpacity("increase", $('#main-title'))
-      changeOpacity("decrease", $('#main-subtitle'));
-    }
-    lastScrollTop = scrollTop;
-
+    var scrollTop = $(this).scrollTop(),
+        proportion = (scrollTop + 1) / 250;
+    $('#main-title').css('opacity', (1-proportion));
+    $('#main-subtitle').css('opacity', proportion);
   });
-}
-
-function changeOpacity(direction, element) {
-  var currentOpacity = parseFloat(element.css('opacity'));
-  if (direction == "decrease") {
-    var newOpacity = currentOpacity - 0.03;
-  } else if (direction == "increase") {
-    var newOpacity = currentOpacity + 0.03;
-  }
-  element.css('opacity', newOpacity)
 }
 
 // THE MAP
@@ -82,6 +66,9 @@ function appendData(svg) {
     svg.selectAll("circle")
       .data(rows)
       .enter().append("circle")
+      .property('year', function(d, index) {
+        // return index; // not right - this is index of row in relation to other rows; need column index
+      })
       .attr("r", function(rows) {
         return rows[year];
       })
@@ -92,7 +79,11 @@ function appendData(svg) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
       .on('mousemove', function(rows) {
-        return showTooltip(rows);
+        var circle = this,
+            year = 2 + d3.select(this).property('index');
+        // console.log(d3.select(this).headers); // how to get key/header/year of currently plotted point?
+        console.log(d3.keys(this));
+        return showTooltip(rows, year);
       })
       .on('mouseout',function(){
         tooltip.style("display", "none");
@@ -154,24 +145,35 @@ function setupSlider() {
  $('#slider-container').hide();
 }
 
-function showTooltip(rows) {
-  tooltip.html("<p>"+ generateRegionTooltip(rows) +"</p>")
+var tooltip = d3.select(".map").append("div")
+  .attr("id","tooltip");
+
+function showTooltip(rows, year) {
+  var regionName = "<p>"+ generateTooltipRegion(rows) +"</p>"
+      // population = getPopulationData(rows.region, rows.)
+  tooltip.html(regionName)
     .style({
       "display": "block",
       "top": (d3.event.pageY - 80) + "px",
       "left": (d3.event.pageX + 10) + "px"
   });
+  // console.log(year);
+  // console.log(d3.keys(rows));
 }
 
-var tooltip = d3.select(".map").append("div")
-  .attr("id","tooltip");
+getPopulationData();
 
-function bubbleTooltip(data) {
-  var html = "<p>Hello</p>";
-  return html;
+function getPopulationData(region, year) {
+  var data = d3.csv("data/population_data.csv", function(d) {
+    return returnPopData(d);
+  }, function(error, rows) {
+    // console.log(rows);
+    // 0 = nRockies, 1 = gLakes, 2 = pacNW, 3 = southwest
+    
+  });
 }
 
-function generateRegionTooltip(data) {
+function generateTooltipRegion(data) {
   var region = "";
   if(data.region === "nRockies") {
     region = "Northern Rockies"
@@ -216,6 +218,50 @@ function returnRadiusData(d) {
     region: d.region,
     xcoord: d.xcoord,
     ycoord: d.ycoord,
+    y1977: d.y1977,
+    y1978: d.y1978,
+    y1979: d.y1979,
+    y1980: d.y1980,
+    y1981: d.y1981,
+    y1982: d.y1982,
+    y1983: d.y1983,
+    y1984: d.y1984,
+    y1985: d.y1985,
+    y1986: d.y1986,
+    y1987: d.y1987,
+    y1988: d.y1988,
+    y1989: d.y1989,
+    y1990: d.y1990,
+    y1991: d.y1991,
+    y1992: d.y1992,
+    y1993: d.y1993,
+    y1994: d.y1994,
+    y1995: d.y1995,
+    y1996: d.y1996,
+    y1997: d.y1997,
+    y1998: d.y1998,
+    y1999: d.y1999,
+    y2000: d.y2000,
+    y2001: d.y2001,
+    y2002: d.y2002,
+    y2003: d.y2003,
+    y2004: d.y2004,
+    y2005: d.y2005,
+    y2006: d.y2006,
+    y2007: d.y2007,
+    y2008: d.y2008,
+    y2009: d.y2009,
+    y2010: d.y2010,
+    y2011: d.y2011,
+    y2012: d.y2012,
+    y2013: d.y2013,
+    y2014: d.y2014,
+  }
+}
+
+function returnPopData(d) {
+  return {
+    region: d.region,
     y1977: d.y1977,
     y1978: d.y1978,
     y1979: d.y1979,
