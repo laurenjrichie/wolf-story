@@ -111,7 +111,6 @@ function appendData(svg) {
     };
   }, function(error, rows) {
     var year = "y1977";
-    var j = 1977;
 
     var projection2 = d3.geo.albersUsa()
       .scale(1500)
@@ -128,57 +127,99 @@ function appendData(svg) {
       })
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
-      });
+      })
+      .on('mousemove', function(rows){
 
-      var playInterval = null;
+        probe
+          .html("<p>"+ generateProbeHtml(rows) +"</p>")
+        probe
+          .style( {
+            "display" : "block",
+            "top" : (d3.event.pageY - 80) + "px",
+            "left" : (d3.event.pageX + 10) + "px"
+          })
 
-      setupSlider();
-
-      $('#play-postcol-button').on('click', function() {
-        if(playInterval != null) {
-          stopPlaying();
-        } else {
-          startPlaying();
-        }
-        $('#slider-container').show();
-      });
-
-      function startPlaying() {
-        playInterval = setInterval(function() {
-          if (j == 2015) {
-            j = 1977;
-            stopPlaying();
-          }
-
-          year = "y" + j++;
-          svg.selectAll("circle")
-            .attr("r", function(rows) { return rows[year]; })
-            .attr('class', function(rows) {
-              return rows.region;
-            });
-        }, 200);
-      }
-
-      function stopPlaying() {
-        clearInterval(playInterval);
-        playInterval = null;
-      }
-
-      function setupSlider() {
-        var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
-
-       .on("slide",function(event,value){
-         year = "y" + value;
-         svg.selectAll("circle")
-           .attr("r", function(rows) { return rows[year];})
-           .attr('class', function(rows) {
-             return rows.region;
-           });
-       });
-
-       d3.select('#slider-div').call(slider);
-       $('#slider-container').hide();
-    }
-
+      })
+      .on('mouseout',function(){
+        probe.style("display", "none");
+      })
   });
+
+  var playInterval = null,
+      j = 1977;
+
+  setupSlider();
+
+  $('#play-postcol-button').on('click', function() {
+    if(playInterval != null) {
+      stopPlaying();
+    } else {
+      startPlaying();
+    }
+    $('#slider-container').show();
+  });
+
+  function startPlaying() {
+    playInterval = setInterval(function() {
+      if (j == 2015) {
+        j = 1977;
+        stopPlaying();
+      }
+
+      year = "y" + j++;
+      svg.selectAll("circle")
+        .attr("r", function(rows) { return rows[year]; })
+        .attr('class', function(rows) {
+          return rows.region;
+        });
+    }, 800);
+  }
+
+  function stopPlaying() {
+    clearInterval(playInterval);
+    playInterval = null;
+  }
+
+  function setupSlider() {
+    var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
+
+   .on("slide",function(event,value){
+     year = "y" + value;
+     svg.selectAll("circle")
+       .attr("r", function(rows) { return rows[year];})
+       .attr('class', function(rows) {
+         return rows.region;
+       });
+   });
+
+   d3.select('#slider-div').call(slider);
+   $('#slider-container').hide();
+  }
+
 };
+
+probe = d3.select(".map").append("div")
+   .attr("id","probe");
+
+function bubbleTooltip(data) {
+  var html = "<p>Hello</p>"
+  return html
+}
+
+function generateProbeHtml(data) {
+  var region = "";
+  if(data.region === "nRockies") {
+    region = "Northern Rockies"
+  }
+  else if(data.region === "gLakes") {
+    region = "Great Lakes"
+  }
+  else if(data.region === "southwest") {
+    region = "Southwest"
+  }
+  else if(data.region === "pacNW") {
+    region = "Pacific Northwest"
+  }
+
+  return region;
+}
