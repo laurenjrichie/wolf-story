@@ -21,7 +21,7 @@
     
 
     <div class="map">
-      <div class="historical-content hide map-event">
+      <div class="historical-content hide map-event" data="historical">
         <button class="close-event-content">X</button>
         <p>
           Few animals in human history have been as hated as the wolf.
@@ -31,7 +31,7 @@
         </p>
         <img src="img/wolf-pack.jpg" alt="wolf-pack" />
       </div>
-      <div class="eradication-content hide map-event">
+      <div class="eradication-content hide map-event" data="eradication">
         <button class="close-event-content">X</button>
         <p>
           Humans brought vulnerable livestock into the wilderness's backyard, 
@@ -40,7 +40,7 @@
         </p>
         <img src="img/wolf-skins.jpg" alt="wolf-skins" />
       </div>
-      <div class="1950s-content hide map-event">
+      <div class="1950s-content hide map-event" data="1950s">
         <button class="close-event-content">X</button>
         <p>
           In 1926, the last wolves in Yellowstone were killed.
@@ -49,7 +49,7 @@
         </p>
         <img src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
       </div>
-      <div class="1973-content hide map-event">
+      <div class="1973-content hide map-event" data="1973">
         <button class="close-event-content">X</button>
         <p>
           With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
@@ -57,7 +57,7 @@
         </p>
         <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
       </div>
-      <div class="1995-content hide map-event">
+      <div class="1995-content hide map-event" data="1995">
         <button class="close-event-content">X</button>
         <p>
           In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
@@ -67,7 +67,7 @@
           <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="today-content hide map-event">
+      <div class="today-content hide map-event" data="today">
         <button class="close-event-content">X</button>
         <p>
           Their population has rebounded in the Northern Rockies and Great Lakes,
@@ -76,18 +76,18 @@
         <img src="img/gibbon-pack.jpg" alt="wolves" />
       </div>
       <h1 id="precol-map-header">Wolves before European colonization</h1>
-      <h1 id="postcol-map-header">Wolves 1977-present</h1>
+      <h1 id="postcol-map-header" class="hide">Wolves 1977-present</h1>
       <button id="play-precol-button">1800-1950</button>
       <button id="play-postcol-button">1977-2014</button>
       <div class="precol-event-buttons">
-        <button id="historical-event">Historical numbers</button>
-        <button id="eradication-event">Eradication</button>
-        <button id="1950s-event">Wiped out</button>
+        <button id="historical-event" class="event-button" data="historical">Historical numbers</button>
+        <button id="eradication-event" class="event-button" data="eradication">Eradication</button>
+        <button id="1950s-event" class="event-button" data="1950s">Wiped out</button>
       </div>
       <div class="postcol-event-buttons hide">
-        <button id="1973-event">Protected</button>
-        <button id="1995-event">Reintroduced</button>
-        <button id="today-event">Today</button>
+        <button id="1973-event" class="event-button" data="1973">Protected</button>
+        <button id="1995-event" class="event-button" data="1995">Reintroduced</button>
+        <button id="today-event" class="event-button" data="today">Today</button>
       </div>
     </div>
 

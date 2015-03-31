@@ -1,11 +1,10 @@
 $(document).ready(function() {
   titleScroll();
-  hoverPostColEvents();
   hideEvents();
   playPreColMap();
   setupSlider();
   playPostcolMap();
-  hoverPreColEvents();
+  hoverMapEvents();
 });
 
 function titleScroll() {
@@ -107,13 +106,10 @@ var playInterval = null,
 
 function playPostcolMap() {
   $('#play-postcol-button').on('click', function() {
-    $(".precol-event-buttons").addClass("hide");
-    $(".1950s-content").addClass("hide");
-    $(".historical-content").addClass("hide");
-    $(".eradication-content").addClass("hide");
+    var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content, #precol-map-header");
     $(".postcol-event-buttons").removeClass("hide");
-    $('#precol-map-header').hide();
-    $('#postcol-map-header').show();
+    $("#postcol-map-header").removeClass("hide");
+    preColStuff.addClass("hide");
     if(playInterval != null) {
       stopPlaying();
     } else {
@@ -179,36 +175,24 @@ function generateRegionTooltip(data) {
   var region = "";
   if(data.region === "nRockies") {
     region = "Northern Rockies"
-  }
-  else if(data.region === "gLakes") {
+  } else if(data.region === "gLakes") {
     region = "Great Lakes"
-  }
-  else if(data.region === "southwest") {
+  } else if(data.region === "southwest") {
     region = "Southwest"
-  }
-  else if(data.region === "pacNW") {
+  } else if(data.region === "pacNW") {
     region = "Pacific Northwest"
   }
-
   return region;
 }
 
-function hoverPostColEvents() {
-  $("#1973-event").hover(function() {
-    $(".1973-content").removeClass("hide");
-    $(".1995-content").addClass("hide");
-    $(".today-content").addClass("hide");
-  });
-  $("#1995-event").hover(function() {
-    $(".1995-content").removeClass("hide");
-    $(".1973-content").addClass("hide");
-    $(".today-content").addClass("hide");
-  });
-  $("#today-event").hover(function() {
-    $(".today-content").removeClass("hide");
-    $(".1995-content").addClass("hide");
-    $(".1973-content").addClass("hide");
-  });
+function hoverMapEvents() {
+  $(".event-button").hover(function() {
+    var eventId = $(this).attr("data"),
+        allEvents = $(this).parent().siblings(".map-event"),
+        eventContent = $(this).parent().siblings("[data=" + eventId + "]");
+    allEvents.addClass('hide');
+    eventContent.removeClass('hide');
+  })
 }
 
 function hideEvents() {
@@ -219,30 +203,11 @@ function hideEvents() {
 
 function playPreColMap() {
   $("#play-precol-button").on('click', function() {
-    $(".postcol-event-buttons").addClass("hide");
-    $(".1995-content").addClass("hide");
-    $(".1973-content").addClass("hide");
-    $(".today-content").addClass("hide");
+    $("#precol-map-header").removeClass("hide");
+    var postColStuff = $(".1973-content, .1995-content, .today-content, #postcol-map-header, .postcol-event-buttons");
+    postColStuff.addClass("hide");
     $(".precol-event-buttons").removeClass("hide");
-    hoverPreColEvents();
-  });
-}
-
-function hoverPreColEvents() {
-  $("#1950s-event").hover(function() {
-    $(".1950s-content").removeClass("hide");
-    $(".historical-content").addClass("hide");
-    $(".eradication-content").addClass("hide");
-  });
-  $("#historical-event").hover(function() {
-    $(".historical-content").removeClass("hide");
-    $(".1950s-content").addClass("hide");
-    $(".eradication-content").addClass("hide");
-  });
-  $("#eradication-event").hover(function() {
-    $(".eradication-content").removeClass("hide");
-    $(".historical-content").addClass("hide");
-    $(".1950s-content").addClass("hide");
+    hoverMapEvents();
   });
 }
 
