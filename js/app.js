@@ -66,49 +66,7 @@ function ready(error, us, populations) {
 
 function appendData(svg) {
   var data = d3.csv("data/output.csv", function(d) {
-    return {
-      region: d.region,
-      xcoord: d.xcoord,
-      ycoord: d.ycoord,
-      y1977: d.y1977,
-      y1978: d.y1978,
-      y1979: d.y1979,
-      y1980: d.y1980,
-      y1981: d.y1981,
-      y1982: d.y1982,
-      y1983: d.y1983,
-      y1984: d.y1984,
-      y1985: d.y1985,
-      y1986: d.y1986,
-      y1987: d.y1987,
-      y1988: d.y1988,
-      y1989: d.y1989,
-      y1990: d.y1990,
-      y1991: d.y1991,
-      y1992: d.y1992,
-      y1993: d.y1993,
-      y1994: d.y1994,
-      y1995: d.y1995,
-      y1996: d.y1996,
-      y1997: d.y1997,
-      y1998: d.y1998,
-      y1999: d.y1999,
-      y2000: d.y2000,
-      y2001: d.y2001,
-      y2002: d.y2002,
-      y2003: d.y2003,
-      y2004: d.y2004,
-      y2005: d.y2005,
-      y2006: d.y2006,
-      y2007: d.y2007,
-      y2008: d.y2008,
-      y2009: d.y2009,
-      y2010: d.y2010,
-      y2011: d.y2011,
-      y2012: d.y2012,
-      y2013: d.y2013,
-      y2014: d.y2014,
-    };
+    return returnRadiusData(d);
   }, function(error, rows) {
     var year = "y1977";
 
@@ -128,29 +86,26 @@ function appendData(svg) {
       .attr("transform", function(rows) {
         return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
       })
-      .on('mousemove', function(rows){
-
-        probe
-          .html("<p>"+ generateProbeHtml(rows) +"</p>")
-        probe
-          .style( {
-            "display" : "block",
-            "top" : (d3.event.pageY - 80) + "px",
-            "left" : (d3.event.pageX + 10) + "px"
-          })
-
+      .on('mousemove', function(rows) {
+        return showTooltip(rows);
       })
       .on('mouseout',function(){
-        probe.style("display", "none");
+        tooltip.style("display", "none");
       })
   });
 
-  var playInterval = null,
-      j = 1977;
+};
 
-  setupSlider();
+var playInterval = null,
+    j = 1977;
 
+setupSlider();
+playPostcolMap();
+
+function playPostcolMap() {
   $('#play-postcol-button').on('click', function() {
+    $('#precol-map-header').hide();
+    $('#postcol-map-header').show();
     if(playInterval != null) {
       stopPlaying();
     } else {
@@ -158,55 +113,61 @@ function appendData(svg) {
     }
     $('#slider-container').show();
   });
+}
 
-  function startPlaying() {
-    playInterval = setInterval(function() {
-      if (j == 2015) {
-        j = 1977;
-        stopPlaying();
-      }
+function startPlaying() {
+  playInterval = setInterval(function() {
+    if (j == 2015) {
+      j = 1977;
+      stopPlaying();
+    }
 
-      year = "y" + j++;
-      svg.selectAll("circle")
-        .attr("r", function(rows) { return rows[year]; })
-        .attr('class', function(rows) {
-          return rows.region;
-        });
-    }, 800);
-  }
+    year = "y" + j++;
+    svg.selectAll("circle")
+      .attr("r", function(rows) { return rows[year]; })
+      .attr('class', function(rows) {
+        return rows.region;
+      });
+  }, 800);
+}
 
-  function stopPlaying() {
-    clearInterval(playInterval);
-    playInterval = null;
-  }
+function stopPlaying() {
+  clearInterval(playInterval);
+  playInterval = null;
+}
 
-  function setupSlider() {
-    var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
-
-   .on("slide",function(event,value){
+function setupSlider() {
+  var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
+    .on("slide", function(event, value){
      year = "y" + value;
      svg.selectAll("circle")
        .attr("r", function(rows) { return rows[year];})
        .attr('class', function(rows) {
          return rows.region;
        });
-   });
-
-   d3.select('#slider-div').call(slider);
-   $('#slider-container').hide();
-  }
-
-};
-
-probe = d3.select(".map").append("div")
-   .attr("id","probe");
-
-function bubbleTooltip(data) {
-  var html = "<p>Hello</p>"
-  return html
+    });
+ d3.select('#slider-div').call(slider);
+ $('#slider-container').hide();
 }
 
-function generateProbeHtml(data) {
+function showTooltip(rows) {
+  tooltip.html("<p>"+ generateRegionTooltip(rows) +"</p>")
+    .style({
+      "display": "block",
+      "top": (d3.event.pageY - 80) + "px",
+      "left": (d3.event.pageX + 10) + "px"
+  });
+}
+
+var tooltip = d3.select(".map").append("div")
+  .attr("id","tooltip");
+
+function bubbleTooltip(data) {
+  var html = "<p>Hello</p>";
+  return html;
+}
+
+function generateRegionTooltip(data) {
   var region = "";
   if(data.region === "nRockies") {
     region = "Northern Rockies"
@@ -222,4 +183,50 @@ function generateProbeHtml(data) {
   }
 
   return region;
+}
+
+function returnRadiusData(d) {
+  return {
+    region: d.region,
+    xcoord: d.xcoord,
+    ycoord: d.ycoord,
+    y1977: d.y1977,
+    y1978: d.y1978,
+    y1979: d.y1979,
+    y1980: d.y1980,
+    y1981: d.y1981,
+    y1982: d.y1982,
+    y1983: d.y1983,
+    y1984: d.y1984,
+    y1985: d.y1985,
+    y1986: d.y1986,
+    y1987: d.y1987,
+    y1988: d.y1988,
+    y1989: d.y1989,
+    y1990: d.y1990,
+    y1991: d.y1991,
+    y1992: d.y1992,
+    y1993: d.y1993,
+    y1994: d.y1994,
+    y1995: d.y1995,
+    y1996: d.y1996,
+    y1997: d.y1997,
+    y1998: d.y1998,
+    y1999: d.y1999,
+    y2000: d.y2000,
+    y2001: d.y2001,
+    y2002: d.y2002,
+    y2003: d.y2003,
+    y2004: d.y2004,
+    y2005: d.y2005,
+    y2006: d.y2006,
+    y2007: d.y2007,
+    y2008: d.y2008,
+    y2009: d.y2009,
+    y2010: d.y2010,
+    y2011: d.y2011,
+    y2012: d.y2012,
+    y2013: d.y2013,
+    y2014: d.y2014,
+  }
 }
