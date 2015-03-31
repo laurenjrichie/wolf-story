@@ -67,3 +67,11 @@ path {
 
 #precol-map-header {
   display: none; }
+
+.hide {
+  display: none; }
+
+.map-event {
+  position: absolute;
+  z-index: 1;
+  margin: 200px 80px 50px 40px; }

@@ -1,5 +1,7 @@
 $(document).ready(function() {
   titleScroll();
+  showPostColEvents();
+  hidePostColEvents();
 });
 
 function titleScroll() {
@@ -183,6 +185,30 @@ function generateRegionTooltip(data) {
   }
 
   return region;
+}
+
+function showPostColEvents() {
+  $("#1976-event").hover(function() {
+    $(".1976-content").removeClass("hide");
+    $(".1995-content").addClass("hide");
+    $(".today-content").addClass("hide");
+  });
+  $("#1995-event").hover(function() {
+    $(".1995-content").removeClass("hide");
+    $(".1976-content").addClass("hide");
+    $(".today-content").addClass("hide");
+  });
+  $("#today-event").hover(function() {
+    $(".today-content").removeClass("hide");
+    $(".1995-content").addClass("hide");
+    $(".1976-content").addClass("hide");
+  });
+}
+
+function hidePostColEvents() {
+  $(".close-event-content").on('click', function() {
+    $(this).parent('.map-event').hide();
+  });
 }
 
 function returnRadiusData(d) {
