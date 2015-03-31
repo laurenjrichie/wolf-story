@@ -1,7 +1,11 @@
 $(document).ready(function() {
   titleScroll();
-  showPostColEvents();
-  hidePostColEvents();
+  hoverPostColEvents();
+  hideEvents();
+  playPreColMap();
+  setupSlider();
+  playPostcolMap();
+  hoverPreColEvents();
 });
 
 function titleScroll() {
@@ -101,11 +105,13 @@ function appendData(svg) {
 var playInterval = null,
     j = 1977;
 
-setupSlider();
-playPostcolMap();
-
 function playPostcolMap() {
   $('#play-postcol-button').on('click', function() {
+    $(".precol-event-buttons").addClass("hide");
+    $(".1950s-content").addClass("hide");
+    $(".historical-content").addClass("hide");
+    $(".eradication-content").addClass("hide");
+    $(".postcol-event-buttons").removeClass("hide");
     $('#precol-map-header').hide();
     $('#postcol-map-header').show();
     if(playInterval != null) {
@@ -187,27 +193,56 @@ function generateRegionTooltip(data) {
   return region;
 }
 
-function showPostColEvents() {
-  $("#1976-event").hover(function() {
-    $(".1976-content").removeClass("hide");
+function hoverPostColEvents() {
+  $("#1973-event").hover(function() {
+    $(".1973-content").removeClass("hide");
     $(".1995-content").addClass("hide");
     $(".today-content").addClass("hide");
   });
   $("#1995-event").hover(function() {
     $(".1995-content").removeClass("hide");
-    $(".1976-content").addClass("hide");
+    $(".1973-content").addClass("hide");
     $(".today-content").addClass("hide");
   });
   $("#today-event").hover(function() {
     $(".today-content").removeClass("hide");
     $(".1995-content").addClass("hide");
-    $(".1976-content").addClass("hide");
+    $(".1973-content").addClass("hide");
   });
 }
 
-function hidePostColEvents() {
+function hideEvents() {
   $(".close-event-content").on('click', function() {
-    $(this).parent('.map-event').hide();
+    $(this).parent('.map-event').addClass("hide");
+  });
+}
+
+function playPreColMap() {
+  $("#play-precol-button").on('click', function() {
+    $(".postcol-event-buttons").addClass("hide");
+    $(".1995-content").addClass("hide");
+    $(".1973-content").addClass("hide");
+    $(".today-content").addClass("hide");
+    $(".precol-event-buttons").removeClass("hide");
+    hoverPreColEvents();
+  });
+}
+
+function hoverPreColEvents() {
+  $("#1950s-event").hover(function() {
+    $(".1950s-content").removeClass("hide");
+    $(".historical-content").addClass("hide");
+    $(".eradication-content").addClass("hide");
+  });
+  $("#historical-event").hover(function() {
+    $(".historical-content").removeClass("hide");
+    $(".1950s-content").addClass("hide");
+    $(".eradication-content").addClass("hide");
+  });
+  $("#eradication-event").hover(function() {
+    $(".eradication-content").removeClass("hide");
+    $(".historical-content").addClass("hide");
+    $(".1950s-content").addClass("hide");
   });
 }
 

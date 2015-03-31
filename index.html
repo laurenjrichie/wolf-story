@@ -21,11 +21,39 @@
     
 
     <div class="map">
-      <div class="1976-content hide map-event">
+      <div class="historical-content hide map-event">
+        <button class="close-event-content">X</button>
+        <p>
+          Few animals in human history have been as hated as the wolf.
+          Wolves in the contiguous US once numbered in the hundreds of thousands, 
+          but as Europeans colonized the country, the land's two top predators - 
+          wolves and humans - clashed. (not sure about this image???)
+        </p>
+        <img src="img/wolf-pack.jpg" alt="wolf-pack" />
+      </div>
+      <div class="eradication-content hide map-event">
+        <button class="close-event-content">X</button>
+        <p>
+          Humans brought vulnerable livestock into the wilderness's backyard, 
+          where they became easy prey for wolves. Considered vermin, wolves and other 
+          predators were eliminated en masse by government-sponsored eradication campaigns.
+        </p>
+        <img src="img/wolf-skins.jpg" alt="wolf-skins" />
+      </div>
+      <div class="1950s-content hide map-event">
+        <button class="close-event-content">X</button>
+        <p>
+          In 1926, the last wolves in Yellowstone were killed.
+          By the 1950s, wolves in the contiguous US were nearly wiped out.
+          Only a few wolves remained in northeastern Minnesota and Michigan.
+        </p>
+        <img src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
+      </div>
+      <div class="1973-content hide map-event">
         <button class="close-event-content">X</button>
         <p>
           With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
-          Wolves were protected under the Endangered Species Act in 1976.
+          Wolves were protected under the Endangered Species Act in 1973.
         </p>
         <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
       </div>
@@ -51,9 +79,16 @@
       <h1 id="postcol-map-header">Wolves 1977-present</h1>
       <button id="play-precol-button">1800-1950</button>
       <button id="play-postcol-button">1977-2014</button>
-      <button id="1976-event">Protected</button>
-      <button id="1995-event">Reintroduced</button>
-      <button id="today-event">Today</button>
+      <div class="precol-event-buttons">
+        <button id="historical-event">Historical numbers</button>
+        <button id="eradication-event">Eradication</button>
+        <button id="1950s-event">Wiped out</button>
+      </div>
+      <div class="postcol-event-buttons hide">
+        <button id="1973-event">Protected</button>
+        <button id="1995-event">Reintroduced</button>
+        <button id="today-event">Today</button>
+      </div>
     </div>
 
     <div id="slider-container">
