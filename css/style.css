@@ -126,6 +126,10 @@ ul.list-inline.postcol-event-buttons {
   z-index: 5;
   position: relative; }
 
+#play-or7 {
+  z-index: 10;
+  position: relative; }
+
 #or7-map-canvas {
-  height: 1000px;
+  height: 750px;
   width: 100%; }
