@@ -41,7 +41,7 @@
     border-radius: 4px;
     background: #000000;
     /*background: linear-gradient(to bottom, #eee 0%, #ddd 100%);*/
-    z-index: 3;
+    z-index: 5;
     cursor: pointer;
 }
 

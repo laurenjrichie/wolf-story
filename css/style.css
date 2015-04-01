@@ -89,7 +89,7 @@ path {
 .map-event {
   position: absolute;
   z-index: 10;
-  margin-top: 15em;
+  margin-top: 10em;
   padding: 1.5em;
   border-left: 4px solid #000000;
   background: rgba(255, 255, 255, 0.6); }
@@ -118,5 +118,12 @@ path {
 
 .event-images {
   width: 100%; }
+
+ul.list-inline.postcol-event-buttons {
+  margin: 3em 0; }
+
+#slider-container {
+  z-index: 5;
+  position: relative; }
 
 /*# sourceMappingURL=style.css.map */

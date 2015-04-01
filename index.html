@@ -84,32 +84,38 @@
           <img class="event-images" src="img/gibbon-pack.jpg" alt="wolves" />
         </div>
 
-        <div id="slider-container" class="row">
+        <!-- <div id="slider-container" class="row">
           <div id="slider-div"></div>
-        </div>
+        </div> -->
         <div class="row col-sm-8 col-sm-offset-2 text-center">
           <h1 id="precol-map-header" class="text-center">Wolves before European colonization</h1>
           <h1 id="postcol-map-header" class="text-center hide">WOLVES 1977 - Present</h1>
           <ul class="list-inline">
             <li class="col-sm-4 col-sm-offset-2">
               <button id="play-precol-button" class="timeline btn btn-block col-sm-2">1800-1950
-                <span class="glyphicon glyphicon-play-circle"></span>
+                <span class="glyphicon glyphicon-play"></span>
+                <span class="glyphicon glyphicon-pause hide"></span>
               </button>
             </li>
             <li class="col-sm-4">
               <button id="play-postcol-button" class="timeline btn btn-block col-sm-2">1977-2014
-                <span class="glyphicon glyphicon-play-circle"></span>
+                <!-- <span class="glyphicon glyphicon-play-circle"></span> -->
+                <span class="glyphicon glyphicon-play"></span>
+                <span class="glyphicon glyphicon-pause hide"></span>
               </button>
             </li>
           </ul>
         </div>
-          <!-- <div id="slider-container" class="row">
+        <!-- <div class="row"> -->
+          <!-- <div id="slider-container">
             <div id="slider-div"></div>
           </div> -->
+        <!-- </div> -->
+
       </div>
       <div class="key-events row col-sm-10 col-sm-offset-1">
-        <ul class="list-inline postcol-event-buttons">
-          <li class="col-sm-3 col-sm-offset-2">
+        <ul class="list-inline precol-event-buttons">
+          <li class="col-sm-3 col-sm-offset-3">
             <button id="historical-event" class="event-button btn-block" data="historical">Historical numbers</button>
           </li>
           <li class="col-sm-2">
@@ -122,6 +128,9 @@
       </div>
 
       <div class="key-events row col-sm-10 col-sm-offset-1">
+        <div id="slider-container">
+          <div id="slider-div"></div>
+        </div>
         <ul class="list-inline postcol-event-buttons hide">
           <li class="col-sm-2 col-sm-offset-3">
             <button id="1973-event" class="event-button btn-block" data="1973">Protected</button>

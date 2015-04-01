@@ -22,7 +22,7 @@ function titleScroll() {
 var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
 
 var width = windowWidth,
-    height = 700;
+    height = 620;
 
 var projection = d3.geo.albers()
     .scale(windowWidth)
@@ -62,7 +62,7 @@ function appendData(svg) {
     var year = "y1977";
 
     var projection2 = d3.geo.albersUsa()
-      .scale(width)
+      .scale(windowWidth)
       .translate([600, 350]);
 
     svg.selectAll("circle")
@@ -109,12 +109,14 @@ function playPostcolMap() {
     } else {
       startPlaying();
     }
-    $('#slider-container').show();
+    $('#slider-container').fadeIn('slow');
   });
 }
 
 function startPlaying() {
   playInterval = setInterval(function() {
+    $('.glyphicon.glyphicon-pause').addClass('hide');
+    $('.glyphicon.glyphicon-play').removeClass('hide');
     if (j == 2015) {
       j = 1977;
       stopPlaying();
@@ -132,6 +134,8 @@ function startPlaying() {
 function stopPlaying() {
   clearInterval(playInterval);
   playInterval = null;
+  $('.glyphicon.glyphicon-play').addClass('hide');
+  $('.glyphicon.glyphicon-pause').removeClass('hide');
 }
 
 function setupSlider() {
