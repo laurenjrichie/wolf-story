@@ -20,60 +20,68 @@
     </div>
 
     <div class="container">
-      <div class="map">
-        <div class="historical-content hide map-event" data="historical">
-          <button class="close-event-content">X</button>
-          <p>
+      <div class="map col-sm-12">
+        <div class="historical-content hide map-event col-sm-6 col-sm-offset-3" data="historical">
+          <a class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">HISTORICAL NUMBERS</h3>
+          <p class="event-description">
             Few animals in human history have been as hated as the wolf.
             Wolves in the contiguous US once numbered in the hundreds of thousands,
             but as Europeans colonized the country, the land's two top predators -
             wolves and humans - clashed. (not sure about this image???)
           </p>
-          <img src="img/wolf-pack.jpg" alt="wolf-pack" />
+          <img class="event-images" src="img/wolf-pack.jpg" alt="wolf-pack" />
         </div>
-        <div class="eradication-content hide map-event" data="eradication">
-          <button class="close-event-content">X</button>
-          <p>
+        <div class="eradication-content hide map-event col-sm-6 col-sm-offset-3" data="eradication">
+          <a class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">ERADICATION</h3>
+          <p class="event-description">
             Humans brought vulnerable livestock into the wilderness's backyard,
             where they became easy prey for wolves. Considered vermin, wolves and other
             predators were eliminated en masse by government-sponsored eradication campaigns.
           </p>
-          <img src="img/wolf-skins.jpg" alt="wolf-skins" />
+          <img class="event-images" src="img/wolf-skins.jpg" alt="wolf-skins" />
         </div>
-        <div class="1950s-content hide map-event" data="1950s">
-          <button class="close-event-content">X</button>
-          <p>
+        <div class="1950s-content hide map-event col-sm-6 col-sm-offset-3" data="1950s">
+          <a class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">WIPED OUT</h3>
+          <p class="event-description">
             In 1926, the last wolves in Yellowstone were killed.
             By the 1950s, wolves in the contiguous US were nearly wiped out.
             Only a few wolves remained in northeastern Minnesota and Michigan.
           </p>
-          <img src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
+          <img class="event-images" src="img/soldiers-wolf-pelt.jpg" alt="soldiers-wolf-pelt" />
         </div>
-        <div class="1973-content hide map-event" data="1973">
-          <button class="close-event-content">X</button>
-          <p>
+
+        <div class="1973-content hide map-event col-sm-6 col-sm-offset-3" data="1973">
+          <a href="#" class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">PROTECTED</h3>
+          <p class="event-description">
             With the environmental movement of the 60's and 70's, public attitudes towards wolves shifted.
             Wolves were protected under the Endangered Species Act in 1973.
           </p>
-          <img src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves" />
+          <img class="event-images" src="img/yellowstone-wolves.jpg" alt="yellowstone-wolves">
         </div>
-        <div class="1995-content hide map-event" data="1995">
-          <button class="close-event-content">X</button>
-          <p>
+
+        <div class="1995-content hide map-event col-sm-6 col-sm-offset-3" data="1995">
+          <a class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">REINTRODUCED</h3>
+          <p class="event-description">
             In 1995 and 1996, wolves were reintroduced into Yellowstone National Park and central Idaho.
             In 1998, wolves were released into eastern Arizona.
           </p>
           <div>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
+            <iframe class="event-images" width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
-        <div class="today-content hide map-event" data="today">
-          <button class="close-event-content">X</button>
-          <p>
+        <div class="today-content hide map-event col-sm-6 col-sm-offset-3" data="today">
+          <a class="close-event-content glyphicon glyphicon-remove"></a>
+          <h3 class="event-title">TODAY</h3>
+          <p class="event-description">
             Their population has rebounded in the Northern Rockies and Great Lakes,
             and is slowly growing in the Pacific Northwest and Southwest.
           </p>
-          <img src="img/gibbon-pack.jpg" alt="wolves" />
+          <img class="event-images" src="img/gibbon-pack.jpg" alt="wolves" />
         </div>
 
         <div id="slider-container" class="row">
@@ -99,10 +107,18 @@
             <div id="slider-div"></div>
           </div> -->
       </div>
-      <div class="precol-event-buttons">
-        <button id="historical-event" class="event-button" data="historical">Historical numbers</button>
-        <button id="eradication-event" class="event-button" data="eradication">Eradication</button>
-        <button id="1950s-event" class="event-button" data="1950s">Wiped out</button>
+      <div class="key-events row col-sm-10 col-sm-offset-1">
+        <ul class="list-inline postcol-event-buttons">
+          <li class="col-sm-3 col-sm-offset-2">
+            <button id="historical-event" class="event-button btn-block" data="historical">Historical numbers</button>
+          </li>
+          <li class="col-sm-2">
+            <button id="eradication-event" class="event-button btn-block" data="eradication">Eradication</button>
+          </li>
+          <li class="col-sm-2">
+            <button id="1950s-event" class="event-button btn-block" data="1950s">Wiped out</button>
+          </li>
+        </ul>
       </div>
 
       <div class="key-events row col-sm-10 col-sm-offset-1">

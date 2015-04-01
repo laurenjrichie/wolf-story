@@ -88,8 +88,11 @@ path {
 
 .map-event {
   position: absolute;
-  z-index: 1;
-  margin: 200px 80px 50px 40px; }
+  z-index: 10;
+  margin-top: 15em;
+  padding: 1.5em;
+  border-left: 4px solid #000000;
+  background: rgba(255, 255, 255, 0.6); }
 
 .event-button {
   font-weight: 700;
@@ -100,5 +103,20 @@ path {
   border-top: 2px solid #000000; }
   .event-button:hover {
     background-color: rgba(67, 47, 33, 0.3); }
+
+.close-event-content {
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.6); }
+  .close-event-content .active, .close-event-content:hover, .close-event-content:active, .close-event-content:focus {
+    color: #FFFFFF;
+    color: #000000;
+    text-decoration: none; }
+
+.event-description {
+  font-size: 18px;
+  line-height: 2; }
+
+.event-images {
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

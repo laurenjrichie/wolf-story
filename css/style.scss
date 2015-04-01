@@ -129,8 +129,12 @@ path {
 
 .map-event {
   position: absolute;
-  z-index: 1;
-  margin: 200px 80px 50px 40px;
+  z-index: 10;
+  margin-top: 15em;
+  padding: 1.5em;
+  border-left: 4px solid $black;
+  background: rgba($white, 0.6);
+
 }
 
 .event-button {
@@ -144,4 +148,29 @@ path {
   &:hover {
     background-color: rgba($pacNW, 0.3);
   }
+}
+
+.close-event-content {
+  font-size: 2em;
+  // color: rgba($white, 0.7);
+  color: rgba($black, 0.6);
+
+  .active,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+.event-description {
+  // color: #EEEEEE;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.event-images {
+  width: 100%;
 }

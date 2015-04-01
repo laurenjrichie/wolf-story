@@ -195,8 +195,6 @@ function clickMapEvents() {
     var eventId = $(this).attr("data"),
         allEvents = $(this).parents(".key-events").siblings('.map').find(".map-event");
         eventContent = $(this).parents(".key-events").siblings('.map').find("[data=" + eventId + "]");
-    console.log($(this).parents(".key-events"));
-    console.log(eventContent);
     allEvents.addClass('hide');
     eventContent.removeClass('hide');
   })
