@@ -19,10 +19,12 @@ function titleScroll() {
 
 // THE MAP
 
-var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
+var windowWidth = Math.max( $(window).width(), window.innerWidth);
+
+console.log(windowWidth);
 
 var width = windowWidth,
-    height = 620;
+    height = 650; // math relationship.
 
 var projection = d3.geo.albers()
     .scale(windowWidth)
