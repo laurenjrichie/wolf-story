@@ -201,3 +201,24 @@ ul.list-inline.postcol-event-buttons {
   background-color: rgba($gLakes, 0.1);
 
 }
+
+// FOOTER
+
+#wolfLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.credit {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.credit a {
+  color: inherit;
+  .active,
+  &:hover {
+    color: $black;
+    text-decoration: none;
+  }
+}

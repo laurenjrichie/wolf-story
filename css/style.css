@@ -138,4 +138,18 @@ ul.list-inline.postcol-event-buttons {
 #infographic {
   background-color: rgba(121, 110, 36, 0.1); }
 
+#wolfLogo {
+  width: 40px;
+  height: 40px; }
+
+.credit {
+  font-weight: 400;
+  font-size: 16px; }
+
+.credit a {
+  color: inherit; }
+  .credit a .active, .credit a:hover {
+    color: #000000;
+    text-decoration: none; }
+
 /*# sourceMappingURL=style.css.map */
