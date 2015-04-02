@@ -9,6 +9,7 @@ var map,
 function initialize() {
   var mapOptions = {
     center: { lat: 43.289231, lng: -120.234386},
+    scrollwheel: false,
     zoom: 7,
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
