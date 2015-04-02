@@ -21,7 +21,7 @@ function titleScroll() {
 
 var windowWidth = Math.max( $(window).width(), window.innerWidth);
 
-console.log(windowWidth);
+// console.log(windowWidth);
 
 var width = windowWidth,
     height = 650; // math relationship.
@@ -41,9 +41,10 @@ var svg = d3.select(".map").append("svg")
 queue()
     .defer(d3.json, "data/us.json")
     .defer(d3.csv, "data/output.csv")
+    .defer(d3.csv, "data/population_data.csv")
     .await(ready);
 
-function ready(error, us, populations) {
+function ready(error, us, radii, pop_data) {
   svg.append("path")
       .datum(topojson.feature(us, us.objects.land))
       .attr("class", "land")
@@ -54,46 +55,79 @@ function ready(error, us, populations) {
       .attr("class", "states")
       .attr("d", path);
 
-  appendData(svg);
+  appendData(svg, radii, pop_data);
 }
 
-function appendData(svg) {
-  var data = d3.csv("data/output.csv", function(d) {
-    return returnRadiusData(d);
-  }, function(error, rows) {
-    var year = "y1977";
+function appendData(svg, radii, pop_data) {
+  var year = "y1977";
 
-    var projection2 = d3.geo.albersUsa()
-      .scale(windowWidth)
-      .translate([600, 350]);
+  radii.forEach(function(datum) {
+    switch(datum.region) {
+      case 'nRockies':
+        var pop_data_row = 0;
+        break;
+      case 'gLakes':
+        var pop_data_row = 1;
+        break;
+      case 'pacNW':
+        var pop_data_row = 2;
+        break;
+      case 'southwest':
+        var pop_data_row = 3;
+        break;
+    }
 
-    svg.selectAll("circle")
-      .data(rows)
-      .enter().append("circle")
-      .property('year', function(d, index) {
-        // return index; // not right - this is index of row in relation to other rows; need column index
-      })
-      .attr("stroke", "white")
-      .attr("r", function(rows) {
-        return rows[year];
-      })
-      .attr('class', function(rows) {
-        return rows.region;
-      })
-      .attr("transform", function(rows) {
-        return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
-      })
-      .on('mousemove', function(rows) {
-        var circle = this,
-            year = 2 + d3.select(this).property('index');
-        // console.log(d3.select(this).headers); // how to get key/header/year of currently plotted point?
-        console.log(d3.keys(this));
-        return showTooltip(rows, year);
-      })
-      .on('mouseout',function(){
-        tooltip.style("display", "none");
-      })
+    for(k in datum) {
+      if(k == 'region' || k == 'xcoord' || k == 'ycoord') {
+        continue;
+      }
+
+      var pop = pop_data[pop_data_row][k];
+      datum[k] = [datum[k], pop];
+    };
   });
+
+  var projection2 = d3.geo.albersUsa()
+    .scale(windowWidth)
+    .translate([600, 350]);
+
+  svg.selectAll("circle")
+    .data(radii)
+    .enter().append("circle")
+    .attr('data-pop', function(row, index) {
+      switch(row.region) {
+        case 'nRockies':
+          var pop_data_row = 0;
+          break;
+        case 'gLakes':
+          var pop_data_row = 1;
+          break;
+        case 'pacNW':
+          var pop_data_row = 2;
+          break;
+        case 'southwest':
+          var pop_data_row = 3;
+          break;
+      }
+      console.log(pop_data[pop_data_row][year]);
+      return pop_data[pop_data_row][year];
+    })
+    .attr("stroke", "white")
+    .attr("r", function(rows) {
+      return rows[year][0];
+    })
+    .attr('class', function(rows) {
+      return rows.region;
+    })
+    .attr("transform", function(rows) {
+      return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
+    })
+    .on('mousemove', function(rows) {
+      return showTooltip(rows, this);
+    })
+    .on('mouseout',function(){
+      tooltip.style("display", "none");
+    })
 
 };
 
@@ -126,7 +160,7 @@ function startPlaying() {
 
     year = "y" + j++;
     svg.selectAll("circle")
-      .attr("r", function(rows) { return rows[year]; })
+      .attr("r", function(rows) { return rows[year][0]; })
       .attr('class', function(rows) {
         return rows.region;
       });
@@ -140,12 +174,12 @@ function stopPlaying() {
   $('.glyphicon.glyphicon-pause').removeClass('hide');
 }
 
-function setupSlider() {
+function setupSlider() { // fix this with pop data
   var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
     .on("slide", function(event, value){
      year = "y" + value;
      svg.selectAll("circle")
-       .attr("r", function(rows) { return rows[year];})
+       .attr("r", function(rows) { return rows[year][0];})
        .attr('class', function(rows) {
          return rows.region;
        });
@@ -157,28 +191,17 @@ function setupSlider() {
 var tooltip = d3.select(".map").append("div")
   .attr("id","tooltip");
 
-function showTooltip(rows, year) {
-  var regionName = "<p>"+ generateTooltipRegion(rows) +"</p>"
-      // population = getPopulationData(rows.region, rows.)
-  tooltip.html(regionName)
+function showTooltip(rows, elem) {
+  var regionName = "<p>"+ generateTooltipRegion(rows) +"</p>";
+  var year = "<p>" + j + "</p>";
+  var populationInt = parseInt(rows["y" + j][1]);
+  var population = "<p>" + populationInt + "</p>"; // slider not accessing this.
+
+  tooltip.html(regionName + year + population)
     .style({
       "display": "block",
       "top": (d3.event.pageY - 80) + "px",
       "left": (d3.event.pageX + 10) + "px"
-  });
-  // console.log(year);
-  // console.log(d3.keys(rows));
-}
-
-getPopulationData();
-
-function getPopulationData(region, year) {
-  var data = d3.csv("data/population_data.csv", function(d) {
-    return returnPopData(d);
-  }, function(error, rows) {
-    // console.log(rows);
-    // 0 = nRockies, 1 = gLakes, 2 = pacNW, 3 = southwest
-
   });
 }
 
@@ -220,94 +243,4 @@ function playPreColMap() {
     $(".precol-event-buttons").removeClass("hide");
     clickMapEvents();
   });
-}
-
-function returnRadiusData(d) {
-  return {
-    region: d.region,
-    xcoord: d.xcoord,
-    ycoord: d.ycoord,
-    y1977: d.y1977,
-    y1978: d.y1978,
-    y1979: d.y1979,
-    y1980: d.y1980,
-    y1981: d.y1981,
-    y1982: d.y1982,
-    y1983: d.y1983,
-    y1984: d.y1984,
-    y1985: d.y1985,
-    y1986: d.y1986,
-    y1987: d.y1987,
-    y1988: d.y1988,
-    y1989: d.y1989,
-    y1990: d.y1990,
-    y1991: d.y1991,
-    y1992: d.y1992,
-    y1993: d.y1993,
-    y1994: d.y1994,
-    y1995: d.y1995,
-    y1996: d.y1996,
-    y1997: d.y1997,
-    y1998: d.y1998,
-    y1999: d.y1999,
-    y2000: d.y2000,
-    y2001: d.y2001,
-    y2002: d.y2002,
-    y2003: d.y2003,
-    y2004: d.y2004,
-    y2005: d.y2005,
-    y2006: d.y2006,
-    y2007: d.y2007,
-    y2008: d.y2008,
-    y2009: d.y2009,
-    y2010: d.y2010,
-    y2011: d.y2011,
-    y2012: d.y2012,
-    y2013: d.y2013,
-    y2014: d.y2014,
-  }
-}
-
-function returnPopData(d) {
-  return {
-    region: d.region,
-    y1977: d.y1977,
-    y1978: d.y1978,
-    y1979: d.y1979,
-    y1980: d.y1980,
-    y1981: d.y1981,
-    y1982: d.y1982,
-    y1983: d.y1983,
-    y1984: d.y1984,
-    y1985: d.y1985,
-    y1986: d.y1986,
-    y1987: d.y1987,
-    y1988: d.y1988,
-    y1989: d.y1989,
-    y1990: d.y1990,
-    y1991: d.y1991,
-    y1992: d.y1992,
-    y1993: d.y1993,
-    y1994: d.y1994,
-    y1995: d.y1995,
-    y1996: d.y1996,
-    y1997: d.y1997,
-    y1998: d.y1998,
-    y1999: d.y1999,
-    y2000: d.y2000,
-    y2001: d.y2001,
-    y2002: d.y2002,
-    y2003: d.y2003,
-    y2004: d.y2004,
-    y2005: d.y2005,
-    y2006: d.y2006,
-    y2007: d.y2007,
-    y2008: d.y2008,
-    y2009: d.y2009,
-    y2010: d.y2010,
-    y2011: d.y2011,
-    y2012: d.y2012,
-    y2013: d.y2013,
-    y2014: d.y2014,
-  }
 }
