@@ -21,14 +21,14 @@ function titleScroll() {
 
 var windowWidth = Math.max( $(window).width(), window.innerWidth);
 
-// console.log(windowWidth);
+console.log(windowWidth);
 
 var width = windowWidth,
-    height = 650; // math relationship.
+    height = windowWidth/2.048 // 1250; // math relationship. 2560/1250 = 2.048
 
 var projection = d3.geo.albers()
     .scale(windowWidth)
-    .translate([600, 350]);
+    .translate([width/2, height/2]);
 
 var path = d3.geo.path()
     .projection(projection)
@@ -89,7 +89,7 @@ function appendData(svg, radii, pop_data) {
 
   var projection2 = d3.geo.albersUsa()
     .scale(windowWidth)
-    .translate([600, 350]);
+    .translate([width/2, height/2]);
 
   svg.selectAll("circle")
     .data(radii)
