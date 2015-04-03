@@ -152,4 +152,43 @@ ul.list-inline.postcol-event-buttons {
     color: #000000;
     text-decoration: none; }
 
+@-webkit-keyframes pulse_animation {
+  0% {
+    -webkit-transform: scale(1); }
+  30% {
+    -webkit-transform: scale(1.01); }
+  40% {
+    -webkit-transform: scale(1.02); }
+  50% {
+    -webkit-transform: scale(1.04); }
+  60% {
+    -webkit-transform: scale(1.04); }
+  70% {
+    -webkit-transform: scale(1.02); }
+  80% {
+    -webkit-transform: scale(1.01); }
+  100% {
+    -webkit-transform: scale(1); } }
+.pulse {
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 1000ms;
+  -webkit-transform-origin: 70% 70%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear; }
+
+.fade-in {
+  opacity: 0;
+  /* make things invisible upon start */
+  -webkit-animation: fadeIn ease-in 1;
+  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
 /*# sourceMappingURL=style.css.map */

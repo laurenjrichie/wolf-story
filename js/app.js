@@ -21,8 +21,6 @@ function titleScroll() {
 
 var windowWidth = Math.max( $(window).width(), window.innerWidth);
 
-console.log(windowWidth);
-
 var width = windowWidth,
     height = windowWidth/2.048 // 1250; // math relationship. 2560/1250 = 2.048
 
@@ -81,7 +79,6 @@ function appendData(svg, radii, pop_data) {
       if(k == 'region' || k == 'xcoord' || k == 'ycoord') {
         continue;
       }
-
       var pop = pop_data[pop_data_row][k];
       datum[k] = [datum[k], pop];
     };
@@ -109,7 +106,6 @@ function appendData(svg, radii, pop_data) {
           var pop_data_row = 3;
           break;
       }
-      console.log(pop_data[pop_data_row][year]);
       return pop_data[pop_data_row][year];
     })
     .attr("stroke", "white")
