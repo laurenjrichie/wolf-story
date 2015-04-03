@@ -74,7 +74,10 @@ function beaverStream() {
 }
 
 function tooltips() {
-  $('.tooltip').tooltipster(); // is this working?
+  $('.tooltip').tooltipster({
+    theme: 'tooltipster-shadow',
+    position: 'top-right',
+  });
 }
 
 // var animateAnimals = ['wolf', 'deer', 'coyote', 'veg-stream'];
