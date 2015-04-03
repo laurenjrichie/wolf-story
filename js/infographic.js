@@ -25,8 +25,8 @@ function wolfDeerCoyote() {
   $("#wolf").on('click', function() {
     $('#arrow-to-deer').attr('class','fade-in');
     window.setTimeout(function(){
-      $('#deer').attr('class','fade-in');
-      $('#elk').attr('class','fade-in');
+      $('#deer').attr('class','fade-in tooltip'); // added class tooltip here to try and make plugin work
+      $('#elk').attr('class','fade-in tooltip');
     }, 500);
     window.setTimeout(function(){
       $('#arrow-to-coyote').attr('class','fade-in');
@@ -74,10 +74,7 @@ function beaverStream() {
 }
 
 function tooltips() {
-  // $("h1").tooltip({
-  //   content: "Awesome title!"
-  // });
-  $(document).tooltip();
+  $('.tooltip').tooltipster(); // is this working?
 }
 
 // var animateAnimals = ['wolf', 'deer', 'coyote', 'veg-stream'];
@@ -87,7 +84,6 @@ function tooltips() {
 //   'coyote': [['arrow-to-fox', 'fox']],
 //   'veg-stream': [['arrow-to-stream', 'beaver']]
 // }
-
 
 // function fadeIn(){
 //   for (var i = 0; i < animateAnimals.length; i++) {
@@ -109,35 +105,3 @@ function tooltips() {
 //       }
 //     });
 //   }
-//   // var arrowToDeer = $('#' + relationships.wolf[0]);
-//   // // console.log(relationships.wolf)
-//   // elem.on('click', function(){
-//   //   arrowToDeer.attr('class','fade-in');  // diff between this and arrow to elk?
-//   //   window.setTimeout(function(){
-//   //     $('#deer').attr('class','fade-in');
-//   //     $('#elk').attr('class','fade-in');
-//   //   }, 500)
-//   // });
-// }
-// 
-// 
-// // console.log(animateAnimals);
-// // var arrowElem;
-// // for (var i = 0; i < animateAnimals.length; i++) {
-// //   // console.log("#" + String(animateAnimals[i]));
-// //   $("#" + String(animateAnimals[i])).on('click', function() {
-// //     // console.log(this);
-// //     console.log(animateAnimals[i]);
-// //     // if (relationships[animateAnimals[i]].length == 2) {
-// //     //   arrowElem = $('#' + relationships[animateAnimals[0]][0], '#' + relationships[animateAnimals[1]][0]);
-// //     //   console.log(arrowELem);
-// //     // } else {
-// //     //   arrowElem = $('#' + relationships[animateAnimals[0]][0]);
-// //     // }
-// //     // var nextAnimalElem = $('#' + relationships[animateAnimals[0]][1]);
-// //     // arrowElem.attr('class','fade-in');
-// //     // window.setTimeout(function() {
-// //     //   nextAnimalElem.attr('class','fade-in');
-// //     // }, 500);
-// //   });
-// // }
