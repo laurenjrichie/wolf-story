@@ -5,6 +5,7 @@ $(document).ready(function(){
   coyoteFox();
   deerBearStream();
   beaverStream();
+  tooltips();
 });
 
 var animals = ["wolf", "deer", "fox", "amphib", "beaver", "bird", "bear", "fish", "coyote", "veg-stream"];
@@ -70,6 +71,13 @@ function beaverStream() {
       $('#beaver').attr('class','fade-in');
     }, 500);
   });
+}
+
+function tooltips() {
+  // $("h1").tooltip({
+  //   content: "Awesome title!"
+  // });
+  $(document).tooltip();
 }
 
 // var animateAnimals = ['wolf', 'deer', 'coyote', 'veg-stream'];
