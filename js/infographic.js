@@ -1,7 +1,7 @@
 $(document).ready(function(){
   loopThroughAnimals(pulse);
-  loopThroughAnimals(fadeIn);
-  fadeIn();
+  // loopThroughAnimals(fadeIn);
+  // fadeIn();
 });
 
 var animals = ["wolf", "deer","fox", "amphib", "beaver", "bird", "bear", "fish", "coyote", "veg-stream"];
@@ -26,14 +26,14 @@ var relationships = {
   "wolf": ["arrow-to-deer", ['deer', 'elk']],
 }
 
-function fadeIn(elem){
-  var arrowToDeer = $('#' + relationships.wolf[0]);
-  // console.log(relationships.wolf)
-  elem.on('click', function(){
-    arrowToDeer.attr('class','fade-in');  // diff between this and arrow to elk?
-    window.setTimeout(function(){
-      $('#deer').attr('class','fade-in');
-      $('#elk').attr('class','fade-in');
-    }, 500)
-  });
-}
+// function fadeIn(elem){
+//   var arrowToDeer = $('#' + relationships.wolf[0]);
+//   // console.log(relationships.wolf)
+//   elem.on('click', function(){
+//     arrowToDeer.attr('class','fade-in');  // diff between this and arrow to elk?
+//     window.setTimeout(function(){
+//       $('#deer').attr('class','fade-in');
+//       $('#elk').attr('class','fade-in');
+//     }, 500)
+//   });
+// }
