@@ -1,9 +1,9 @@
 $(document).ready(function() {
   titleScroll();
   hideEvents();
-  playPreColMap();
+  showPreColStuff();
   setupSlider();
-  playPostcolMap();
+  // playPostcolMap();
   clickMapEvents();
 });
 
@@ -62,16 +62,26 @@ function ready(error, us, radii, pop_data, precol) {
   chooseMap(svg, radii, pop_data, precol);
 }
 
+var playInterval;
+var playingPostCol = false;
+
 function chooseMap(svg, radii, pop_data, precol) {
   $('#play-postcol-button').on('click', function() {
-    svg.selectAll("circle.precol")
-      .remove()
-    appendPostcolData(svg, radii, pop_data);
+    // clearInterval(playInterval);
+    // playInterval = null;
+    console.log("inside click event");
+
+    if(playingPostCol === false) {
+      appendPostcolData(svg, radii, pop_data);
+      playingPostCol = true;
+    }
   });
   $('#play-precol-button').on('click', function() {
-    svg.selectAll("circle.postcol")
+    clearInterval(playInterval);
+    svg.selectAll("circle")
       .remove()
     appendPrecolData(svg, precol);
+    animatePrecolMap(svg);
   });
 }
 
@@ -80,12 +90,13 @@ function appendPrecolData(svg, precol) {
     .scale(windowWidth)
     .translate([width/2, height/2]);
 
-  svg.selectAll("circle")
+  svg.selectAll("circle") // make so clicking while animation is present doesn't overlay more circles
     .data(precol)
     .enter().append("circle")
     .attr("stroke", "white")
+    .attr("fill", "rgba(121,110,36,0.6)")
     .attr("r", function(rows) {
-      return 5;
+      return Math.floor(Math.random() * (14 - 2) + 2);
     })
     .attr('class', function(rows) {
       return 'precol';
@@ -99,9 +110,33 @@ function appendPrecolData(svg, precol) {
     // .on('mouseout',function(){
     //   tooltip.style("display", "none");
     // })
+
 }
 
+function animatePrecolMap(svg) {
+  var k = 1;
+  playPrecolInterval = setInterval(function() {
+    if (k === 11) {
+      clearInterval(playPrecolInterval);
+      k = 1;
+    }
+    svg.selectAll("circle")
+      .filter(function(d) {
+        if (d.frame == k) {
+          return d.frame;
+        }
+      })
+      .remove();
+    k ++;
+  }, 1000);
+}
+
+var  j = 1977;
+
 function appendPostcolData(svg, radii, pop_data) {
+  clearInterval(playInterval);
+  svg.selectAll("circle")
+    .remove()
   var year = "y1977";
 
   radii.forEach(function(datum) {
@@ -133,7 +168,7 @@ function appendPostcolData(svg, radii, pop_data) {
     .scale(windowWidth)
     .translate([width/2, height/2]);
   
-  svg.selectAll("circle.postcol")
+  svg.selectAll("circle")
     .data(radii)
     .enter().append("circle")
     .attr('data-pop', function(row, index) {
@@ -170,52 +205,44 @@ function appendPostcolData(svg, radii, pop_data) {
       tooltip.style("display", "none");
     })
     
+    playInterval = setInterval(function() {
+      // $('.glyphicon.glyphicon-pause').addClass('hide');
+      // $('.glyphicon.glyphicon-play').removeClass('hide');
+      if (j == 2015) {
+        j = 1977;
+        playingPostCol = false;
+        clearInterval(playInterval);
+      }
+
+      year = "y" + j++;        
+      svg.selectAll("circle")
+        .attr("r", function(row) { return row[year][0]; })
+        .attr('class', function(row) {
+          return "postcol " + row.region;
+        });
+      console.log("still playing");
+      console.log(j);
+    }, 300);
+    
     drawLegend(svg);
+    showPostcolStuff();
 };
 
-var playInterval = null,
-    j = 1977;
-
-function playPostcolMap() {
-  $('#play-postcol-button').on('click', function() {    
-    var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content, #precol-map-header");
-    $(".postcol-event-buttons").removeClass("hide");
-    $("#postcol-map-header").removeClass("hide");
-    preColStuff.addClass("hide");
-    if(playInterval != null) {
-      stopPlaying();
-    } else {
-      startPlaying();
-    }
-    $('#slider-container').fadeIn('slow');
-  });
+function showPostcolStuff() {
+  var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content, #precol-map-header");
+  $(".postcol-event-buttons").removeClass("hide");
+  $("#postcol-map-header").removeClass("hide");
+  preColStuff.addClass("hide");
+  $('#slider-container').fadeIn('slow');
+  drawLegend(svg);
 }
 
-function startPlaying() {
-  playInterval = setInterval(function() {
-    $('.glyphicon.glyphicon-pause').addClass('hide');
-    $('.glyphicon.glyphicon-play').removeClass('hide');
-    if (j == 2015) {
-      j = 1977;
-      stopPlaying();
-    }
-
-    year = "y" + j++;
-      
-    svg.selectAll("circle.postcol")
-      .attr("r", function(row) { return row[year][0]; })
-      .attr('class', function(row) {
-        return "postcol " + row.region;
-      });
-  }, 300);
-}
-
-function stopPlaying() {
-  clearInterval(playInterval);
-  playInterval = null;
-  $('.glyphicon.glyphicon-play').addClass('hide');
-  $('.glyphicon.glyphicon-pause').removeClass('hide');
-}
+// function stopPlaying() {
+//   clearInterval(playInterval);
+//   playInterval = null;
+//   $('.glyphicon.glyphicon-play').addClass('hide');
+//   $('.glyphicon.glyphicon-pause').removeClass('hide');
+// }
 
 function setupSlider() { // fix this with pop data
   var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
@@ -279,13 +306,15 @@ function hideEvents() {
   });
 }
 
-function playPreColMap() {
+function showPreColStuff() {
   $("#play-precol-button").on('click', function() {
     $("#precol-map-header").removeClass("hide");
     var postColStuff = $(".1973-content, .1995-content, .today-content, #postcol-map-header, .postcol-event-buttons");
     postColStuff.addClass("hide");
     $(".precol-event-buttons").removeClass("hide");
     clickMapEvents();
+    svg.selectAll('.legend').remove();
+    $('#slider-container').hide();
   });
 }
 
