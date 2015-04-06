@@ -26,19 +26,28 @@ function startPlaying() {
   });
 }
 
-function getData() {
-  var data = [];
-  d3.csv('data/or7-data.csv', function(d) {
-    return {
-      xcoord: d.xcoord,
-      ycoord: d.ycoord,
-    }
-  }, function(error, rows) {
-    for (var i = 0; i < rows.length; i++) {
-      data.push([rows[i].xcoord, rows[i].ycoord]);
-    }
-    plotCoordinates(data, index); // how to have this function return data and then call plotCoordinates from startPlaying??
-  });
+queue()
+    .defer(d3.csv, "data/or7-data.csv")
+    .await(ready);
+
+function ready(error, or7) {
+  getData(or7);
+}
+
+function getData(data) {
+  console.log(data);
+  // var data = [];
+  // d3.csv('data/or7-data.csv', function(d) {
+  //   return {
+  //     xcoord: d.xcoord,
+  //     ycoord: d.ycoord,
+  //   }
+  // }, function(error, rows) {
+  //   for (var i = 0; i < rows.length; i++) {
+  //     data.push([rows[i].xcoord, rows[i].ycoord]);
+  //   }
+  //   plotCoordinates(data, index); // how to have this function return data and then call plotCoordinates from startPlaying??
+  // });
 }
 
 var infoLatLongs = {
@@ -70,7 +79,7 @@ function plotCoordinates(data, index) {
   }, 300);
 }
 
-function plotInfoNums(index) {
+function plotInfoNums(index) { // refactor this
   if (index == 1) {
     showInfo("one", infoLatLongs);
   } else if (index == 3) {
