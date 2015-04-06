@@ -22,7 +22,7 @@ function titleScroll() {
 var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
 
 var width = windowWidth,
-    height = windowWidth/2.048 // 1250; // math relationship. 2560/1250 = 2.048
+    height = windowWidth/2.048
 
 var projection = d3.geo.albers()
     .scale(windowWidth)
@@ -40,9 +40,13 @@ queue()
     .defer(d3.json, "data/us.json")
     .defer(d3.csv, "data/output.csv")
     .defer(d3.csv, "data/population_data.csv")
+    .defer(d3.csv, "data/final-precol.csv")
     .await(ready);
 
-function ready(error, us, radii, pop_data) {
+function ready(error, us, radii, pop_data, precol) {
+  window.radii = radii;
+  window.pop_data = pop_data;
+  
   svg.append("path")
       .datum(topojson.feature(us, us.objects.land))
       .attr("class", "land")
@@ -53,10 +57,51 @@ function ready(error, us, radii, pop_data) {
       .attr("class", "states")
       .attr("d", path);
 
-  appendData(svg, radii, pop_data);
+  // appendPostcolData(svg, radii, pop_data);
+  appendPrecolData(svg, precol);
+  chooseMap(svg, radii, pop_data, precol);
 }
 
-function appendData(svg, radii, pop_data) {
+function chooseMap(svg, radii, pop_data, precol) {
+  $('#play-postcol-button').on('click', function() {
+    svg.selectAll("circle.precol")
+      .remove()
+    appendPostcolData(svg, radii, pop_data);
+  });
+  $('#play-precol-button').on('click', function() {
+    svg.selectAll("circle.postcol")
+      .remove()
+    appendPrecolData(svg, precol);
+  });
+}
+
+function appendPrecolData(svg, precol) {
+  var projection2 = d3.geo.albersUsa()
+    .scale(windowWidth)
+    .translate([width/2, height/2]);
+
+  svg.selectAll("circle")
+    .data(precol)
+    .enter().append("circle")
+    .attr("stroke", "white")
+    .attr("r", function(rows) {
+      return 5;
+    })
+    .attr('class', function(rows) {
+      return 'precol';
+    })
+    .attr("transform", function(rows) {
+      return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
+    })
+    // .on('mousemove', function(rows) { // maybe?
+    //   return showTooltip(rows, this);
+    // })
+    // .on('mouseout',function(){
+    //   tooltip.style("display", "none");
+    // })
+}
+
+function appendPostcolData(svg, radii, pop_data) {
   var year = "y1977";
 
   radii.forEach(function(datum) {
@@ -87,8 +132,8 @@ function appendData(svg, radii, pop_data) {
   var projection2 = d3.geo.albersUsa()
     .scale(windowWidth)
     .translate([width/2, height/2]);
-
-  svg.selectAll("circle")
+  
+  svg.selectAll("circle.postcol")
     .data(radii)
     .enter().append("circle")
     .attr('data-pop', function(row, index) {
@@ -113,7 +158,7 @@ function appendData(svg, radii, pop_data) {
       return rows[year][0];
     })
     .attr('class', function(rows) {
-      return rows.region;
+      return "postcol " + rows.region;
     })
     .attr("transform", function(rows) {
       return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
@@ -124,61 +169,15 @@ function appendData(svg, radii, pop_data) {
     .on('mouseout',function(){
       tooltip.style("display", "none");
     })
-
-    var legendRectSize = 18;
-    var legendSpacing = 4;
-    var color = d3.scale.ordinal()
-        .range(['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21']);
     
-    var legend = svg.selectAll('.legend')
-      .data(["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"])
-      .enter()
-      .append('g')
-      .attr('class', 'legend')
-      .attr('transform', function(d, i) {
-        var height = legendRectSize + legendSpacing;
-        var offset =  height * color.domain().length / 2;
-        var horz = 2 * legendRectSize;
-        var vert = i * height - offset;
-        return 'translate(' + horz + ',' + vert + ')';
-      });
-    
-    legend.append('rect')
-      .attr('width', legendRectSize)
-      .attr('height', legendRectSize)
-      .style('fill', color)
-      .style('stroke', color);
-    
-    legend.append('text')
-      .attr('x', legendRectSize + legendSpacing)
-      .attr('y', legendRectSize - legendSpacing)
-      .text(function(d) { return d; });
-      
-    svg.select('.legend')
-      .attr('transform', function(d, i) {
-        var horz = legendRectSize;
-        return 'translate(' + horz + ',' + 0 + ')';
-      })
-      .style('font-weight', 'bold')
-      .style('font-size', '14px');
-      
-    // legend.append('text')
-    //   .data(["title"])
-    //   // .exit()
-    //   // .enter()
-    //   .attr('x', 0)
-    //   .attr('y', legendRectSize - legendSpacing - legendRectSize)
-    //   .style("font-family", "sans-serif")
-    //   // .style("font-size", "10px")
-    //   .style("color", "Black")
-    //   .text(function() { return "Wolf management regions:"; });
+    drawLegend(svg);
 };
 
 var playInterval = null,
     j = 1977;
 
 function playPostcolMap() {
-  $('#play-postcol-button').on('click', function() {
+  $('#play-postcol-button').on('click', function() {    
     var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content, #precol-map-header");
     $(".postcol-event-buttons").removeClass("hide");
     $("#postcol-map-header").removeClass("hide");
@@ -202,10 +201,11 @@ function startPlaying() {
     }
 
     year = "y" + j++;
-    svg.selectAll("circle")
-      .attr("r", function(rows) { return rows[year][0]; })
-      .attr('class', function(rows) {
-        return rows.region;
+      
+    svg.selectAll("circle.postcol")
+      .attr("r", function(row) { return row[year][0]; })
+      .attr('class', function(row) {
+        return "postcol " + row.region;
       });
   }, 300);
 }
@@ -287,4 +287,43 @@ function playPreColMap() {
     $(".precol-event-buttons").removeClass("hide");
     clickMapEvents();
   });
+}
+
+function drawLegend(svg) {
+  var legendRectSize = 18;
+  var legendSpacing = 4;
+  var color = d3.scale.ordinal()
+      .range(['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21']);
+  
+  var legend = svg.selectAll('.legend')
+    .data(["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"])
+    .enter()
+    .append('g')
+    .attr('class', 'legend')
+    .attr('transform', function(d, i) {
+      var height = legendRectSize + legendSpacing;
+      var offset =  height * color.domain().length / 2;
+      var horz = 2 * legendRectSize;
+      var vert = i * height - offset;
+      return 'translate(' + horz + ',' + vert + ')';
+    });
+  
+  legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', color)
+    .style('stroke', color);
+  
+  legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
+    .text(function(d) { return d; });
+    
+  svg.select('.legend')
+    .attr('transform', function(d, i) {
+      var horz = legendRectSize;
+      return 'translate(' + horz + ',' + 0 + ')';
+    })
+    .style('font-weight', 'bold')
+    .style('font-size', '14px');
 }
