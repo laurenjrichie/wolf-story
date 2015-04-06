@@ -1,14 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800);
 body {
   margin-top: 0;
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased; }
 
-.row {
-  margin-top: 2em; }
-
 h1#main-title {
-  font-weight: 300;
+  font-weight: 600;
   color: #F9F7EB;
   position: relative;
   top: 300px;
@@ -20,10 +17,11 @@ h1#main-title {
   margin-top: 0; }
 
 h2#main-subtitle {
-  font-weight: 300;
+  font-weight: 600;
   color: #F9F7EB;
   position: relative;
   font-weight: 400;
+  font-size: 36px;
   opacity: 0;
   top: 320px;
   letter-spacing: 5px; }
@@ -138,6 +136,24 @@ ul.list-inline.postcol-event-buttons {
 #infographic {
   background-color: rgba(121, 110, 36, 0.1); }
 
+/* Use this next selector to style things like font-size and line-height: */
+.roles-in-nature {
+  position: relative;
+  top: -800px;
+  left: 250px;
+  background: rgba(255, 255, 255, 0.4);
+  width: 150px;
+  height: 150px;
+  border: 2px solid #796E24;
+  border-radius: 50%; }
+
+.roles-in-nature p {
+  color: #796E24;
+  position: relative;
+  top: 30px;
+  font-size: 18px;
+  font-weight: 400; }
+
 #wolfLogo {
   width: 40px;
   height: 40px; }
@@ -145,6 +161,9 @@ ul.list-inline.postcol-event-buttons {
 .credit {
   font-weight: 400;
   font-size: 16px; }
+
+footer .row {
+  margin-top: 10px; }
 
 .credit a {
   color: inherit; }
@@ -190,5 +209,15 @@ ul.list-inline.postcol-event-buttons {
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
   animation-duration: 1s; }
+
+@media screen and (max-width: 465px) {
+  h1#main-title {
+    width: 300px;
+    font-size: 18px; }
+
+  h2#main-subtitle {
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px; } }
 
 /*# sourceMappingURL=style.css.map */

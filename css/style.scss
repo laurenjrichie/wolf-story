@@ -1,6 +1,5 @@
 //Typhography
-@import
-url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800);
 
 //Color Theme
 $black: #000000;
@@ -9,6 +8,7 @@ $nRockies: #B2273A;
 $gLakes: #796E24;
 $southwest: #337ab7;
 $pacNW: #432F21;
+$arrowColor: #796F2C;
 
 //Button Style
 @mixin mapButtons {
@@ -33,7 +33,7 @@ $pacNW: #432F21;
 }
 //Heading
 @mixin landing-title {
-  font-weight: 300;
+  font-weight: 600;
   color: #F9F7EB;
   position: relative;
 }
@@ -42,10 +42,6 @@ body {
   margin-top: 0;
   font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
-}
-
-.row {
-  margin-top: 2em;
 }
 
 h1#main-title {
@@ -62,6 +58,7 @@ h1#main-title {
 h2#main-subtitle {
   @include landing-title;
   font-weight: 400;
+  font-size: 36px;
   opacity: 0;
   top: 320px;
   letter-spacing: 5px;
@@ -70,6 +67,7 @@ h2#main-subtitle {
 .parallax-window {
   min-height: 2000px;
 }
+
 
 // d3 MAP
 
@@ -199,7 +197,41 @@ ul.list-inline.postcol-event-buttons {
 
 #infographic {
   background-color: rgba($gLakes, 0.1);
+}
 
+// .my-custom-theme {
+// 	border-radius: 5px;
+// 	border: 1px solid $gLakes;
+// 	background: rgba($white, 0.3);
+// 	color: $gLakes;
+// }
+/* Use this next selector to style things like font-size and line-height: */
+// .my-custom-theme .tooltipster-content {
+// 	font-family: inherit;
+// 	font-size: 16px;
+// 	line-height: 16px;
+// 	padding: 8px 10px;
+//   font-weight: 400;
+// }
+
+.roles-in-nature {
+  // z-index: 30;
+  position: relative;
+  top: -800px;
+  left: 250px;
+  background: rgba($white, 0.4);
+  width: 150px;
+  height: 150px;
+  border: 2px solid $gLakes;
+  border-radius: 50%;
+}
+
+.roles-in-nature p {
+  color: $gLakes;
+  position: relative;
+  top: 30px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 // FOOTER
@@ -212,6 +244,10 @@ ul.list-inline.postcol-event-buttons {
 .credit {
   font-weight: 400;
   font-size: 16px;
+}
+
+footer .row {
+  margin-top: 10px;
 }
 
 .credit a {
@@ -255,4 +291,18 @@ ul.list-inline.postcol-event-buttons {
  -webkit-animation-duration:1s;
  -moz-animation-duration:1s;
  animation-duration:1s;
+}
+
+@media screen and (max-width:465px){
+  h1#main-title {
+    width: 300px;
+    font-size: 18px;
+  }
+
+  h2#main-subtitle {
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px;
+  }
+
 }

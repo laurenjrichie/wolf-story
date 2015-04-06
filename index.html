@@ -17,14 +17,37 @@
   </head>
   <body>
 
-    <div class="parallax-window text-center" data-parallax="scroll" data-image-src="img/grey-wolf-snow.jpg">
+    <!-- LANDING-PAGE -->
+    <div class="parallax-window text-center" data-parallax="scroll" data-image-src="img/grey-wolf-snow02.jpg">
       <h1 id="main-title" class="text-center">COMEBACK</h1>
       <h2 id="main-subtitle" class="text-center">How a once-persecuted predator is returning to the US</h2>
     </div>
+    <!-- <div class="parallax-window text-center" data-parallax="scroll" data-image-src="img/grey-wolf-snow02.jpg"> -->
+    <!-- </div> -->
 
+    <!-- 3D MAP - WOLF POPULATION IN HISTORY -->
     <div class="container-fluid d3-map">
-      <!-- <div class="map col-sm-12 col-md-12 col-lg-12"> -->
       <div class="map">
+        <div class="row col-sm-8 col-sm-offset-2 text-center">
+          <h1 id="precol-map-header" class="text-center">Wolves before European colonization</h1>
+          <h1 id="postcol-map-header" class="text-center hide">WOLVES 1977 - Present</h1>
+          <ul class="list-inline">
+            <li class="col-sm-4 col-sm-offset-2">
+              <button id="play-precol-button" class="timeline btn btn-block col-sm-2">1800-1950
+                <span class="glyphicon glyphicon-play"></span>
+                <span class="glyphicon glyphicon-pause hide"></span>
+              </button>
+            </li>
+            <li class="col-sm-4">
+              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2">1977-2014
+                <span class="glyphicon glyphicon-play"></span>
+                <span class="glyphicon glyphicon-pause hide"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- POPUP EVENT DESCRIPTION -->
         <div class="historical-content hide map-event col-sm-6 col-sm-offset-3" data="historical">
           <a class="close-event-content glyphicon glyphicon-remove"></a>
           <h3 class="event-title">HISTORICAL NUMBERS</h3>
@@ -36,6 +59,7 @@
           </p>
           <img class="event-images" src="img/wolf-pack.jpg" alt="wolf-pack" />
         </div>
+
         <div class="eradication-content hide map-event col-sm-6 col-sm-offset-3" data="eradication">
           <a class="close-event-content glyphicon glyphicon-remove"></a>
           <h3 class="event-title">ERADICATION</h3>
@@ -46,6 +70,7 @@
           </p>
           <img class="event-images" src="img/wolf-skins.jpg" alt="wolf-skins" />
         </div>
+
         <div class="1950s-content hide map-event col-sm-6 col-sm-offset-3" data="1950s">
           <a class="close-event-content glyphicon glyphicon-remove"></a>
           <h3 class="event-title">WIPED OUT</h3>
@@ -78,6 +103,7 @@
             <iframe class="event-images" width="560" height="315" src="https://www.youtube.com/embed/0_KvAkGYsSA" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
+
         <div class="today-content hide map-event col-sm-6 col-sm-offset-3" data="today">
           <a class="close-event-content glyphicon glyphicon-remove"></a>
           <h3 class="event-title">TODAY</h3>
@@ -87,30 +113,12 @@
           </p>
           <img class="event-images" src="img/gibbon-pack.jpg" alt="wolves" />
         </div>
-
-        <div class="row col-sm-8 col-sm-offset-2 text-center">
-          <h1 id="precol-map-header" class="text-center">Wolves before European colonization</h1>
-          <h1 id="postcol-map-header" class="text-center hide">WOLVES 1977 - Present</h1>
-          <ul class="list-inline">
-            <li class="col-sm-4 col-sm-offset-2">
-              <button id="play-precol-button" class="timeline btn btn-block col-sm-2">1800-1950
-                <span class="glyphicon glyphicon-play"></span>
-                <span class="glyphicon glyphicon-pause hide"></span>
-              </button>
-            </li>
-            <li class="col-sm-4">
-              <button id="play-postcol-button" class="timeline btn btn-block col-sm-2">1977-2014
-                <span class="glyphicon glyphicon-play"></span>
-                <span class="glyphicon glyphicon-pause hide"></span>
-              </button>
-            </li>
-          </ul>
-        </div>
-
       </div>
+
+      <!-- EVENT BUTTONS -->
       <div class="key-events row col-sm-10 col-sm-offset-1">
         <ul class="list-inline precol-event-buttons">
-          <li class="col-sm-3 col-sm-offset-3">
+          <li class="col-sm-2 col-sm-offset-3">
             <button id="historical-event" class="event-button btn-block" data="historical">Historical numbers</button>
           </li>
           <li class="col-sm-2">
@@ -140,6 +148,7 @@
       </div>
     </div>
 
+    <!-- INFOGRAPHIC -->
     <div class="container-fluid" id="infographic">
       <div class="row">
         <div class="col-md-12 text-center">
@@ -156,6 +165,7 @@
           </g>
           <g id="wolf" class="oldclass" title="Wolves have cascading effects on ecosystems.">
             <image overflow="visible" width="1219" height="1219" xlink:href="img/wolf-clipart.png" transform="matrix(-0.1396 0 0 0.1372 202.5827 36.5958)"/>
+            <text x="100" y="100" fill="#FFFFFF">Click!</text>
           </g>
           <g id="fox" class="hide tooltip" title="With coyote numbers in check, fox and rodent populations rebound.">
             <image overflow="visible" width="1200" height="720" xlink:href="img/rodent.png" transform="matrix(5.860282e-02 0 0 5.860282e-02 188.6766 607.3607)"/>
@@ -233,11 +243,16 @@
             <path fill="#796F2C" d="M832.7 510.6c0-0.2-0.5-0.2-1.3-0.2 -0.8 0-1.9 0-3.2-0.1 -0.7 0-1.4-0.1-2.2 0 -0.8 0-1.7 0.1-2.6 0.1 -1.8 0.1-3.6 0.3-5.5 0.4 -3.8 0.3-7.6 0.8-10.6 1 -3 0.3-5.1 0.5-5.5 0.5 -1.6 0.2-3.1 2-3.3 4.1 -0.2 2 0.9 3.5 2.6 3.3 0.4-0.1 2.6-0.4 5.7-1.1 3.1-0.7 7-1.6 10.8-2.6 1.9-0.5 3.8-1 5.6-1.5 0.9-0.2 1.8-0.5 2.5-0.7 0.8-0.2 1.5-0.4 2.3-0.6 1.4-0.4 2.7-0.9 3.6-1.4C832.3 511.3 832.8 510.8 832.7 510.6z"/>
           </g>
         </svg>
+        <div class="col-sm-2 roles-in-nature text-center">
+          <p>Wolves have cascading effects on ecosystems.</p>
+        </div>
       </div>
     </div>
+
+    <!-- FOOTER -->
     <footer class="container-fluid">
       <div class="row">
-        <ul class="list-inline col-sm-4 col-sm-offset-1">
+        <ul class="list-inline col-sm-4">
           <li>
             <svg id="wolfLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" viewBox="0 0 93.7 93.7" enable-background="new 0 0 93.7 93.7" xml:space="preserve">
               <g id="logo">

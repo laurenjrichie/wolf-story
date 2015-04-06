@@ -19,7 +19,7 @@ function titleScroll() {
 
 // THE MAP
 
-var windowWidth = Math.max( $(window).width(), window.innerWidth);
+var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
 
 var width = windowWidth,
     height = windowWidth/2.048 // 1250; // math relationship. 2560/1250 = 2.048
@@ -125,6 +125,29 @@ function appendData(svg, radii, pop_data) {
       tooltip.style("display", "none");
     })
 
+    // var legend = svg.selectAll(".legend")
+    //   .data(color.domain().slice().reverse())
+    //   .enter().append("g")
+    //   .attr("class", "legend")
+    //   .attr("transform", function (d, i) {
+    //   return "translate(0," + i * 20 + ")";
+    // });
+    //
+    // legend.append("rect")
+    //     .attr("x", width - 18)
+    //     .attr("width", 18)
+    //     .attr("height", 18)
+    //     .style("fill", color);
+    //
+    // legend.append("text")
+    //     .attr("x", width - 24)
+    //     .attr("y", 9)
+    //     .attr("dy", ".35em")
+    //     .style("text-anchor", "end")
+    //     .text(function (d) {
+    //     return d;
+    // });
+
 };
 
 var playInterval = null,
@@ -188,16 +211,17 @@ var tooltip = d3.select(".map").append("div")
   .attr("id","tooltip");
 
 function showTooltip(rows, elem) {
-  var regionName = "<p>"+ generateTooltipRegion(rows) +"</p>";
-  var year = "<p>" + j + "</p>";
+  var regionName = "<p><strong>"+ generateTooltipRegion(rows) +"</strong></p>";
+  var year = "<p>" + "Year: " + j + "</p>";
   var populationInt = parseInt(rows["y" + j][1]);
-  var population = "<p>" + populationInt + "</p>"; // slider not accessing this.
+  var population = "<p>" + "Population: " + populationInt + "</p>"; // slider not accessing this.
 
   tooltip.html(regionName + year + population)
     .style({
       "display": "block",
       "top": (d3.event.pageY - 80) + "px",
-      "left": (d3.event.pageX + 10) + "px"
+      "left": (d3.event.pageX + 10) + "px",
+      "font-size": "14px"
   });
 }
 
