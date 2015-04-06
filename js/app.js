@@ -125,29 +125,53 @@ function appendData(svg, radii, pop_data) {
       tooltip.style("display", "none");
     })
 
-    // var legend = svg.selectAll(".legend")
-    //   .data(color.domain().slice().reverse())
-    //   .enter().append("g")
-    //   .attr("class", "legend")
-    //   .attr("transform", function (d, i) {
-    //   return "translate(0," + i * 20 + ")";
-    // });
-    //
-    // legend.append("rect")
-    //     .attr("x", width - 18)
-    //     .attr("width", 18)
-    //     .attr("height", 18)
-    //     .style("fill", color);
-    //
-    // legend.append("text")
-    //     .attr("x", width - 24)
-    //     .attr("y", 9)
-    //     .attr("dy", ".35em")
-    //     .style("text-anchor", "end")
-    //     .text(function (d) {
-    //     return d;
-    // });
-
+    var legendRectSize = 18;
+    var legendSpacing = 4;
+    var color = d3.scale.ordinal()
+        .range(['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21']);
+    
+    var legend = svg.selectAll('.legend')
+      .data(["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"])
+      .enter()
+      .append('g')
+      .attr('class', 'legend')
+      .attr('transform', function(d, i) {
+        var height = legendRectSize + legendSpacing;
+        var offset =  height * color.domain().length / 2;
+        var horz = 2 * legendRectSize;
+        var vert = i * height - offset;
+        return 'translate(' + horz + ',' + vert + ')';
+      });
+    
+    legend.append('rect')
+      .attr('width', legendRectSize)
+      .attr('height', legendRectSize)
+      .style('fill', color)
+      .style('stroke', color);
+    
+    legend.append('text')
+      .attr('x', legendRectSize + legendSpacing)
+      .attr('y', legendRectSize - legendSpacing)
+      .text(function(d) { return d; });
+      
+    svg.select('.legend')
+      .attr('transform', function(d, i) {
+        var horz = legendRectSize;
+        return 'translate(' + horz + ',' + 0 + ')';
+      })
+      .style('font-weight', 'bold')
+      .style('font-size', '14px');
+      
+    // legend.append('text')
+    //   .data(["title"])
+    //   // .exit()
+    //   // .enter()
+    //   .attr('x', 0)
+    //   .attr('y', legendRectSize - legendSpacing - legendRectSize)
+    //   .style("font-family", "sans-serif")
+    //   // .style("font-size", "10px")
+    //   .style("color", "Black")
+    //   .text(function() { return "Wolf management regions:"; });
 };
 
 var playInterval = null,

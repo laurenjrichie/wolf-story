@@ -41,25 +41,25 @@ path {
 
 .timeline {
   font-size: 16px;
-  border: 1px solid #000000;
+  border: 1px solid black;
   border-radius: 0;
   line-height: 1.5;
-  color: #FFFFFF;
-  background-color: #000000;
+  color: white;
+  background-color: black;
   text-shadow: none;
   box-shadow: none; }
   .timeline .active, .timeline:hover, .timeline:active, .timeline:visited, .timeline:focus {
     background-color: transparent;
-    border: 2px solid #000000;
-    color: #000000; }
+    border: 2px solid black;
+    color: black; }
 
 .nRockies {
   opacity: 0.6;
-  fill: #B2273A; }
+  fill: #b2273a; }
 
 .gLakes {
   opacity: 0.6;
-  fill: #796E24; }
+  fill: #796e24; }
 
 .southwest {
   opacity: 0.6;
@@ -67,7 +67,7 @@ path {
 
 .pacNW {
   opacity: 0.6;
-  fill: #432F21; }
+  fill: #432f21; }
 
 #tooltip {
   position: absolute;
@@ -89,7 +89,7 @@ path {
   z-index: 10;
   margin-top: 10em;
   padding: 1.5em;
-  border-left: 4px solid #000000;
+  border-left: 4px solid black;
   background: rgba(255, 255, 255, 0.6); }
 
 .event-button {
@@ -98,7 +98,7 @@ path {
   padding: 10px;
   background-color: rgba(67, 47, 33, 0.2);
   border: 0;
-  border-top: 2px solid #000000; }
+  border-top: 2px solid black; }
   .event-button:hover {
     background-color: rgba(67, 47, 33, 0.3); }
 
@@ -106,8 +106,8 @@ path {
   font-size: 2em;
   color: rgba(0, 0, 0, 0.6); }
   .close-event-content .active, .close-event-content:hover, .close-event-content:active, .close-event-content:focus {
-    color: #FFFFFF;
-    color: #000000;
+    color: white;
+    color: black;
     text-decoration: none; }
 
 .event-description {
@@ -126,6 +126,12 @@ ul.list-inline.postcol-event-buttons {
 
 .d3-map {
   margin-bottom: 2em; }
+
+.legend {
+  font-size: 12px; }
+
+rect {
+  stroke-width: 2; }
 
 #infographic h1 {
   margin-top: 1em; }
@@ -151,26 +157,34 @@ footer .row {
 .credit a {
   color: inherit; }
   .credit a .active, .credit a:hover {
-    color: #000000;
+    color: black;
     text-decoration: none; }
 
 @-webkit-keyframes pulse_animation {
   0% {
     -webkit-transform: scale(1); }
+
   30% {
     -webkit-transform: scale(1.01); }
+
   40% {
     -webkit-transform: scale(1.02); }
+
   50% {
     -webkit-transform: scale(1.04); }
+
   60% {
     -webkit-transform: scale(1.04); }
+
   70% {
     -webkit-transform: scale(1.02); }
+
   80% {
     -webkit-transform: scale(1.01); }
+
   100% {
     -webkit-transform: scale(1); } }
+
 .pulse {
   -webkit-animation-name: 'pulse_animation';
   -webkit-animation-duration: 1000ms;
@@ -202,5 +216,3 @@ footer .row {
     font-size: 20px;
     line-height: 2;
     padding: 20px; } }
-
-/*# sourceMappingURL=style.css.map */
