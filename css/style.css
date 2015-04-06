@@ -137,23 +137,6 @@ ul.list-inline.postcol-event-buttons {
   background-color: rgba(121, 110, 36, 0.1); }
 
 /* Use this next selector to style things like font-size and line-height: */
-.roles-in-nature {
-  position: relative;
-  top: -800px;
-  left: 250px;
-  background: rgba(255, 255, 255, 0.4);
-  width: 150px;
-  height: 150px;
-  border: 2px solid #796E24;
-  border-radius: 50%; }
-
-.roles-in-nature p {
-  color: #796E24;
-  position: relative;
-  top: 30px;
-  font-size: 18px;
-  font-weight: 400; }
-
 #wolfLogo {
   width: 40px;
   height: 40px; }
