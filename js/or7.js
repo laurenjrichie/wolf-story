@@ -1,10 +1,18 @@
-$(document).ready(function() {
-  startPlaying();
-});
-
 var map,
-    playInterval = null,
-    index = 0;
+    playOR7Interval,
+    isPlaying = false,
+    index = 0,
+    infoLatLongs = {
+      one: [45.728322, -117.610243],
+      two: [45.474668, -118.016737],
+      three: [45.095913, -117.698133],
+      four: [42.850894, -121.587294],
+      five: [42.268259, -120.873182],
+      six: [42.552164, -122.916639],
+      seven: [41.598083, -123.378065]
+    },
+    coordinates = [],
+    markers = [];
 
 function initialize() {
   var mapOptions = {
@@ -18,10 +26,12 @@ function initialize() {
 
 function startPlaying() {
   $('#play-or7').on('click', function() {
-    if (playInterval != null) {
-      stopPlaying();
+    if (isPlaying === false) {
+      plotCoordinates();
+      isPlaying = true;
     } else {
-      getData();
+      clearInterval(playOR7Interval);
+      isPlaying = false;
     }
   });
 }
@@ -31,55 +41,40 @@ queue()
     .await(ready);
 
 function ready(error, or7) {
-  getData(or7);
+  for (var i = 0; i < or7.length; i++) {
+    coordinates.push([or7[i].xcoord, or7[i].ycoord]);
+  }
+  startPlaying();
 }
 
-function getData(data) {
-  console.log(data);
-  // var data = [];
-  // d3.csv('data/or7-data.csv', function(d) {
-  //   return {
-  //     xcoord: d.xcoord,
-  //     ycoord: d.ycoord,
-  //   }
-  // }, function(error, rows) {
-  //   for (var i = 0; i < rows.length; i++) {
-  //     data.push([rows[i].xcoord, rows[i].ycoord]);
-  //   }
-  //   plotCoordinates(data, index); // how to have this function return data and then call plotCoordinates from startPlaying??
-  // });
-}
-
-var infoLatLongs = {
-  one: [45.728322, -117.610243],
-  two: [45.474668, -118.016737],
-  three: [45.095913, -117.698133],
-  four: [42.850894, -121.587294],
-  five: [42.268259, -120.873182],
-  six: [42.552164, -122.916639],
-  seven: [41.598083, -123.378065]
-}
-
-function plotCoordinates(data, index) {
-  playInterval = setInterval(function() {
+function plotCoordinates() {
+  playOR7Interval = setInterval(function() {
     var image = 'img/paw.png';
-    if (index == 42) {
-      stopPlaying();
+    if (index === 0) { removeMarkers(); }
+    if (index === 42) {
       index = 0;
-    } else {
-      plotInfoNums(index);
-    }
+      isPlaying = false;
+      clearInterval(playOR7Interval);
+      return;
+    } else { plotInfoNums(index); }
     var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(data[index][0], data[index][1]),
+      position: new google.maps.LatLng(coordinates[index][0], coordinates[index][1]),
       map: map,
       icon: image,
     });
-    index++;
-    console.log(index);
-  }, 300);
+    markers.push(marker);
+    index += 1;
+  }, 250);
 }
 
-function plotInfoNums(index) { // refactor this
+function removeMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+}
+
+function plotInfoNums() { // refactor this
   if (index == 1) {
     showInfo("one", infoLatLongs);
   } else if (index == 3) {
@@ -97,11 +92,6 @@ function plotInfoNums(index) { // refactor this
   }
 }
 
-function stopPlaying() {
-  clearInterval(playInterval);
-  playInterval = null;
-}
-
 function showInfo(num, infoLatLongs) {
   var latLongs = infoLatLongs[num],
       image = 'img/' + num + '.ico',
@@ -113,22 +103,26 @@ function showInfo(num, infoLatLongs) {
   showHoverInfo(marker, num);
 }
 
-function generateHtml(num) {
-  var source = $("#or7-info-" + num).html(),
-      template = Handlebars.compile(source),
-      html = template();
-  return html;
-}
+// function generateHtml(num) {
+//   var source = $("#or7-info-" + num).html(),
+//       template = Handlebars.compile(source),
+//       html = template();
+//   return html;
+// }
 
 function showHoverInfo(marker, num) {
-  var infowindow = new google.maps.InfoWindow({
-      content: generateHtml(num),
-  });
+  
+  // var infowindow = new google.maps.InfoWindow({
+  //     content: generateHtml(num),
+  //     disableAutoPan: true,
+  // });
   google.maps.event.addListener(marker, 'mouseover', function() {
-    infowindow.open(map,marker);
+    // infowindow.open(map,marker);
+    $(".or7-info-" + num).removeClass("hide");
   });
   google.maps.event.addListener(marker, 'mouseout', function() {
-    infowindow.close(map,marker);
+    // infowindow.close(map,marker);
+    $(".or7-info-" + num).addClass("hide");
   });
 }
 
