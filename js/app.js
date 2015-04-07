@@ -19,11 +19,7 @@ function titleScroll() {
 
 // THE MAP
 
-<<<<<<< HEAD
 var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
-=======
-var windowWidth = Math.max( $(window).width(), window.innerWidth);
->>>>>>> 5d10819df65eafda61e9897fed2f50de72a82c17
 
 var width = windowWidth,
     height = windowWidth/2.048
