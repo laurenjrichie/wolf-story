@@ -375,6 +375,33 @@
         </svg>
       </div>
     </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <h1 id="or7-title">The Journey of OR-7</h1>
+        <button id="play-or7">Play</button>
+        <div class="col-xs-3">
+          <p id="or7-description">
+            In 2011, a lone wolf made an epic trek of over 1000 miles across Oregon 
+            and into California. Follow his story to learn what it means for the 
+            future of wolf recovery in California.
+          </p>
+          <div id="or7-events">
+            <div class="or7-info-one hide">
+              <p>
+                Wolf OR-7 was born in 2009 to the Imnaha Pack.
+              </p>
+              <p>
+                Photo: trail camera image of the Imnaha pack.
+              </p>
+              <img src="img/imnaha-pack.jpg" alt="or7 wolf" />
+            </div>
+          </div> 
+        </div>
+        <div id="or7-map-canvas">
+        </div>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="container-fluid">
@@ -395,6 +422,7 @@
     </footer>
 
     <script charset="utf-8" src="js/d3.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZZeYwLqgRAFfrvfULeMvyBAcuP7rO8oE"></script>
     <script src="js/d3.slider.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script> <!-- replace with file? -->
@@ -404,6 +432,70 @@
     <script charset="utf-8" src="js/parallax.min.js"></script>
     <script charset="utf-8" src="js/app.js"></script>
     <script charset="utf-8" src="js/infographic.js"></script>
+    <script charset="utf-8" src="js/or7.js"></script>
+
+    <script id="or7-info-one" type="text/x-handlebars-template">
+      <p>
+        Wolf OR-7 was born in 2009 to the Imnaha Pack.
+      </p>
+      <p>
+        This image is of the Imnaha pack from a trail camera.
+      </p>
+      <img src="img/imnaha-pack.jpg" alt="or7 wolf" />
+    </script>
+    <script id="or7-info-two" type="text/x-handlebars-template">
+      <p>
+        At two years old, OR-7 was fitted with a GPS collar by biologists. 
+        OR-7 stands for the seventh wolf collared in Oregon.
+      </p>
+    </script>
+    <script id="or7-info-three" type="text/x-handlebars-template">
+      <p>
+        OR-7 left his pack in 2011 to seek out his own territory. 
+        He covered thousands of miles, while his GPS collar sent his 
+        coordinates to biologists via satellite signals.
+      </p>
+      <p>
+        This image is of OR-7 from a trail camera.
+      </p>
+      <img src="img/or7-trail-cam2.jpg" alt="or7 wolf" />
+    </script>
+    <script id="or7-info-four" type="text/x-handlebars-template">
+      <p>
+        When OR-7 entered the Cascade Mountains, he represented the 
+        first wolf documented west of the Cascades since 1947, when 
+        the last known wolf was killed.
+      </p>
+    </script>
+    <script id="or7-info-five" type="text/x-handlebars-template">
+      <p>
+        In late 2011, OR-7 crossed into California, marking the first 
+        documented wolf in California since 1924.
+      </p>
+      <p>
+        This image is of OR-7 from a trail camera.
+      </p>
+      <img src="img/or7-trail-cam.jpg" alt="or7 wolf" />
+    </script>
+    <script id="or7-info-six" type="text/x-handlebars-template">
+      <p>
+        After wandering California for a year, OR-7 finally settled 
+        in southern Oregon. He found a mate and in 2014, they gave birth 
+        to pups. OR-7's family is called the Rogue Pack.
+      </p>
+      <p>
+        This image is one of OR-7's pups, captured on a trail camera.
+      </p>
+      <img src="img/or7-pup-trail-cam.jpg" alt="or7-wolf-pup" />
+    </script>
+    </script>
+    <script id="or7-info-seven" type="text/x-handlebars-template">
+      <p>
+        It is only a matter of time before other wolves, or OR-7's young, 
+        continue traveling south into California. In fact, there may be wolves 
+        here already that we don't know about.
+      </p>
+    </script>
 
   </body>
 </html>
