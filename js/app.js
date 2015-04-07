@@ -2,8 +2,7 @@ $(document).ready(function() {
   titleScroll();
   hideEvents();
   showPreColStuff();
-  setupSlider();
-  // playPostcolMap();
+  drawLegend(precolColors, precolLegend);
   clickMapEvents();
 });
 
@@ -62,42 +61,35 @@ function ready(error, us, radii, pop_data, precol) {
       .attr("class", "states")
       .attr("d", path);
 
-  // appendPostcolData(svg, radii, pop_data);
-  appendPrecolData(svg, precol);
-  chooseMap(svg, radii, pop_data, precol);
+  appendPrecolData(precol);
+  chooseMap(radii, pop_data, precol);
 }
 
-var playInterval;
+var playPostcolInterval,
+    playPrecolInterval,
+    j = 1977;
 var playingPostCol = false;
 
-function chooseMap(svg, radii, pop_data, precol) {
+function chooseMap(radii, pop_data, precol) {
+  $('#play-precol-button').on('click', function() {
+    clearInterval(playPrecolInterval);
+    clearInterval(playPostcolInterval);
+    appendPrecolData(precol);
+    animatePrecolMap();
+  });
   $('#play-postcol-button').on('click', function() {
     j = 1977;
-    clearInterval(playInterval);
-    appendPostcolData(svg, radii, pop_data);
-    // playInterval = null;
-    console.log("inside click event");
-    // 
-    // if(playingPostCol === false) {
-    //   appendPostcolData(svg, radii, pop_data);
-    //   playingPostCol = true;
-    // }
-  });
-  $('#play-precol-button').on('click', function() {
-    // clearInterval(playInterval); // playPrecolInterval
-    svg.selectAll("circle")
-      .remove()
-    appendPrecolData(svg, precol);
-    animatePrecolMap(svg);
+    drawLegend(postcolColors, postcolLegend);
+    showPostcolStuff();
+    clearInterval(playPrecolInterval);
+    clearInterval(playPostcolInterval);
+    appendPostcolData(radii, pop_data);
+    animatePostcolMap(pop_data);
   });
 }
 
-function appendPrecolData(svg, precol) {
-  drawLegend(svg, precolColors, precolLegend);
-  var projection2 = d3.geo.albersUsa()
-    .scale(windowWidth)
-    .translate([width/2, height/2]);
-
+function appendPrecolData(precol) {
+  svg.selectAll("circle").remove();
   svg.selectAll("circle") // make so clicking while animation is present doesn't overlay more circles
     .data(precol)
     .enter().append("circle")
@@ -110,18 +102,11 @@ function appendPrecolData(svg, precol) {
       return 'precol';
     })
     .attr("transform", function(rows) {
-      return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
+      return "translate(" + projection([rows.ycoord,rows.xcoord]) + ")";
     })
-    // .on('mousemove', function(rows) { // maybe?
-    //   return showTooltip(rows, this);
-    // })
-    // .on('mouseout',function(){
-    //   tooltip.style("display", "none");
-    // })
-
 }
 
-function animatePrecolMap(svg) {
+function animatePrecolMap() {
   var k = 1;
   playPrecolInterval = setInterval(function() {
     if (k === 11) {
@@ -139,103 +124,72 @@ function animatePrecolMap(svg) {
   }, 1000);
 }
 
-var  j = 1977;
-
-function appendPostcolData(svg, radii, pop_data) {
-  clearInterval(playInterval);
-  svg.selectAll("circle")
-    .remove()
-  var year = "y1977";
-
-  radii.forEach(function(datum) {
-    switch(datum.region) {
-      case 'nRockies':
-        var pop_data_row = 0;
-        break;
-      case 'gLakes':
-        var pop_data_row = 1;
-        break;
-      case 'pacNW':
-        var pop_data_row = 2;
-        break;
-      case 'southwest':
-        var pop_data_row = 3;
-        break;
-    }
-
-    for(k in datum) {
-      if(k == 'region' || k == 'xcoord' || k == 'ycoord') {
-        continue;
-      }
-      var pop = pop_data[pop_data_row][k];
-      datum[k] = [datum[k], pop];
-    };
-  });
-
-  var projection2 = d3.geo.albersUsa()
-    .scale(windowWidth)
-    .translate([width/2, height/2]);
-  
-  svg.selectAll("circle")
+function appendPostcolData(radii, pop_data) {
+  var year = "y" + j;
+  svg.selectAll('circle.precol').remove();
+  svg.selectAll('circle')
     .data(radii)
     .enter().append("circle")
-    .attr('data-pop', function(row, index) {
-      switch(row.region) {
-        case 'nRockies':
-          var pop_data_row = 0;
-          break;
-        case 'gLakes':
-          var pop_data_row = 1;
-          break;
-        case 'pacNW':
-          var pop_data_row = 2;
-          break;
-        case 'southwest':
-          var pop_data_row = 3;
-          break;
-      }
-      return pop_data[pop_data_row][year];
+    .attr('data-pop', function(rows, index) { // delete index?
+      return returnRegionPop(rows, pop_data, year);
+    })
+    .attr("r", function(rows) {
+      return rows[year];
     })
     .attr("stroke", "white")
-    .attr("r", function(rows) {
-      return rows[year][0];
-    })
     .attr('class', function(rows) {
       return "postcol " + rows.region;
     })
     .attr("transform", function(rows) {
-      return "translate(" + projection2([rows.ycoord,rows.xcoord]) + ")";
+      return "translate(" + projection([rows.ycoord,rows.xcoord]) + ")";
     })
     .on('mousemove', function(rows) {
-      return showTooltip(rows, this);
+      var elem = $(this);
+      return showTooltip(rows, elem, j);
     })
     .on('mouseout',function(){
       tooltip.style("display", "none");
-    })
-    
-    playInterval = setInterval(function() {
-      // $('.glyphicon.glyphicon-pause').addClass('hide');
-      // $('.glyphicon.glyphicon-play').removeClass('hide');
-      if (j == 2015) {
-        j = 1977;
-        playingPostCol = false;
-        clearInterval(playInterval);
-      }
-
-      year = "y" + j++;        
-      svg.selectAll("circle")
-        .transition()
-        .attr("r", function(row) { return row[year][0]; })
-        .attr('class', function(row) {
-          return "postcol " + row.region;
-        });
-      console.log("still playing");
-      console.log(j);
-    }, 300);
-    
-    drawLegend(svg, postcolColors, postcolLegend);
-    showPostcolStuff();
+    });
+  setupSlider(pop_data);
 };
+
+function returnRegionPop(rows, pop_data, year) {
+  var pop_data_row;
+  switch(rows.region) {
+    case 'nRockies':
+      pop_data_row = 0;
+      break;
+    case 'gLakes':
+      pop_data_row = 1;
+      break;
+    case 'pacNW':
+      pop_data_row = 2;
+      break;
+    case 'southwest':
+      pop_data_row = 3;
+      break;
+  }
+  return pop_data[pop_data_row][year];
+}
+
+function animatePostcolMap(pop_data) {
+  playPostcolInterval = setInterval(function() {
+    if (j == 2015) { 
+      j = 1977;
+      clearInterval(playPostcolInterval);
+      return;
+    }
+    year = "y" + j++;
+    svg.selectAll('circle')
+      .transition()
+      .attr('data-pop', function(rows, index) {
+        return returnRegionPop(rows, pop_data, year);
+      })
+      .attr("r", function(rows) {
+        return rows[year];
+      })
+  }, 300);
+}
 
 function showPostcolStuff() {
   var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content");
@@ -243,7 +197,7 @@ function showPostcolStuff() {
   preColStuff.addClass("hide");
   $('#slider-container').fadeIn('slow');
   svg.selectAll('.legend').remove();
-  drawLegend(svg, postcolColors, postcolLegend);
+  drawLegend(postcolColors, postcolLegend);
 }
 
 // function stopPlaying() {
@@ -253,30 +207,45 @@ function showPostcolStuff() {
 //   $('.glyphicon.glyphicon-pause').removeClass('hide');
 // }
 
-function setupSlider() { // fix this with pop data
+function setupSlider(pop_data) { // fix this with pop data
   var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
     .on("slide", function(event, value){
-     year = "y" + value;
-     svg.selectAll("circle")
-       .attr("r", function(rows) { return rows[year][0];})
-       .attr('class', function(rows) {
-         return rows.region;
-       });
+      year = "y" + value;
+      svg.selectAll("circle")
+        .attr("r", function(rows) { 
+          return rows[year]; 
+        })
+        .attr('data-pop', function(rows, index) {
+          return returnRegionPop(rows, pop_data, year);
+        })
+        .on('mousemove', function(rows) {
+          var elem = $(this);
+          console.log(year);
+          console.log(j);
+          return showTooltip(rows, elem, year);
+        })
+        .on('mouseout', function(){
+          tooltip.style("display", "none");
+        });
     });
- d3.select('#slider-div').call(slider);
- $('#slider-container').hide();
+  d3.select('#slider-div').call(slider);
 }
 
 var tooltip = d3.select(".map").append("div")
   .attr("id","tooltip");
 
-function showTooltip(rows, elem) {
+function showTooltip(rows, elem, year) {
   var regionName = "<p><strong>"+ generateTooltipRegion(rows) +"</strong></p>";
-  var year = "<p>" + "Year: " + j + "</p>";
-  var populationInt = parseInt(rows["y" + j][1]);
+  var tooltipYear;
+  var yearString = year.toString();
+  if (yearString.substr(0, 1) === "y") {
+    tooltipYear = yearString.substr(1, 5);
+  } else { tooltipYear = yearString }
+  var tooltipYearText = "<p>" + "Year: " + tooltipYear + "</p>";
+  var populationInt = parseInt(elem.attr('data-pop'));
   var population = "<p>" + "Population: " + populationInt + "</p>"; // slider not accessing this.
-
-  tooltip.html(regionName + year + population)
+  
+  tooltip.html(regionName + tooltipYearText + population)
     .style({
       "display": "block",
       "top": (d3.event.pageY - 80) + "px",
@@ -323,11 +292,11 @@ function showPreColStuff() {
     clickMapEvents();
     svg.selectAll('.legend').remove();
     $('#slider-container').hide();
-    drawLegend(svg, precolColors, precolLegend);
+    drawLegend(precolColors, precolLegend);
   });
 }
 
-function drawLegend(svg, colorArray, dataArray) {
+function drawLegend(colorArray, dataArray) {
   var legendRectSize = 18;
   var legendSpacing = 4;
   var color = d3.scale.ordinal()
