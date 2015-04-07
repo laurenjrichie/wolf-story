@@ -34,7 +34,7 @@ var path = d3.geo.path()
 var svg = d3.select(".map").append("svg")
     .attr("width", width)
     .attr("height", height);
-    
+
 var postcolColors = ['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21'],
     postcolLegend = ["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"],
     precolColors = ['#FFFFFF', '#796E24'],
@@ -50,7 +50,7 @@ queue()
 function ready(error, us, radii, pop_data, precol) {
   window.radii = radii;
   window.pop_data = pop_data;
-  
+
   svg.append("path")
       .datum(topojson.feature(us, us.objects.land))
       .attr("class", "land")
@@ -90,7 +90,7 @@ function chooseMap(radii, pop_data, precol) {
 
 function appendPrecolData(precol) {
   svg.selectAll("circle").remove();
-  svg.selectAll("circle") // make so clicking while animation is present doesn't overlay more circles
+  svg.selectAll("circle")
     .data(precol)
     .enter().append("circle")
     .attr("stroke", "white")
@@ -130,7 +130,7 @@ function appendPostcolData(radii, pop_data) {
   svg.selectAll('circle')
     .data(radii)
     .enter().append("circle")
-    .attr('data-pop', function(rows, index) { // delete index?
+    .attr('data-pop', function(rows) {
       return returnRegionPop(rows, pop_data, year);
     })
     .attr("r", function(rows) {
@@ -174,7 +174,7 @@ function returnRegionPop(rows, pop_data, year) {
 
 function animatePostcolMap(pop_data) {
   playPostcolInterval = setInterval(function() {
-    if (j == 2015) { 
+    if (j == 2015) {
       j = 1977;
       clearInterval(playPostcolInterval);
       return;
@@ -207,13 +207,14 @@ function showPostcolStuff() {
 //   $('.glyphicon.glyphicon-pause').removeClass('hide');
 // }
 
-function setupSlider(pop_data) { // fix this with pop data
+function setupSlider(pop_data) {
+  $('#slider-div').empty();
   var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
     .on("slide", function(event, value){
       year = "y" + value;
       svg.selectAll("circle")
-        .attr("r", function(rows) { 
-          return rows[year]; 
+        .attr("r", function(rows) {
+          return rows[year];
         })
         .attr('data-pop', function(rows, index) {
           return returnRegionPop(rows, pop_data, year);
@@ -243,8 +244,8 @@ function showTooltip(rows, elem, year) {
   } else { tooltipYear = yearString }
   var tooltipYearText = "<p>" + "Year: " + tooltipYear + "</p>";
   var populationInt = parseInt(elem.attr('data-pop'));
-  var population = "<p>" + "Population: " + populationInt + "</p>"; // slider not accessing this.
-  
+  var population = "<p>" + "Population: " + populationInt + "</p>";
+
   tooltip.html(regionName + tooltipYearText + population)
     .style({
       "display": "block",
@@ -301,7 +302,7 @@ function drawLegend(colorArray, dataArray) {
   var legendSpacing = 4;
   var color = d3.scale.ordinal()
       .range(colorArray);
-  
+
   var legend = svg.selectAll('.legend')
     .data(dataArray)
     .enter()
@@ -314,18 +315,18 @@ function drawLegend(colorArray, dataArray) {
       var vert = i * height - offset;
       return 'translate(' + horz + ',' + vert + ')';
     });
-  
+
   legend.append('rect')
     .attr('width', legendRectSize)
     .attr('height', legendRectSize)
     .style('fill', color)
     .style('stroke', color);
-  
+
   legend.append('text')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
     .text(function(d) { return d; });
-    
+
   svg.select('.legend')
     .attr('transform', function(d, i) {
       var horz = legendRectSize;
