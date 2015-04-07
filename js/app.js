@@ -35,6 +35,11 @@ var path = d3.geo.path()
 var svg = d3.select(".map").append("svg")
     .attr("width", width)
     .attr("height", height);
+    
+var postcolColors = ['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21'],
+    postcolLegend = ["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"],
+    precolColors = ['#FFFFFF', '#796E24'],
+    precolLegend = ["Pre-European colonization population:", "est. 400,000"];
 
 queue()
     .defer(d3.json, "data/us.json")
@@ -67,17 +72,19 @@ var playingPostCol = false;
 
 function chooseMap(svg, radii, pop_data, precol) {
   $('#play-postcol-button').on('click', function() {
-    // clearInterval(playInterval);
+    j = 1977;
+    clearInterval(playInterval);
+    appendPostcolData(svg, radii, pop_data);
     // playInterval = null;
     console.log("inside click event");
-
-    if(playingPostCol === false) {
-      appendPostcolData(svg, radii, pop_data);
-      playingPostCol = true;
-    }
+    // 
+    // if(playingPostCol === false) {
+    //   appendPostcolData(svg, radii, pop_data);
+    //   playingPostCol = true;
+    // }
   });
   $('#play-precol-button').on('click', function() {
-    clearInterval(playInterval);
+    // clearInterval(playInterval); // playPrecolInterval
     svg.selectAll("circle")
       .remove()
     appendPrecolData(svg, precol);
@@ -86,6 +93,7 @@ function chooseMap(svg, radii, pop_data, precol) {
 }
 
 function appendPrecolData(svg, precol) {
+  drawLegend(svg, precolColors, precolLegend);
   var projection2 = d3.geo.albersUsa()
     .scale(windowWidth)
     .translate([width/2, height/2]);
@@ -216,6 +224,7 @@ function appendPostcolData(svg, radii, pop_data) {
 
       year = "y" + j++;        
       svg.selectAll("circle")
+        .transition()
         .attr("r", function(row) { return row[year][0]; })
         .attr('class', function(row) {
           return "postcol " + row.region;
@@ -224,17 +233,17 @@ function appendPostcolData(svg, radii, pop_data) {
       console.log(j);
     }, 300);
     
-    drawLegend(svg);
+    drawLegend(svg, postcolColors, postcolLegend);
     showPostcolStuff();
 };
 
 function showPostcolStuff() {
-  var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content, #precol-map-header");
+  var preColStuff = $(".precol-event-buttons, .1950s-content, .historical-content, .eradication-content");
   $(".postcol-event-buttons").removeClass("hide");
-  $("#postcol-map-header").removeClass("hide");
   preColStuff.addClass("hide");
   $('#slider-container').fadeIn('slow');
-  drawLegend(svg);
+  svg.selectAll('.legend').remove();
+  drawLegend(svg, postcolColors, postcolLegend);
 }
 
 // function stopPlaying() {
@@ -308,24 +317,24 @@ function hideEvents() {
 
 function showPreColStuff() {
   $("#play-precol-button").on('click', function() {
-    $("#precol-map-header").removeClass("hide");
-    var postColStuff = $(".1973-content, .1995-content, .today-content, #postcol-map-header, .postcol-event-buttons");
+    var postColStuff = $(".1973-content, .1995-content, .today-content, .postcol-event-buttons");
     postColStuff.addClass("hide");
     $(".precol-event-buttons").removeClass("hide");
     clickMapEvents();
     svg.selectAll('.legend').remove();
     $('#slider-container').hide();
+    drawLegend(svg, precolColors, precolLegend);
   });
 }
 
-function drawLegend(svg) {
+function drawLegend(svg, colorArray, dataArray) {
   var legendRectSize = 18;
   var legendSpacing = 4;
   var color = d3.scale.ordinal()
-      .range(['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21']);
+      .range(colorArray);
   
   var legend = svg.selectAll('.legend')
-    .data(["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"])
+    .data(dataArray)
     .enter()
     .append('g')
     .attr('class', 'legend')
