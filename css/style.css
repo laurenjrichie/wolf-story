@@ -41,25 +41,25 @@ path {
 
 .timeline {
   font-size: 16px;
-  border: 1px solid black;
+  border: 1px solid #000000;
   border-radius: 0;
   line-height: 1.5;
-  color: white;
-  background-color: black;
+  color: #FFFFFF;
+  background-color: #000000;
   text-shadow: none;
   box-shadow: none; }
   .timeline .active, .timeline:hover, .timeline:active, .timeline:visited, .timeline:focus {
     background-color: transparent;
-    border: 2px solid black;
-    color: black; }
+    border: 2px solid #000000;
+    color: #000000; }
 
 .nRockies {
   opacity: 0.6;
-  fill: #b2273a; }
+  fill: #B2273A; }
 
 .gLakes {
   opacity: 0.6;
-  fill: #796e24; }
+  fill: #796E24; }
 
 .southwest {
   opacity: 0.6;
@@ -67,7 +67,7 @@ path {
 
 .pacNW {
   opacity: 0.6;
-  fill: #432f21; }
+  fill: #432F21; }
 
 #tooltip {
   position: absolute;
@@ -89,7 +89,7 @@ path {
   z-index: 10;
   margin-top: 10em;
   padding: 1.5em;
-  border-left: 4px solid black;
+  border-left: 4px solid #000000;
   background: rgba(255, 255, 255, 0.6); }
 
 .event-button {
@@ -98,7 +98,7 @@ path {
   padding: 10px;
   background-color: rgba(67, 47, 33, 0.2);
   border: 0;
-  border-top: 2px solid black; }
+  border-top: 2px solid #000000; }
   .event-button:hover {
     background-color: rgba(67, 47, 33, 0.3); }
 
@@ -106,8 +106,8 @@ path {
   font-size: 2em;
   color: rgba(0, 0, 0, 0.6); }
   .close-event-content .active, .close-event-content:hover, .close-event-content:active, .close-event-content:focus {
-    color: white;
-    color: black;
+    color: #FFFFFF;
+    color: #000000;
     text-decoration: none; }
 
 .event-description {
@@ -157,34 +157,26 @@ footer .row {
 .credit a {
   color: inherit; }
   .credit a .active, .credit a:hover {
-    color: black;
+    color: #000000;
     text-decoration: none; }
 
 @-webkit-keyframes pulse_animation {
   0% {
     -webkit-transform: scale(1); }
-
   30% {
     -webkit-transform: scale(1.01); }
-
   40% {
     -webkit-transform: scale(1.02); }
-
   50% {
     -webkit-transform: scale(1.04); }
-
   60% {
     -webkit-transform: scale(1.04); }
-
   70% {
     -webkit-transform: scale(1.02); }
-
   80% {
     -webkit-transform: scale(1.01); }
-
   100% {
     -webkit-transform: scale(1); } }
-
 .pulse {
   -webkit-animation-name: 'pulse_animation';
   -webkit-animation-duration: 1000ms;
@@ -227,8 +219,20 @@ footer .row {
 #play-or7 {
   z-index: 2;
   position: absolute;
-  margin-top: 70px;
-  margin-left: 100px; }
+  margin-top: 90px;
+  margin-left: 100px;
+  border: 1px solid #FFFFFF;
+  border-radius: 0;
+  line-height: 1.5;
+  text-shadow: none;
+  box-shadow: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+  font-size: 20px; }
+  #play-or7 .active, #play-or7:hover, #play-or7:active, #play-or7:visited, #play-or7:focus {
+    background-color: transparent;
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF; }
 
 #or7-title {
   z-index: 2;
@@ -238,9 +242,10 @@ footer .row {
   color: #FFFFFF; }
 
 #or7-description {
+  font-size: 18px;
   z-index: 2;
   position: absolute;
-  margin-top: 100px;
+  margin-top: 145px;
   margin-left: 100px;
   color: #FFFFFF; }
 
@@ -250,3 +255,5 @@ footer .row {
   margin-top: 280px;
   margin-left: 100px;
   color: #FFFFFF; }
+
+/*# sourceMappingURL=style.css.map */
