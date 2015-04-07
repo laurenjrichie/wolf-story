@@ -12,11 +12,20 @@ var map,
       seven: [41.598083, -123.378065]
     },
     coordinates = [],
-    markers = [];
+    markers = [],
+    infoNumRelationships = {
+      1: "one",
+      3: "two",
+      5: "three",
+      18: "four",
+      27: "five",
+      40: "six",
+      41: "seven",
+    };
 
 function initialize() {
   var mapOptions = {
-    center: { lat: 43.289231, lng: -120.234386},
+    center: { lat: 43.452016, lng: -123.647230},
     scrollwheel: false,
     zoom: 7,
     mapTypeId: google.maps.MapTypeId.HYBRID
@@ -56,7 +65,11 @@ function plotCoordinates() {
       isPlaying = false;
       clearInterval(playOR7Interval);
       return;
-    } else { plotInfoNums(index); }
+    } else { 
+      if ([1, 3, 5, 18, 27, 40, 41].indexOf(index) > -1) {
+        showInfo(infoNumRelationships[index]);
+      }
+    }
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(coordinates[index][0], coordinates[index][1]),
       map: map,
@@ -74,25 +87,7 @@ function removeMarkers() {
   markers = [];
 }
 
-function plotInfoNums() { // refactor this
-  if (index == 1) {
-    showInfo("one", infoLatLongs);
-  } else if (index == 3) {
-    showInfo("two", infoLatLongs);
-  } else if (index == 5) {
-    showInfo("three", infoLatLongs);
-  } else if (index == 18) {
-    showInfo("four", infoLatLongs);
-  } else if (index == 27) {
-    showInfo("five", infoLatLongs);
-  } else if (index == 40) {
-    showInfo("six", infoLatLongs);
-  } else if (index == 41) {
-    showInfo("seven", infoLatLongs);
-  }
-}
-
-function showInfo(num, infoLatLongs) {
+function showInfo(num) {
   var latLongs = infoLatLongs[num],
       image = 'img/' + num + '.ico',
       marker = new google.maps.Marker({
@@ -103,25 +98,11 @@ function showInfo(num, infoLatLongs) {
   showHoverInfo(marker, num);
 }
 
-// function generateHtml(num) {
-//   var source = $("#or7-info-" + num).html(),
-//       template = Handlebars.compile(source),
-//       html = template();
-//   return html;
-// }
-
 function showHoverInfo(marker, num) {
-  
-  // var infowindow = new google.maps.InfoWindow({
-  //     content: generateHtml(num),
-  //     disableAutoPan: true,
-  // });
   google.maps.event.addListener(marker, 'mouseover', function() {
-    // infowindow.open(map,marker);
     $(".or7-info-" + num).removeClass("hide");
   });
   google.maps.event.addListener(marker, 'mouseout', function() {
-    // infowindow.close(map,marker);
     $(".or7-info-" + num).addClass("hide");
   });
 }
