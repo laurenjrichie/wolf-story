@@ -1,0 +1,239 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800);
+body {
+  margin-top: 0;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+h1#main-title {
+  font-weight: 600;
+  color: #F9F7EB;
+  position: relative;
+  top: 300px;
+  padding: 20px;
+  border: 1px solid #F9F7EB;
+  display: inline-block;
+  font-size: 6em;
+  letter-spacing: 15px;
+  margin-top: 0; }
+
+h2#main-subtitle {
+  font-weight: 600;
+  color: #F9F7EB;
+  position: relative;
+  font-weight: 400;
+  font-size: 36px;
+  opacity: 0;
+  top: 320px;
+  letter-spacing: 5px; }
+
+.parallax-window {
+  min-height: 2000px; }
+
+path {
+  stroke-linejoin: round; }
+
+.land {
+  fill: #ddd; }
+
+.states {
+  fill: none;
+  stroke: #fff; }
+
+.timeline {
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 0;
+  line-height: 1.5;
+  color: white;
+  background-color: black;
+  text-shadow: none;
+  box-shadow: none; }
+  .timeline .active, .timeline:hover, .timeline:active, .timeline:visited, .timeline:focus {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black; }
+
+.nRockies {
+  opacity: 0.6;
+  fill: #b2273a; }
+
+.gLakes {
+  opacity: 0.6;
+  fill: #796e24; }
+
+.southwest {
+  opacity: 0.6;
+  fill: #337ab7; }
+
+.pacNW {
+  opacity: 0.6;
+  fill: #432f21; }
+
+#tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  font-size: 12px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25); }
+
+.hide {
+  display: none; }
+
+.map-event {
+  position: absolute;
+  z-index: 10;
+  margin-top: 10em;
+  padding: 1.5em;
+  border-left: 4px solid black;
+  background: rgba(255, 255, 255, 0.6); }
+
+.event-button {
+  font-weight: 700;
+  z-index: 10;
+  padding: 10px;
+  background-color: rgba(67, 47, 33, 0.2);
+  border: 0;
+  border-top: 2px solid black; }
+  .event-button:hover {
+    background-color: rgba(67, 47, 33, 0.3); }
+
+.close-event-content {
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.6); }
+  .close-event-content .active, .close-event-content:hover, .close-event-content:active, .close-event-content:focus {
+    color: white;
+    color: black;
+    text-decoration: none; }
+
+.event-description {
+  font-size: 18px;
+  line-height: 2; }
+
+.event-images {
+  width: 100%; }
+
+ul.list-inline.postcol-event-buttons {
+  margin: 3em 0; }
+
+#slider-container {
+  z-index: 5;
+  position: relative; }
+
+.d3-map {
+  margin-bottom: 2em; }
+
+.legend {
+  font-size: 12px; }
+
+rect {
+  stroke-width: 2; }
+
+#infographic h1 {
+  margin-top: 1em; }
+
+.infographic-image {
+  width: 100%; }
+
+#infographic {
+  background-color: rgba(121, 110, 36, 0.1); }
+
+/* Use this next selector to style things like font-size and line-height: */
+#wolfLogo {
+  width: 40px;
+  height: 40px; }
+
+.credit {
+  font-weight: 400;
+  font-size: 16px; }
+
+footer .row {
+  margin-top: 10px; }
+
+.credit a {
+  color: inherit; }
+  .credit a .active, .credit a:hover {
+    color: black;
+    text-decoration: none; }
+
+@-webkit-keyframes pulse_animation {
+  0% {
+    -webkit-transform: scale(1); }
+<<<<<<< HEAD
+
+  30% {
+    -webkit-transform: scale(1.01); }
+
+  40% {
+    -webkit-transform: scale(1.02); }
+
+  50% {
+    -webkit-transform: scale(1.04); }
+
+  60% {
+    -webkit-transform: scale(1.04); }
+
+  70% {
+    -webkit-transform: scale(1.02); }
+
+  80% {
+    -webkit-transform: scale(1.01); }
+
+  100% {
+    -webkit-transform: scale(1); } }
+
+=======
+  30% {
+    -webkit-transform: scale(1.01); }
+  40% {
+    -webkit-transform: scale(1.02); }
+  50% {
+    -webkit-transform: scale(1.04); }
+  60% {
+    -webkit-transform: scale(1.04); }
+  70% {
+    -webkit-transform: scale(1.02); }
+  80% {
+    -webkit-transform: scale(1.01); }
+  100% {
+    -webkit-transform: scale(1); } }
+>>>>>>> 5d10819df65eafda61e9897fed2f50de72a82c17
+.pulse {
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 1000ms;
+  -webkit-transform-origin: 70% 70%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear; }
+
+.fade-in {
+  opacity: 0;
+  /* make things invisible upon start */
+  -webkit-animation: fadeIn ease-in 1;
+  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s; }
+
+<<<<<<< HEAD
+@media screen and (max-width: 465px) {
+  h1#main-title {
+    width: 300px;
+    font-size: 18px; }
+
+  h2#main-subtitle {
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px; } }
+=======
+/*# sourceMappingURL=style.css.map */
+>>>>>>> 5d10819df65eafda61e9897fed2f50de72a82c17
