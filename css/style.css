@@ -98,9 +98,21 @@ path {
   padding: 10px;
   background-color: rgba(67, 47, 33, 0.2);
   border: 0;
-  border-top: 2px solid #000000; }
+  border-top: 2px solid #000000;
+  margin-bottom: 10px; }
   .event-button:hover {
     background-color: rgba(67, 47, 33, 0.3); }
+
+.precol-event-buttons .event-button {
+  background-color: rgba(51, 122, 183, 0.4); }
+
+.key-events {
+  position: relative;
+  top: -300px; }
+
+.key-events-post {
+  position: relative;
+  top: -350px; }
 
 .close-event-content {
   font-size: 2em;
@@ -123,9 +135,6 @@ ul.list-inline.postcol-event-buttons {
 #slider-container {
   z-index: 5;
   position: relative; }
-
-.d3-map {
-  margin-bottom: 2em; }
 
 .legend {
   font-size: 12px; }
