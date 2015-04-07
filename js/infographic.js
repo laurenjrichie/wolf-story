@@ -23,9 +23,10 @@ function pulse() {
 
 function wolfDeerCoyote() {
   $("#wolf").on('click', function() {
+    $("#wolf .click-text").attr('class', 'hide');
     $('#arrow-to-deer').attr('class','fade-in');
     window.setTimeout(function(){
-      $('#deer').attr('class','fade-in tooltip'); // added class tooltip here to try and make plugin work
+      $('#deer').attr('class','fade-in tooltip');
       $('#elk').attr('class','fade-in tooltip');
     }, 500);
     window.setTimeout(function(){
