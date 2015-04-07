@@ -58,14 +58,14 @@ function ready(error, or7) {
 
 function plotCoordinates() {
   playOR7Interval = setInterval(function() {
-    var image = 'img/paw.png';
+    var image = 'img/pawpaw.png';
     if (index === 0) { removeMarkers(); }
     if (index === 42) {
       index = 0;
       isPlaying = false;
       clearInterval(playOR7Interval);
       return;
-    } else { 
+    } else {
       if ([1, 3, 5, 18, 27, 40, 41].indexOf(index) > -1) {
         showInfo(infoNumRelationships[index]);
       }

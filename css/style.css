@@ -142,7 +142,6 @@ rect {
 #infographic {
   background-color: rgba(121, 110, 36, 0.1); }
 
-/* Use this next selector to style things like font-size and line-height: */
 #wolfLogo {
   width: 40px;
   height: 40px; }
@@ -199,19 +198,6 @@ footer .row {
   -moz-animation-duration: 1s;
   animation-duration: 1s; }
 
-@media screen and (max-width: 465px) {
-  h1#main-title {
-    width: 300px;
-    font-size: 18px; }
-
-  h2#main-subtitle {
-    font-size: 20px;
-    line-height: 2;
-    padding: 20px; } }
-#play-or7 {
-  z-index: 10;
-  position: relative; }
-
 #or7-map-canvas {
   height: 750px;
   width: 100%; }
@@ -250,10 +236,31 @@ footer .row {
   color: #FFFFFF; }
 
 #or7-events {
+  font-size: 16px;
   z-index: 2;
   position: absolute;
   margin-top: 280px;
   margin-left: 100px;
   color: #FFFFFF; }
+
+figure .or7-event-img {
+  width: 100%; }
+
+.or7-info-text {
+  font-size: 15px; }
+
+.or7-info {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4); }
+
+@media screen and (max-width: 465px) {
+  h1#main-title {
+    width: 300px;
+    font-size: 18px; }
+
+  h2#main-subtitle {
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px; } }
 
 /*# sourceMappingURL=style.css.map */

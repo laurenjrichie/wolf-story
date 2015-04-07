@@ -132,7 +132,6 @@ path {
   padding: 1.5em;
   border-left: 4px solid $black;
   background: rgba($white, 0.6);
-
 }
 
 .event-button {
@@ -207,22 +206,6 @@ rect {
   background-color: rgba($gLakes, 0.1);
 }
 
-// .my-custom-theme {
-// 	border-radius: 5px;
-// 	border: 1px solid $gLakes;
-// 	background: rgba($white, 0.3);
-// 	color: $gLakes;
-// }
-/* Use this next selector to style things like font-size and line-height: */
-// .my-custom-theme .tooltipster-content {
-// 	font-family: inherit;
-// 	font-size: 16px;
-// 	line-height: 16px;
-// 	padding: 8px 10px;
-//   font-weight: 400;
-// }
-
-
 // FOOTER
 
 #wolfLogo {
@@ -282,26 +265,7 @@ footer .row {
  animation-duration:1s;
 }
 
-@media screen and (max-width:465px){
-  h1#main-title {
-    width: 300px;
-    font-size: 18px;
-  }
-
-  h2#main-subtitle {
-    font-size: 20px;
-    line-height: 2;
-    padding: 20px;
-  }
-
-}
-
-// OR-7 MAP
-
-#play-or7 {
-  z-index: 10;
-  position: relative;
-}
+// OR-7
 
 #or7-map-canvas {
   height: 750px;
@@ -333,12 +297,6 @@ footer .row {
   }
 }
 
-
-
-
-
-
-
 #or7-title {
   z-index: 2;
   position: absolute;
@@ -357,9 +315,37 @@ footer .row {
 }
 
 #or7-events {
+  font-size: 16px;
   z-index: 2;
   position: absolute;
   margin-top: 280px;
   margin-left: 100px;
   color: #FFFFFF;
+}
+
+figure .or7-event-img {
+  width: 100%;
+}
+
+.or7-info-text {
+  font-size: 15px;
+}
+
+.or7-info {
+  padding: 20px;
+  background: rgba($black, 0.4);
+}
+
+@media screen and (max-width:465px){
+  h1#main-title {
+    width: 300px;
+    font-size: 18px;
+  }
+
+  h2#main-subtitle {
+    font-size: 20px;
+    line-height: 2;
+    padding: 20px;
+  }
+
 }
