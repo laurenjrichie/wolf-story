@@ -16,7 +16,7 @@ var map,
 
 function initialize() {
   var mapOptions = {
-    center: { lat: 43.289231, lng: -120.234386},
+    center: { lat: 43.452016, lng: -123.647230},
     scrollwheel: false,
     zoom: 7,
     mapTypeId: google.maps.MapTypeId.HYBRID
@@ -103,25 +103,11 @@ function showInfo(num, infoLatLongs) {
   showHoverInfo(marker, num);
 }
 
-// function generateHtml(num) {
-//   var source = $("#or7-info-" + num).html(),
-//       template = Handlebars.compile(source),
-//       html = template();
-//   return html;
-// }
-
 function showHoverInfo(marker, num) {
-  
-  // var infowindow = new google.maps.InfoWindow({
-  //     content: generateHtml(num),
-  //     disableAutoPan: true,
-  // });
   google.maps.event.addListener(marker, 'mouseover', function() {
-    // infowindow.open(map,marker);
     $(".or7-info-" + num).removeClass("hide");
   });
   google.maps.event.addListener(marker, 'mouseout', function() {
-    // infowindow.close(map,marker);
     $(".or7-info-" + num).addClass("hide");
   });
 }
