@@ -1,5 +1,5 @@
 # COMEBACK
-##### [Visit online:](http://graywolfstory.com/)
+##### [graywolfstory.com](http://graywolfstory.com/)
 
 ###### Lauren Richie & Rosa Choi
 
