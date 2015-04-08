@@ -24,6 +24,6 @@ To build the project, we:
   
 ##### Screenshots:
 
-![D3 wolf population map](laurenjrichie.github.com/wolf-story/img/d3-screenshot.png)
-![Animated SVG infographic](laurenjrichie.github.com/wolf-story/img/infographic-screenshot.png)
-![OR-7 journey map](laurenjrichie.github.com/wolf-story/img/or7-screenshot.png)
+![D3 wolf population map](laurenjrichie.github.com/wolf-story/blob/gh-pages/img/d3-screenshot.png)
+![Animated SVG infographic](laurenjrichie.github.com/wolf-story/blob/gh-pages/img/infographic-screenshot.png)
+![OR-7 journey map](laurenjrichie.github.com/wolf-story/blob/gh-pages/img/or7-screenshot.png)
