@@ -1,5 +1,5 @@
 # COMEBACK
-##### Visit online: graywolfstory.com
+##### [Visit online:](http://graywolfstory.com/)
 
 ###### Lauren Richie & Rosa Choi
 
@@ -12,6 +12,7 @@ Intended as a tool to educate and build awareness about one of the country's mos
   - TopoJSON
   - Data parsing with Ruby
   - Google Maps API
+  - Javascript
 
 To build the project, we:
   - Collected data on wolf populations from pdfs and government websites
