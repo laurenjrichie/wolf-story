@@ -157,16 +157,14 @@ path {
   top: -300px;
 }
 
-.key-events-post {
+.key-events.key-events-post {
   position: relative;
   top: -350px;
+  margin-right: -200px;
 }
-
-
 
 .close-event-content {
   font-size: 2em;
-  // color: rgba($white, 0.7);
   color: rgba($black, 0.6);
 
   .active,

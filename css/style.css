@@ -110,9 +110,10 @@ path {
   position: relative;
   top: -300px; }
 
-.key-events-post {
+.key-events.key-events-post {
   position: relative;
-  top: -350px; }
+  top: -350px;
+  margin-right: -200px; }
 
 .close-event-content {
   font-size: 2em;
