@@ -1,0 +1,21 @@
+{
+  "name": "wolves",
+  "version": "0.0.0",
+  "homepage": "https://github.com/laurenjrichie/wolf-story",
+  "authors": [
+    "laurenjrichie <laurenjrichie@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  
+  "dependencies": {
+    "queue-async": "1.0.7",
+    "d3": "3.5.5"
+  }
+}
