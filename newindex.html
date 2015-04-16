@@ -18,6 +18,9 @@
   
   <body>
     
+    <div class="map">
+      
+    </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZZeYwLqgRAFfrvfULeMvyBAcuP7rO8oE"></script>
     
     <!-- // <script src="http://d3js.org/queue.v1.min.js"></script> -->
@@ -36,7 +39,7 @@
       $(function() {
         var app = new App();
         app.loadData();
-        app.drawMap();
+        app.drawMap($('.map'));
       });
     </script>
   </body>

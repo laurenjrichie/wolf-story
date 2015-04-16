@@ -14,10 +14,10 @@ App.prototype.loaded = function(err, usJson) {
   this.usJson = usJson;
 }
 
-App.prototype.drawMap = function() {
+App.prototype.drawMap = function(width, height, container) {
   this.svg = d3
-    .select("body")
+    .select(container)
     .append("svg")
-//     .attr("width", width)
-//     .attr("height", height);
+    .attr("width", width)
+    .attr("height", height);
 }
