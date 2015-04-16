@@ -13,4 +13,16 @@ describe('App', function() {
 
     expect(app.usJson).toEqual({ some: 'object' });
   });
+  
+  it('shows a us map', function(done) {
+    var app = new App();
+
+    app.loadData(function() {
+      app.drawMap();
+      
+      var svg = $('body svg');
+      expect(svg).toExist();
+      done();
+    });
+  });
 });

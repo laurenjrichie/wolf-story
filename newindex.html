@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+  <head>
+    <title>Wolf Story</title>
+    <meta charset="utf-8">
+    <meta name="wolf-story" content="history of wolf recovery">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" charset="utf-8">
+    <link rel="stylesheet" href="css/animate.css" charset="utf-8">
+    <link rel="stylesheet" href="css/d3.slider.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+    <link rel="stylesheet" type="text/css" href="css/tooltipster-shadow.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/wolf-favicon.png">
+  </head>
+  
+  <body>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZZeYwLqgRAFfrvfULeMvyBAcuP7rO8oE"></script>
+    
+    <!-- // <script src="http://d3js.org/queue.v1.min.js"></script> -->
+    <script src="bower_components/queue-async/queue.min.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="js/d3.slider.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script> <!-- replace with file? -->
+    <script charset="utf-8" src="js/handlebars-v3.0.0.js"></script>
+    <script charset="utf-8" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+    <script charset="utf-8" src="js/parallax.min.js"></script>
+
+    <script charset="utf-8" src="src/app.js"></script>
+    
+    <script charset="utf-8">
+      $(function() {
+        var app = new App();
+        app.loadData();
+        app.drawMap();
+      });
+    </script>
+  </body>
+</html>
