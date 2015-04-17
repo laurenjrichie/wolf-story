@@ -24,8 +24,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZZeYwLqgRAFfrvfULeMvyBAcuP7rO8oE"></script>
     <script src="bower_components/queue-async/queue.min.js"></script>
     <script src="bower_components/d3/d3.min.js"></script>
-    <script src="js/d3.slider.js"></script>
     <script src="bower_components/topojson/topojson.js"></script>
+    <script src="js/d3.slider.js"></script>
     <script src="bower_components/handlebars/handlebars.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/tooltipster/js/jquery.tooltipster.min.js"></script>
@@ -35,9 +35,8 @@
     
     <script charset="utf-8">
       $(function() {
-        var popMap = new PopMap(getWidth(), getHeight());
+        var popMap = new PopMap(getWidth(), getHeight(), '.map');
         popMap.loadData();
-        popMap.drawMap(this.width, this.height, $('.map'));
       });
     </script>
   </body>
