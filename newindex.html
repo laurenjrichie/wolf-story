@@ -35,9 +35,9 @@
     
     <script charset="utf-8">
       $(function() {
-        var app = new App();
-        app.loadData();
-        app.drawMap($('.map'));
+        var popMap = new popMap(getWidth(), getHeight());
+        popMap.loadData();
+        popMap.drawMap(this.width, this.height, $('.map'));
       });
     </script>
   </body>

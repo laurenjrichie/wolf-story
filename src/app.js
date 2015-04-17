@@ -1,7 +1,17 @@
-function App() {
+function getWidth() {
+  return Math.max( $(window).width(), window.innerWidth) - 80;
 }
 
-App.prototype.loadData = function(done) {
+function getHeight() {
+  return width/2.048;
+}
+
+function popMap(width, height) {
+  this.width = width;
+  this.height = height;
+}
+
+popMap.prototype.loadData = function(done) {
   queue()
     .defer(d3.json, 'data/us.json')
     .await(function() {
@@ -10,11 +20,11 @@ App.prototype.loadData = function(done) {
     }.bind(this));
 }
 
-App.prototype.loaded = function(err, usJson) {
+popMap.prototype.loaded = function(err, usJson) {
   this.usJson = usJson;
 }
 
-App.prototype.drawMap = function(width, height, container) {
+popMap.prototype.drawMap = function(width, height, container) {
   this.svg = d3
     .select(container)
     .append("svg")

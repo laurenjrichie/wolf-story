@@ -18,10 +18,10 @@ function titleScroll() {
 
 // THE MAP
 
-var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80;
+var windowWidth = Math.max( $(window).width(), window.innerWidth) - 80; //
 
-var width = windowWidth,
-    height = windowWidth/2.048
+var width = windowWidth, //
+    height = windowWidth/2.048 //
 
 var projection = d3.geo.albers()
     .scale(windowWidth)
@@ -31,9 +31,9 @@ var path = d3.geo.path()
     .projection(projection)
     .pointRadius(1.5);
 
-var svg = d3.select(".map").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+var svg = d3.select(".map").append("svg") //
+    .attr("width", width) //
+    .attr("height", height); //
 
 var slider;
 

@@ -1,9 +1,9 @@
-describe('App', function() {
+describe('popMap', function() {
   it('loads the json for the US map', function() {
-    var app = new App();
+    var popMap = new popMap();
     
     var jsonSpy = spyOn(d3, 'json');
-    app.loadData();
+    popMap.loadData();
     
     var firstCall = jsonSpy.calls.first();
     
@@ -11,17 +11,17 @@ describe('App', function() {
     var callback = firstCall.args[1];
     callback(null, { some: 'object'});
 
-    expect(app.usJson).toEqual({ some: 'object' });
+    expect(popMap.usJson).toEqual({ some: 'object' });
   });
   
   it('shows a us map', function(done) {
-    var app = new App();
+    var popMap = new popMap();
 
-    app.loadData(function() {
+    popMap.loadData(function() {
       var width = '100';
       var height = '100';
       var container = 'body'
-      app.drawMap(width, height, container);
+      popMap.drawMap(width, height, container);
     
       var svg = $('body svg');
       expect(svg).toExist();
@@ -33,14 +33,14 @@ describe('App', function() {
   });
   
   it('appends the map to the correct div', function(done) {
-    var app = new App();
+    var popMap = new popMap();
 
-    app.loadData(function() {  
+    popMap.loadData(function() {  
       var width = '200';
       var height = '200';
       var container = '.map';
       
-      app.drawMap(width, height, container);
+      popMap.drawMap(width, height, container);
       var map = $('.map svg');
       expect(map).toExist();
       expect(map.attr('width')).toEqual('200');
