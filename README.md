@@ -7,6 +7,8 @@ COMEBACK is a data visualization and storytelling narrative that describes the h
 
 Intended as a tool to educate and build awareness about one of the country's most iconic endangered species, COMEBACK provides a visually appealing, interactive story and data visualization that replaces the need to dig through antiquated websites.
 
+We are currently undertaking a major rebuild of the code, implementing test-driven development with Jasmine and RSpec.
+
 ##### Technical stack:
   - D3
   - TopoJSON
