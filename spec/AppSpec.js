@@ -1,6 +1,6 @@
-describe('popMap', function() {
+describe('PopMap', function() {
   it('loads the json for the US map', function() {
-    var popMap = new popMap();
+    var popMap = new PopMap();
     
     var jsonSpy = spyOn(d3, 'json');
     popMap.loadData();
@@ -15,7 +15,7 @@ describe('popMap', function() {
   });
   
   it('shows a us map', function(done) {
-    var popMap = new popMap();
+    var popMap = new PopMap();
 
     popMap.loadData(function() {
       var width = '100';
@@ -33,7 +33,7 @@ describe('popMap', function() {
   });
   
   it('appends the map to the correct div', function(done) {
-    var popMap = new popMap();
+    var popMap = new PopMap();
 
     popMap.loadData(function() {  
       var width = '200';
@@ -49,5 +49,5 @@ describe('popMap', function() {
       done();
     });
   });
-  
+    
 });

@@ -3,15 +3,15 @@ function getWidth() {
 }
 
 function getHeight() {
-  return width/2.048;
+  return getWidth()/2.048;
 }
 
-function popMap(width, height) {
+function PopMap(width, height) {
   this.width = width;
   this.height = height;
 }
 
-popMap.prototype.loadData = function(done) {
+PopMap.prototype.loadData = function(done) {
   queue()
     .defer(d3.json, 'data/us.json')
     .await(function() {
@@ -20,11 +20,11 @@ popMap.prototype.loadData = function(done) {
     }.bind(this));
 }
 
-popMap.prototype.loaded = function(err, usJson) {
+PopMap.prototype.loaded = function(err, usJson) {
   this.usJson = usJson;
 }
 
-popMap.prototype.drawMap = function(width, height, container) {
+PopMap.prototype.drawMap = function(width, height, container) {
   this.svg = d3
     .select(container)
     .append("svg")
