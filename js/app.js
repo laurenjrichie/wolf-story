@@ -35,6 +35,8 @@ var svg = d3.select(".map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
+var slider;
+
 var postcolColors = ['#FFFFFF', '#B2273A', '#796E24', '#337ab7', '#432F21'],
     postcolLegend = ["Wolf management regions:", "Northern Rockies", "Great Lakes", "Pacific Northwest", "Southwest"],
     precolColors = ['#FFFFFF', '#796E24'],
@@ -179,6 +181,7 @@ function animatePostcolMap(pop_data) {
       clearInterval(playPostcolInterval);
       return;
     }
+    animateSlider(pop_data);
     year = "y" + j++;
     svg.selectAll('circle')
       .transition()
@@ -209,27 +212,32 @@ function showPostcolStuff() {
 
 function setupSlider(pop_data) {
   $('#slider-div').empty();
-  var slider = d3.slider().axis(true).min(1977).max(2014).step(2)
-    .on("slide", function(event, value){
-      year = "y" + value;
-      svg.selectAll("circle")
-        .attr("r", function(rows) {
-          return rows[year];
-        })
-        .attr('data-pop', function(rows, index) {
-          return returnRegionPop(rows, pop_data, year);
-        })
-        .on('mousemove', function(rows) {
-          var elem = $(this);
-          console.log(year);
-          console.log(j);
-          return showTooltip(rows, elem, year);
-        })
-        .on('mouseout', function(){
-          tooltip.style("display", "none");
-        });
+  slider = d3.slider().axis(true).min(1977).max(2014).step(2).value(j);
+  slider.on("slide", function(event, value){
+    year = "y" + value;
+    svg.selectAll("circle")
+      .attr("r", function(rows) {
+        return rows[year];
+      })
+      .attr('data-pop', function(rows, index) {
+        return returnRegionPop(rows, pop_data, year);
+      })
+      .on('mousemove', function(rows) {
+        var elem = $(this);
+        return showTooltip(rows, elem, year);
+      })
+      .on('mouseout', function(){
+        tooltip.style("display", "none");
+      });
     });
   d3.select('#slider-div').call(slider);
+}
+
+function animateSlider(pop_data) {
+  $('#slider-div').empty();
+  slider = d3.slider().axis(true).min(1977).max(2014).step(2).value(j);
+  d3.select('#slider-div').call(slider);
+  setupSlider(pop_data);
 }
 
 var tooltip = d3.select(".map").append("div")

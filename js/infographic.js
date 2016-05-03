@@ -80,32 +80,3 @@ function tooltips() {
     position: 'top-right',
   });
 }
-
-// var animateAnimals = ['wolf', 'deer', 'coyote', 'veg-stream'];
-// var relationships = {
-//   "wolf": [["arrow-to-deer", 'deer'], ['arrow-to-coyote', 'coyote']],
-//   'deer': [['arrow-to-veg', 'veg-stream'], ['arrow-to-elk', 'bear']],
-//   'coyote': [['arrow-to-fox', 'fox']],
-//   'veg-stream': [['arrow-to-stream', 'beaver']]
-// }
-
-// function fadeIn(){
-//   for (var i = 0; i < animateAnimals.length; i++) {
-//     var elem = $('#' + animateAnimals[i]);
-//     elem.on('click', function() {
-//       for (var j = 0; j < animateAnimals.length; j++) { // i was undefined
-//         var arrowElem1 = null;
-//         var arrowElem2 = null;
-//         var clickedAnimalConnections = relationships[animateAnimals[j]];
-//         if (clickedAnimalConnections.length == 2) {
-//           arrowElem1 = $('#' + clickedAnimalConnections[0][0]);
-//           arrowElem2 = $('#' + clickedAnimalConnections[1][0]);
-//           console.log(arrowElem1);
-//           console.log(arrowElem2);
-//         } else {
-//           arrowElem1 = $("#" + clickedAnimalConnections[0]);
-//         }
-//           // .......!!!!!!
-//       }
-//     });
-//   }
